@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { View } from '../types';
 import { navLinks, locations } from '../data/mockData';
@@ -7,7 +8,6 @@ import {
   X, 
   Phone, 
   MapPin, 
-  Search, 
   Activity, 
   ChevronDown,
   Clock
@@ -21,7 +21,6 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState(locations[0].name);
 
   // Handle Scroll Effect
@@ -43,8 +42,6 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
 
   return (
     <>
-      <ReportModal isOpen={isReportModalOpen} onClose={() => setIsReportModalOpen(false)} />
-
       {/* Top Bar - Avishkar Green */}
       <div className="bg-primary text-white text-[11px] md:text-xs py-2.5 hidden md:block tracking-wide">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -85,10 +82,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
 
       {/* Main Navbar */}
       <nav 
-        className={`sticky top-0 z-50 transition-all duration-500 border-b ${
+        className={`sticky top-0 z-50 transition-all duration-300 border-b relative ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg py-3 border-gray-100' 
-            : 'bg-white py-5 border-transparent'
+            : 'bg-white py-4 md:py-5 border-transparent'
         }`}
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -103,13 +100,13 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
                 <Activity className="h-6 w-6 text-secondary" />
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl font-heading font-bold text-primary leading-none tracking-tight">Avishkar</span>
+                <span className="text-xl md:text-2xl font-heading font-bold text-primary leading-none tracking-tight">Avishkar</span>
                 <span className="text-[10px] text-secondary font-bold tracking-[0.2em] uppercase mt-0.5">Diagnostic Centre</span>
               </div>
             </div>
 
             {/* Desktop Nav Links - Centered */}
-            <div className="hidden lg:flex items-center space-x-1">
+            <div className="hidden xl:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
@@ -125,10 +122,10 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
               ))}
             </div>
 
-            {/* Right Side Actions */}
+            {/* Right Side Actions (Desktop) */}
             <div className="hidden md:flex items-center gap-4">
                <button 
-                onClick={() => setIsReportModalOpen(true)}
+                onClick={() => onNavigate(View.REPORT_DOWNLOAD)}
                 className="text-xs font-bold text-primary hover:text-white border-2 border-primary hover:bg-primary rounded-full px-5 py-2.5 transition-all duration-300"
                >
                  Download Report
@@ -142,85 +139,46 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
               </button>
             </div>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Menu Toggle - Minimal */}
             <button
-              className="lg:hidden text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-              onClick={() => setIsMobileMenuOpen(true)}
+              className="xl:hidden group p-2 rounded-lg hover:bg-gray-50 transition-all duration-300 active:scale-95 touch-manipulation z-50"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle Menu"
             >
-              <Menu className="h-6 w-6" />
+               {isMobileMenuOpen ? (
+                 <X className="h-6 w-6 text-gray-800" />
+               ) : (
+                 <Menu className="h-6 w-6 text-primary" strokeWidth={2.5} />
+               )}
             </button>
           </div>
+        </div>
+
+        {/* Minimal Mobile Dropdown - Slide Down from Top */}
+        <div 
+            className={`absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-lg transform transition-all duration-300 ease-in-out origin-top xl:hidden ${
+                isMobileMenuOpen 
+                ? 'opacity-100 translate-y-0 visible' 
+                : 'opacity-0 -translate-y-4 invisible pointer-events-none'
+            }`}
+        >
+            <div className="flex flex-col py-4 px-4 space-y-1">
+                {navLinks.map((link) => (
+                    <button
+                        key={link.name}
+                        onClick={() => handleLinkClick(link.view)}
+                        className={`text-left w-full py-3 px-4 rounded-lg text-sm font-medium transition-colors ${
+                            currentView === link.view
+                            ? 'text-primary bg-green-50/50'
+                            : 'text-gray-700 hover:text-primary hover:bg-gray-50'
+                        }`}
+                    >
+                        {link.name}
+                    </button>
+                ))}
+            </div>
         </div>
       </nav>
-
-      {/* Mobile Sidebar */}
-      <div 
-        className={`fixed inset-0 z-[60] transform transition-all duration-300 lg:hidden ${
-          isMobileMenuOpen ? 'visible' : 'invisible'
-        }`}
-      >
-        <div 
-          className={`absolute inset-0 bg-primary/20 backdrop-blur-sm transition-opacity duration-300 ${
-            isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
-          }`}
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-
-        <div 
-          className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transform transition-transform duration-300 flex flex-col ${
-            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
-          <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-            <span className="text-lg font-heading font-bold text-primary">Menu</span>
-            <button 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-full transition-all shadow-sm"
-            >
-              <X className="h-5 w-5" />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto py-6 px-6 space-y-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.name}
-                onClick={() => handleLinkClick(link.view)}
-                className={`w-full text-left px-4 py-4 rounded-xl text-base font-semibold transition-colors flex items-center justify-between group ${
-                    currentView === link.view ? 'bg-green-50 text-primary' : 'text-gray-600 hover:bg-gray-50'
-                }`}
-              >
-                {link.name}
-                {currentView === link.view && <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>}
-              </button>
-            ))}
-            
-            <div className="my-4 border-t border-gray-100"></div>
-            
-             <button
-                onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    setIsReportModalOpen(true);
-                }}
-                className="w-full text-left px-4 py-4 rounded-xl text-base font-semibold text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors flex items-center justify-between"
-              >
-                Download Report
-              </button>
-          </div>
-
-          <div className="p-6 border-t border-gray-100 bg-gray-50 space-y-4">
-            <button
-              onClick={() => {
-                onNavigate(View.APPOINTMENT);
-                setIsMobileMenuOpen(false);
-              }}
-              className="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-xl shadow-green-900/10 active:scale-95 transition-transform"
-            >
-              Book Appointment
-            </button>
-          </div>
-        </div>
-      </div>
     </>
   );
 };

@@ -17,6 +17,9 @@ import ServiceDetailMRI from './views/ServiceDetailMRI';
 import ServiceDetailFullBody from './views/ServiceDetailFullBody';
 import ServiceDetailDiabetes from './views/ServiceDetailDiabetes';
 import ServiceDetailCardiac from './views/ServiceDetailCardiac';
+import TestDirectory from './views/TestDirectory';
+import HomeCollection from './views/HomeCollection';
+import ReportDownload from './views/ReportDownload';
 import { View } from './types';
 
 const App: React.FC = () => {
@@ -60,6 +63,12 @@ const App: React.FC = () => {
          return <ServiceDetailDiabetes onNavigate={setCurrentView} />;
       case View.SERVICEDETAIL_CARDIAC:
          return <ServiceDetailCardiac onNavigate={setCurrentView} />;
+      case View.TEST_DIRECTORY:
+         return <TestDirectory onNavigate={setCurrentView} />;
+      case View.HOME_COLLECTION:
+         return <HomeCollection onNavigate={setCurrentView} />;
+      case View.REPORT_DOWNLOAD:
+         return <ReportDownload onNavigate={setCurrentView} />;
       default:
         return <Home onNavigate={setCurrentView} />;
     }

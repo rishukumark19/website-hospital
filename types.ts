@@ -18,7 +18,10 @@ export enum View {
   SERVICEDETAIL_MRI = 'SERVICEDETAIL_MRI',
   SERVICEDETAIL_FULL_BODY = 'SERVICEDETAIL_FULL_BODY',
   SERVICEDETAIL_DIABETES = 'SERVICEDETAIL_DIABETES',
-  SERVICEDETAIL_CARDIAC = 'SERVICEDETAIL_CARDIAC'
+  SERVICEDETAIL_CARDIAC = 'SERVICEDETAIL_CARDIAC',
+  TEST_DIRECTORY = 'TEST_DIRECTORY',
+  HOME_COLLECTION = 'HOME_COLLECTION',
+  REPORT_DOWNLOAD = 'REPORT_DOWNLOAD'
 }
 
 export interface ServiceItem {
@@ -38,6 +41,8 @@ export interface TestItem {
   price: number;
   tat: string; // Turnaround time
   isFastingRequired: boolean;
+  sampleType?: string;
+  description?: string;
 }
 
 export interface ChatMessage {

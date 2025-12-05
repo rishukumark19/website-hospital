@@ -1,354 +1,359 @@
 
 import React, { useState } from 'react';
-import { Calendar, Clock, User, Phone, Mail, FileText, CheckCircle, MapPin, TestTube, AlertCircle, Loader2 } from 'lucide-react';
+import { View } from '../types';
+import { Calendar, Clock, User, Phone, MapPin, TestTube, AlertCircle, Loader2, CheckCircle, ArrowRight, ArrowLeft, Home, Building2, Search, X } from 'lucide-react';
+import { testDirectory } from '../data/mockData';
 
 const Appointment: React.FC = () => {
-  const [submitted, setSubmitted] = useState(false);
+  const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSuccess, setIsSuccess] = useState(false);
   
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    serviceType: 'home', // 'home' or 'center'
+    date: '',
+    timeSlot: '',
+    name: '',
     phone: '',
     email: '',
-    testType: '',
-    collectionType: 'Home Visit',
-    date: '',
-    time: 'Morning (9AM - 12PM)',
-    notes: '',
+    address: '',
+    selectedTests: [] as string[],
     agreed: false
   });
 
-  const validate = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.firstName.trim()) newErrors.firstName = 'First name is required';
-    if (!formData.phone.trim()) {
-       newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-       newErrors.phone = 'Please enter a valid 10-digit number';
-    }
-    if (!formData.email.trim()) {
-       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-       newErrors.email = 'Please enter a valid email address';
-    }
-    if (!formData.testType) newErrors.testType = 'Please select a service';
-    if (!formData.date) newErrors.date = 'Please select a date';
-    if (!formData.agreed) newErrors.agreed = 'You must agree to the privacy policy';
+  const [testSearch, setTestSearch] = useState('');
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const nextStep = () => setStep(prev => prev + 1);
+  const prevStep = () => setStep(prev => prev - 1);
+
+  // Helper to toggle test selection
+  const toggleTest = (testId: string) => {
+    setFormData(prev => {
+        const tests = prev.selectedTests.includes(testId)
+            ? prev.selectedTests.filter(id => id !== testId)
+            : [...prev.selectedTests, testId];
+        return { ...prev, selectedTests: tests };
+    });
+  };
+
+  const calculateTotal = () => {
+      return formData.selectedTests.reduce((total, testId) => {
+          const test = testDirectory.find(t => t.id === testId);
+          return total + (test?.price || 0);
+      }, 0);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
     setIsLoading(true);
-    // Simulate API call
     setTimeout(() => {
-      setIsLoading(false);
-      setSubmitted(true);
-      window.scrollTo(0, 0);
-    }, 1500);
+        setIsLoading(false);
+        setIsSuccess(true);
+        window.scrollTo(0,0);
+    }, 2000);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrs = {...prev};
-        delete newErrs[name];
-        return newErrs;
-      });
-    }
-  };
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-        <div className="bg-white p-10 rounded-2xl shadow-xl max-w-md w-full text-center border-t-4 border-green-500 animate-in zoom-in duration-300">
-          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle className="h-10 w-10 text-green-600" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Booking Request Sent!</h2>
-          <p className="text-gray-500 mb-8">
-            Thank you for choosing Avishkar Diagnostic. Our team will contact you shortly at <strong>{formData.phone}</strong> to confirm your appointment details.
-          </p>
-          <button 
-            onClick={() => { 
-              setSubmitted(false); 
-              setFormData({
-                firstName: '', lastName: '', phone: '', email: '', 
-                testType: '', collectionType: 'Home Visit', date: '', 
-                time: 'Morning (9AM - 12PM)', notes: '', agreed: false
-              }); 
-            }}
-            className="text-primary font-bold hover:underline"
-          >
-            Book Another Appointment
-          </button>
+  if (isSuccess) {
+      return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12">
+            <div className="bg-white p-10 rounded-3xl shadow-xl max-w-md w-full text-center border-t-4 border-green-500 animate-in zoom-in duration-300">
+            <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="h-12 w-12 text-green-600" />
+            </div>
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Booking Confirmed!</h2>
+            <p className="text-gray-500 mb-6">
+                Your appointment ID is <strong>#AV8839</strong>. We have sent a confirmation SMS to {formData.phone}.
+            </p>
+            <div className="bg-gray-50 p-4 rounded-xl text-left text-sm text-gray-600 mb-8 space-y-2">
+                <div className="flex justify-between"><span>Date:</span> <span className="font-bold text-gray-800">{formData.date}</span></div>
+                <div className="flex justify-between"><span>Time:</span> <span className="font-bold text-gray-800">{formData.timeSlot}</span></div>
+                <div className="flex justify-between"><span>Type:</span> <span className="font-bold text-gray-800 uppercase">{formData.serviceType}</span></div>
+            </div>
+            <button 
+                onClick={() => window.location.reload()}
+                className="w-full bg-primary hover:bg-green-700 text-white font-bold py-3.5 rounded-xl transition-all"
+            >
+                Book Another
+            </button>
+            </div>
         </div>
-      </div>
-    );
+      )
   }
+
+  // --- STEPS COMPONENTS ---
+
+  const Step1ServiceType = () => (
+      <div className="animate-in slide-in-from-right duration-300">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">How would you like to get tested?</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div 
+                onClick={() => setFormData({...formData, serviceType: 'home'})}
+                className={`cursor-pointer p-8 rounded-2xl border-2 transition-all hover:shadow-lg flex flex-col items-center text-center gap-4 ${formData.serviceType === 'home' ? 'border-primary bg-green-50' : 'border-gray-100 bg-white'}`}
+              >
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center ${formData.serviceType === 'home' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-400'}`}>
+                      <Home className="h-8 w-8" />
+                  </div>
+                  <div>
+                      <h3 className="font-bold text-lg text-gray-800">Home Collection</h3>
+                      <p className="text-sm text-gray-500 mt-1">Our phlebotomist visits your home.</p>
+                  </div>
+              </div>
+
+              <div 
+                onClick={() => setFormData({...formData, serviceType: 'center'})}
+                className={`cursor-pointer p-8 rounded-2xl border-2 transition-all hover:shadow-lg flex flex-col items-center text-center gap-4 ${formData.serviceType === 'center' ? 'border-primary bg-green-50' : 'border-gray-100 bg-white'}`}
+              >
+                   <div className={`w-16 h-16 rounded-full flex items-center justify-center ${formData.serviceType === 'center' ? 'bg-primary text-white' : 'bg-gray-100 text-gray-400'}`}>
+                      <Building2 className="h-8 w-8" />
+                  </div>
+                  <div>
+                      <h3 className="font-bold text-lg text-gray-800">Visit Center</h3>
+                      <p className="text-sm text-gray-500 mt-1">Visit our lab at Bank More.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  );
+
+  const Step2DateTime = () => (
+      <div className="animate-in slide-in-from-right duration-300">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Select Date & Time</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Preferred Date</label>
+                  <input 
+                    type="date" 
+                    value={formData.date}
+                    onChange={e => setFormData({...formData, date: e.target.value})}
+                    min={new Date().toISOString().split('T')[0]}
+                    className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 text-lg"
+                  />
+              </div>
+              <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Time Slot</label>
+                  <div className="grid grid-cols-2 gap-3">
+                      {['07:00 - 09:00', '09:00 - 11:00', '11:00 - 13:00', '14:00 - 16:00', '16:00 - 18:00', '18:00 - 20:00'].map(slot => (
+                          <button
+                            key={slot}
+                            onClick={() => setFormData({...formData, timeSlot: slot})}
+                            className={`py-3 px-2 rounded-lg text-sm font-medium border transition-all ${formData.timeSlot === slot ? 'bg-primary text-white border-primary' : 'bg-white text-gray-600 border-gray-200 hover:border-primary'}`}
+                          >
+                              {slot}
+                          </button>
+                      ))}
+                  </div>
+              </div>
+          </div>
+      </div>
+  );
+
+  const Step3Details = () => (
+      <div className="animate-in slide-in-from-right duration-300 space-y-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Patient Details</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Full Name</label>
+                  <div className="relative">
+                      <User className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+                      <input 
+                        type="text" 
+                        value={formData.name}
+                        onChange={e => setFormData({...formData, name: e.target.value})}
+                        className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        placeholder="Patient Name"
+                      />
+                  </div>
+              </div>
+              <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number</label>
+                  <div className="relative">
+                      <Phone className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+                      <input 
+                        type="tel" 
+                        value={formData.phone}
+                        onChange={e => setFormData({...formData, phone: e.target.value})}
+                        className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        placeholder="10-digit Mobile"
+                      />
+                  </div>
+              </div>
+          </div>
+          
+          {formData.serviceType === 'home' && (
+              <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Collection Address</label>
+                  <div className="relative">
+                      <MapPin className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+                      <textarea 
+                        value={formData.address}
+                        onChange={e => setFormData({...formData, address: e.target.value})}
+                        className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 h-24 resize-none"
+                        placeholder="Full Address with Landmark"
+                      />
+                  </div>
+              </div>
+          )}
+      </div>
+  );
+
+  const Step4Tests = () => {
+      const filtered = testDirectory.filter(t => t.name.toLowerCase().includes(testSearch.toLowerCase()));
+      
+      return (
+        <div className="animate-in slide-in-from-right duration-300">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Select Tests</h2>
+            <p className="text-gray-500 mb-6 text-sm">Search and add tests to your booking.</p>
+            
+            <div className="relative mb-6">
+                <Search className="absolute left-4 top-3.5 h-5 w-5 text-gray-400" />
+                <input 
+                    type="text" 
+                    value={testSearch}
+                    onChange={e => setTestSearch(e.target.value)}
+                    placeholder="Search tests (e.g. CBC, Thyroid)..."
+                    className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 shadow-sm"
+                />
+            </div>
+
+            <div className="h-64 overflow-y-auto border border-gray-100 rounded-xl mb-6 bg-gray-50 p-2 space-y-2">
+                {filtered.map(test => {
+                    const isSelected = formData.selectedTests.includes(test.id);
+                    return (
+                        <div 
+                            key={test.id} 
+                            onClick={() => toggleTest(test.id)}
+                            className={`p-3 rounded-lg flex items-center justify-between cursor-pointer transition-colors ${isSelected ? 'bg-primary text-white shadow-md' : 'bg-white hover:bg-gray-100 text-gray-700'}`}
+                        >
+                            <div className="flex-1">
+                                <p className="font-bold text-sm">{test.name}</p>
+                                <p className={`text-xs ${isSelected ? 'text-green-100' : 'text-gray-500'}`}>₹{test.price}</p>
+                            </div>
+                            {isSelected && <CheckCircle className="h-5 w-5" />}
+                        </div>
+                    )
+                })}
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                 <h3 className="font-bold text-gray-800 mb-2">Selected Tests ({formData.selectedTests.length})</h3>
+                 <div className="flex flex-wrap gap-2 mb-4">
+                     {formData.selectedTests.length === 0 && <p className="text-sm text-gray-400 italic">No tests selected yet.</p>}
+                     {formData.selectedTests.map(id => {
+                         const t = testDirectory.find(x => x.id === id);
+                         return (
+                             <span key={id} className="inline-flex items-center gap-1 bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs font-bold">
+                                 {t?.name} <X className="h-3 w-3 cursor-pointer hover:text-red-500" onClick={(e) => {e.stopPropagation(); toggleTest(id);}} />
+                             </span>
+                         )
+                     })}
+                 </div>
+                 <div className="flex justify-between items-center border-t border-gray-100 pt-3">
+                     <span className="text-gray-500 font-medium">Estimated Total</span>
+                     <span className="text-xl font-bold text-primary">₹{calculateTotal()}</span>
+                 </div>
+            </div>
+        </div>
+      )
+  };
+
+  const Step5Review = () => (
+      <div className="animate-in slide-in-from-right duration-300">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6">Review & Confirm</h2>
+          <div className="bg-gray-50 rounded-2xl p-6 space-y-4 border border-gray-100 mb-6">
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                  <span className="text-gray-500">Service Type</span>
+                  <span className="font-bold text-gray-800 uppercase">{formData.serviceType}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                  <span className="text-gray-500">Date & Time</span>
+                  <span className="font-bold text-gray-800 text-right">{formData.date} <br/> {formData.timeSlot}</span>
+              </div>
+              <div className="flex justify-between border-b border-gray-200 pb-2">
+                  <span className="text-gray-500">Patient</span>
+                  <span className="font-bold text-gray-800 text-right">{formData.name} <br/> {formData.phone}</span>
+              </div>
+              <div className="flex justify-between pb-2">
+                  <span className="text-gray-500">Tests ({formData.selectedTests.length})</span>
+                  <span className="font-bold text-primary text-xl">₹{calculateTotal()}</span>
+              </div>
+          </div>
+          
+          <label className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl cursor-pointer">
+              <input 
+                type="checkbox" 
+                checked={formData.agreed}
+                onChange={e => setFormData({...formData, agreed: e.target.checked})}
+                className="w-5 h-5 text-primary rounded focus:ring-primary border-gray-300"
+              />
+              <span className="text-sm text-gray-700">I agree to the Terms & Privacy Policy and consent to be contacted.</span>
+          </label>
+      </div>
+  );
 
   return (
     <div className="bg-background min-h-screen py-12">
-      <div className="container mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-           <h1 className="text-3xl md:text-4xl font-bold text-primary mb-3">Schedule Your Visit</h1>
-           <p className="text-gray-600">Book a home collection or a center visit in just a few clicks.</p>
+      <div className="container mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        
+        {/* Progress Bar */}
+        <div className="mb-10">
+            <div className="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-wide mb-2">
+                <span className={step >= 1 ? 'text-primary' : ''}>Service</span>
+                <span className={step >= 2 ? 'text-primary' : ''}>Time</span>
+                <span className={step >= 3 ? 'text-primary' : ''}>Details</span>
+                <span className={step >= 4 ? 'text-primary' : ''}>Tests</span>
+                <span className={step >= 5 ? 'text-primary' : ''}>Confirm</span>
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div 
+                    className="h-full bg-primary transition-all duration-500 ease-out"
+                    style={{width: `${(step/5)*100}%`}}
+                ></div>
+            </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Info Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="bg-primary text-white rounded-2xl p-8 shadow-lg h-full relative overflow-hidden">
-               <div className="relative z-10">
-                 <h2 className="text-2xl font-bold mb-6">Contact Info</h2>
-                 <div className="space-y-6">
-                    <div>
-                      <p className="text-green-200 text-sm font-medium uppercase tracking-wide mb-1">Address</p>
-                      <p className="flex items-start gap-2"><MapPin className="h-5 w-5 opacity-80" /> Bank More, Dhanbad,<br/>Jharkhand 826001</p>
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+            <div className="p-8 md:p-10">
+                <form onSubmit={handleSubmit}>
+                    {step === 1 && <Step1ServiceType />}
+                    {step === 2 && <Step2DateTime />}
+                    {step === 3 && <Step3Details />}
+                    {step === 4 && <Step4Tests />}
+                    {step === 5 && <Step5Review />}
+
+                    <div className="mt-10 flex justify-between gap-4">
+                        {step > 1 && (
+                            <button 
+                                type="button" 
+                                onClick={prevStep}
+                                className="px-6 py-3 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors flex items-center gap-2"
+                            >
+                                <ArrowLeft className="h-5 w-5" /> Back
+                            </button>
+                        )}
+                        
+                        {step < 5 ? (
+                            <button 
+                                type="button" 
+                                onClick={nextStep}
+                                className="ml-auto px-8 py-3 rounded-xl font-bold text-white bg-primary hover:bg-green-700 transition-colors shadow-lg shadow-green-900/10 flex items-center gap-2"
+                            >
+                                Next Step <ArrowRight className="h-5 w-5" />
+                            </button>
+                        ) : (
+                            <button 
+                                type="submit" 
+                                disabled={isLoading || !formData.agreed}
+                                className="ml-auto w-full md:w-auto px-10 py-3 rounded-xl font-bold text-white bg-primary hover:bg-green-700 transition-colors shadow-lg shadow-green-900/10 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                            >
+                                {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Confirm Booking'}
+                            </button>
+                        )}
                     </div>
-                    <div>
-                      <p className="text-green-200 text-sm font-medium uppercase tracking-wide mb-1">Phone</p>
-                      <p className="text-lg font-semibold flex items-center gap-2"><Phone className="h-5 w-5 opacity-80" /> +91 326 230 XXXX</p>
-                    </div>
-                    <div>
-                      <p className="text-green-200 text-sm font-medium uppercase tracking-wide mb-1">Email</p>
-                      <p className="flex items-center gap-2"><Mail className="h-5 w-5 opacity-80" /> info@avishkardiagnostic.com</p>
-                    </div>
-                 </div>
-                 
-                 <div className="mt-8 bg-white/10 p-4 rounded-xl border border-white/20">
-                    <p className="font-bold mb-1 flex items-center gap-2"><Clock className="h-4 w-4" /> Working Hours</p>
-                    <p className="text-sm opacity-90">Mon - Sun: 7:00 AM - 9:00 PM</p>
-                 </div>
-               </div>
-               <div className="absolute -bottom-20 -right-20 w-60 h-60 bg-secondary/20 rounded-full blur-2xl"></div>
+                </form>
             </div>
-          </div>
-
-          {/* Form */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl p-8 shadow-md border border-gray-100">
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {Object.keys(errors).length > 0 && (
-                   <div className="bg-red-50 border border-red-100 text-red-600 px-4 py-3 rounded-xl flex items-center gap-2 text-sm font-medium">
-                      <AlertCircle className="h-5 w-5" /> Please fix the highlighted errors below.
-                   </div>
-                )}
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">First Name <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <input 
-                        type="text" 
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.firstName ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all`} 
-                        placeholder="John" 
-                      />
-                    </div>
-                    {errors.firstName && <p className="text-red-500 text-xs mt-1 ml-1">{errors.firstName}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Last Name</label>
-                    <div className="relative">
-                      <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <input 
-                        type="text" 
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all" 
-                        placeholder="Doe" 
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <Phone className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <input 
-                        type="tel" 
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.phone ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all`} 
-                        placeholder="9876543210" 
-                      />
-                    </div>
-                    {errors.phone && <p className="text-red-500 text-xs mt-1 ml-1">{errors.phone}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Email Address <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <input 
-                        type="email" 
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.email ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all`} 
-                        placeholder="john@example.com" 
-                      />
-                    </div>
-                    {errors.email && <p className="text-red-500 text-xs mt-1 ml-1">{errors.email}</p>}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Select Service <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <TestTube className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <select 
-                        name="testType"
-                        value={formData.testType}
-                        onChange={handleInputChange}
-                        className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.testType ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all appearance-none`}
-                      >
-                        <option value="">Select a Service...</option>
-                        <optgroup label="Popular Packages">
-                            <option>Full Body Checkup</option>
-                            <option>Diabetes Screening</option>
-                            <option>Advanced Heart Care</option>
-                            <option>Senior Citizen Package</option>
-                        </optgroup>
-                        <optgroup label="Radiology">
-                            <option>MRI Scan</option>
-                            <option>CT Scan</option>
-                            <option>Ultrasound / Sonography</option>
-                            <option>Digital X-Ray</option>
-                        </optgroup>
-                        <optgroup label="Pathology">
-                            <option>Blood Test (Routine)</option>
-                            <option>Thyroid Profile</option>
-                            <option>Lipid Profile</option>
-                            <option>Vitamin Profile</option>
-                            <option>Other (Specify in notes)</option>
-                        </optgroup>
-                      </select>
-                    </div>
-                    {errors.testType && <p className="text-red-500 text-xs mt-1 ml-1">{errors.testType}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Collection Type</label>
-                    <div className="relative">
-                      <MapPin className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <select 
-                        name="collectionType"
-                        value={formData.collectionType}
-                        onChange={handleInputChange}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all appearance-none"
-                      >
-                        <option>Home Visit</option>
-                        <option>Lab Visit (Walk-in)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Preferred Date <span className="text-red-500">*</span></label>
-                    <div className="relative">
-                      <Calendar className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <input 
-                        type="date" 
-                        name="date"
-                        value={formData.date}
-                        onChange={handleInputChange}
-                        min={new Date().toISOString().split('T')[0]}
-                        className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.date ? 'border-red-500 bg-red-50' : 'border-gray-200'} rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all`} 
-                      />
-                    </div>
-                    {errors.date && <p className="text-red-500 text-xs mt-1 ml-1">{errors.date}</p>}
-                  </div>
-                  <div>
-                    <label className="block text-sm font-bold text-gray-700 mb-2">Preferred Time</label>
-                    <div className="relative">
-                      <Clock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <select 
-                        name="time"
-                        value={formData.time}
-                        onChange={handleInputChange}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all appearance-none"
-                      >
-                        <option>Morning (7AM - 11AM)</option>
-                        <option>Mid-Day (11AM - 2PM)</option>
-                        <option>Afternoon (2PM - 5PM)</option>
-                        <option>Evening (5PM - 8PM)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                   <label className="block text-sm font-bold text-gray-700 mb-2">Special Requirements / Symptoms</label>
-                   <div className="relative">
-                      <FileText className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                      <textarea 
-                        name="notes"
-                        value={formData.notes}
-                        onChange={handleInputChange}
-                        className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all h-28 resize-none" 
-                        placeholder="e.g., Fasting since last night, need wheelchair access, specific doctor referral..."
-                      ></textarea>
-                   </div>
-                </div>
-
-                <div className="flex flex-col gap-1">
-                    <div className="flex items-start gap-2">
-                        <input 
-                            type="checkbox" 
-                            id="agree" 
-                            checked={formData.agreed}
-                            onChange={(e) => {
-                                setFormData(prev => ({...prev, agreed: e.target.checked}));
-                                if(e.target.checked && errors.agreed) {
-                                    setErrors(prev => {const n = {...prev}; delete n.agreed; return n;});
-                                }
-                            }}
-                            className="mt-1 w-4 h-4 text-secondary rounded focus:ring-secondary border-gray-300" 
-                        />
-                        <label htmlFor="agree" className="text-sm text-gray-600 leading-tight">
-                            I agree to the <span className="text-primary font-semibold cursor-pointer">Privacy Policy</span> and consent to receive calls/SMS regarding my appointment.
-                        </label>
-                    </div>
-                    {errors.agreed && <p className="text-red-500 text-xs ml-6">{errors.agreed}</p>}
-                </div>
-
-                <button 
-                  type="submit" 
-                  disabled={isLoading}
-                  className="w-full bg-primary hover:bg-green-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-green-900/20 transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
-                >
-                  {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : 'Confirm Booking'}
-                </button>
-
-              </form>
-            </div>
-          </div>
         </div>
+
       </div>
     </div>
   );

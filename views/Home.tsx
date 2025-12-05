@@ -20,7 +20,11 @@ import {
   Activity,
   ShieldCheck,
   CheckCircle2,
-  Star
+  Star,
+  Calendar,
+  Search,
+  Upload,
+  ChevronDown
 } from 'lucide-react';
 
 interface HomeProps {
@@ -30,11 +34,12 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [heroSearch, setHeroSearch] = useState('');
   
   const handleQuickAction = (link: string) => {
     if (link === '/locator') onNavigate(View.LOCATOR);
-    else if (link === '/book-visit') setIsBookingModalOpen(true);
-    else if (link === '/reports') setIsReportModalOpen(true);
+    else if (link === '/book-visit') onNavigate(View.HOME_COLLECTION);
+    else if (link === '/reports') onNavigate(View.REPORT_DOWNLOAD);
   };
 
   const iconMap: Record<string, React.ElementType> = {
@@ -64,27 +69,6 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       rating: 4,
       text: "Very clean and hygienic lab. The wait time was minimal and the staff guided me well for my MRI scan.",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
-    },
-    {
-      name: "Vikram Singh",
-      location: "Govindpur",
-      rating: 5,
-      text: "Best diagnostic center in Dhanbad. Their full body package covers everything at a very reasonable price.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200"
-    },
-    {
-      name: "Meera Reddy",
-      location: "Dhanbad City",
-      rating: 5,
-      text: "The staff is extremely polite and the facilities are world-class. I appreciate the online report download feature.",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200"
-    },
-    {
-      name: "Arjun Kumar",
-      location: "Saraidhela",
-      rating: 5,
-      text: "Highly recommended for cardiac profiles. The doctor explained the reports clearly. Professional and trusted.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
     }
   ];
 
@@ -101,115 +85,194 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         onClose={() => setIsReportModalOpen(false)}
       />
 
-      {/* 1. Hero Section */}
-      <section className="relative bg-gradient-to-r from-green-50 via-white to-green-50 pt-12 pb-32 md:pt-24 md:pb-48 overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-40" style={{
-            backgroundImage: 'radial-gradient(#86efac 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px'
-        }}></div>
-
-        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      {/* 
+        HERO SECTION - NEUBERG STYLE REDESIGN 
+        Clean, Minimal, Professional, Mobile-First
+      */}
+      <section className="relative bg-gradient-to-br from-green-50/50 via-white to-green-50/30 pt-4 pb-12 md:py-16 overflow-hidden">
+        
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             
-            <div className="flex-1 text-center lg:text-left pt-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-green-200 text-primary font-bold text-xs rounded-full mb-6 tracking-wide shadow-sm animate-fade-in">
-                <ShieldCheck className="h-4 w-4 text-secondary" />
-                <span>NABL Accredited & ISO Certified Lab in Dhanbad</span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary leading-[1.1] mb-6 tracking-tight">
-                Avishkar Diagnostic <br className="hidden lg:block"/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-green-600">A Step Towards Life</span>
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
-                Advanced pathology and radiology services delivered with care at Bank More, Dhanbad. 
-                Experience faster turnaround times and 100% accurate reports.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <button 
-                  onClick={() => setIsBookingModalOpen(true)}
-                  className="w-full sm:w-auto bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold transition-all shadow-xl shadow-green-900/20 flex items-center justify-center gap-3 hover:-translate-y-1"
-                >
-                  <HomeIcon className="h-5 w-5" /> Book Home Visit
-                </button>
-                <button 
-                  onClick={() => onNavigate(View.LOCATOR)}
-                  className="w-full sm:w-auto bg-white hover:bg-gray-50 text-primary border-2 border-primary/10 px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-3 hover:border-primary/30"
-                >
-                  <MapPin className="h-5 w-5 text-secondary" /> Find Our Lab
-                </button>
-              </div>
+            {/* Top Bar: Location & Upload (Visible on Desktop, stacked on mobile) */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+                {/* Location Selector */}
+                <div className="inline-flex items-center gap-2 self-start bg-white border border-gray-200 rounded-full pl-3 pr-4 py-1.5 shadow-sm cursor-pointer hover:border-primary transition-colors group">
+                    <MapPin className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
+                    <span className="text-sm font-bold text-gray-700">Bank More, Dhanbad</span>
+                    <ChevronDown className="h-3 w-3 text-gray-400" />
+                </div>
 
-              <div className="mt-10 flex items-center justify-center lg:justify-start gap-8 text-sm font-semibold text-gray-500">
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-secondary"></div> Bank More, Dhanbad
+                {/* Trust Badge (Mobile Top Right) */}
+                <div className="hidden md:flex items-center gap-2 bg-green-50 px-3 py-1 rounded-lg border border-green-100">
+                    <ShieldCheck className="h-4 w-4 text-primary" />
+                    <span className="text-xs font-bold text-primary">Serving Dhanbad for 13+ Years</span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-secondary"></div> 24/7 Support
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-secondary"></div> Smart Reports
-                </div>
-              </div>
             </div>
 
-            <div className="flex-1 relative w-full max-w-lg lg:max-w-none mt-10 lg:mt-0">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-green-100 to-teal-light rounded-full blur-3xl opacity-60"></div>
-              
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border-[6px] border-white transform lg:rotate-2 hover:rotate-0 transition-transform duration-700">
-                <img 
-                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000" 
-                  alt="Avishkar Diagnostic Centre Reception" 
-                  className="w-full h-auto object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-60"></div>
-              </div>
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+                
+                {/* Left Side: Doctor Image (Desktop) / Split View (Mobile) */}
+                <div className="w-full lg:w-5/12 order-2 lg:order-1 relative">
+                     {/* Mobile Split Layout (Image + Text) */}
+                     <div className="flex lg:hidden items-center gap-4 mb-2">
+                        <div className="w-[40%] relative">
+                            <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 border-2 border-white shadow-lg">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600" 
+                                    alt="Avishkar Doctor" 
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            {/* Trust Badge Mobile */}
+                            <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1.5 shadow-md border border-green-100">
+                                <ShieldCheck className="h-5 w-5 text-primary" />
+                            </div>
+                        </div>
+                        <div className="w-[60%]">
+                             <div className="inline-block px-2 py-0.5 bg-green-100 text-primary rounded-md text-[10px] font-bold uppercase tracking-wider mb-2">
+                                NABL Accredited
+                             </div>
+                             <h1 className="text-2xl font-bold text-gray-900 leading-tight mb-2">
+                                Precision <br/>
+                                <span className="text-primary">Diagnostics</span>
+                             </h1>
+                             <p className="text-xs text-gray-500 font-medium leading-relaxed mb-3">
+                                13+ Years of Trust in Dhanbad.
+                             </p>
+                             <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                <span className="text-xs font-bold text-gray-700">Open 24/7</span>
+                             </div>
+                        </div>
+                     </div>
 
-              <div className="absolute -left-6 top-20 bg-white p-4 rounded-xl shadow-xl border border-gray-50 flex items-center gap-3 animate-bounce-slow hidden sm:flex max-w-[200px]">
-                <div className="bg-green-100 p-2.5 rounded-lg text-primary">
-                  <Microscope className="h-6 w-6" />
+                     {/* Desktop Image */}
+                     <div className="hidden lg:block relative z-10 mx-auto">
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-primary/5 rounded-full filter blur-3xl transform scale-90 translate-y-4"></div>
+                            <img 
+                                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" 
+                                alt="Professional Doctor" 
+                                className="relative z-10 w-full max-w-md mx-auto h-auto object-contain drop-shadow-2xl rounded-3xl" 
+                            />
+                            {/* Floating Card Desktop */}
+                            <div className="absolute bottom-12 -left-4 bg-white/90 backdrop-blur p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-3 animate-bounce-delayed max-w-[200px]">
+                                <div className="bg-red-50 p-2 rounded-full text-secondary">
+                                    <Activity className="h-6 w-6" />
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 font-bold uppercase">Accuracy</p>
+                                    <p className="text-lg font-bold text-gray-800">99.9%</p>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500 font-bold uppercase">Technology</p>
-                  <p className="text-primary font-bold text-sm leading-tight">Advanced Lab</p>
-                </div>
-              </div>
 
-              <div className="absolute -right-4 bottom-10 bg-white p-4 rounded-xl shadow-xl border border-gray-50 flex items-center gap-3 animate-bounce-delayed hidden sm:flex">
-                <div className="bg-red-100 p-2.5 rounded-lg text-secondary">
-                  <Award className="h-6 w-6" />
+                {/* Right Side: Content & Actions */}
+                <div className="w-full lg:w-7/12 order-1 lg:order-2">
+                    {/* Desktop Headline */}
+                    <div className="hidden lg:block mb-8">
+                        <h1 className="text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-4 tracking-tight">
+                            Avishkar <span className="text-primary">Diagnostic</span>
+                        </h1>
+                        <p className="text-xl text-gray-500 font-medium max-w-lg">
+                            Accurate Reports. Advanced Technology. Affordable Care right here in Bank More.
+                        </p>
+                    </div>
+
+                    {/* Search Bar - Prominent & Full Width Mobile */}
+                    <div className="bg-white p-2 rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 mb-8 flex items-center gap-2 w-full transition-transform focus-within:scale-[1.01]">
+                        <Search className="h-5 w-5 text-gray-400 ml-3 flex-shrink-0" />
+                        <input 
+                            type="text" 
+                            value={heroSearch}
+                            onChange={(e) => setHeroSearch(e.target.value)}
+                            placeholder="Search for tests (e.g. CBC, MRI, Sugar)..." 
+                            className="flex-grow bg-transparent border-none focus:ring-0 text-gray-700 text-base md:text-lg placeholder-gray-400 py-3 md:py-4"
+                        />
+                        <button 
+                            onClick={() => onNavigate(View.TEST_DIRECTORY)}
+                            className="bg-primary hover:bg-green-700 text-white p-3 md:px-6 md:py-3 rounded-xl transition-colors font-bold text-sm flex items-center gap-2"
+                        >
+                            <span className="hidden md:inline">Search</span>
+                            <Search className="h-5 w-5 md:hidden" />
+                        </button>
+                    </div>
+
+                    {/* CTA Buttons */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <button 
+                            onClick={() => onNavigate(View.APPOINTMENT)}
+                            className="bg-primary hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg shadow-green-900/20 flex items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        >
+                            <Calendar className="h-5 w-5 group-hover:scale-110 transition-transform" /> 
+                            <span>Book Appointment</span>
+                        </button>
+                        <button 
+                            onClick={() => onNavigate(View.HOME_COLLECTION)}
+                            className="bg-secondary hover:bg-red-600 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg shadow-red-900/20 flex items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                        >
+                            <HomeIcon className="h-5 w-5 group-hover:scale-110 transition-transform" /> 
+                            <span>Home Collection</span>
+                        </button>
+                    </div>
+
+                    {/* Secondary Actions */}
+                    <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-600">
+                         <button onClick={() => setIsReportModalOpen(true)} className="flex items-center gap-2 hover:text-primary transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
+                             <FileText className="h-4 w-4 text-secondary" /> Download Report
+                         </button>
+                         <button className="flex items-center gap-2 hover:text-primary transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm md:hidden">
+                             <Upload className="h-4 w-4 text-primary" /> Upload Rx
+                         </button>
+                    </div>
+
                 </div>
-                <div>
-                  <p className="text-xs text-gray-500 font-bold uppercase">Quality</p>
-                  <p className="text-primary font-bold text-sm leading-tight">ISO Certified</p>
-                </div>
-              </div>
+
             </div>
-
-          </div>
         </div>
       </section>
 
-      {/* 2. Quick Actions Bar */}
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-20 -mt-24 md:-mt-28">
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-8 backdrop-blur-xl bg-white/95">
-          <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+      {/* Stats Section */}
+      <div className="bg-white border-b border-gray-100">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-3 divide-x divide-gray-100 py-6 md:py-8">
+                <div className="text-center px-2">
+                    <p className="text-xl md:text-3xl font-bold text-primary">10L+</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Patients Served</p>
+                </div>
+                <div className="text-center px-2">
+                    <p className="text-xl md:text-3xl font-bold text-primary">24/7</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Support Available</p>
+                </div>
+                <div className="text-center px-2">
+                    <p className="text-xl md:text-3xl font-bold text-primary">500+</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Test Menu</p>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      {/* 2. Quick Actions Bar - Clean Minimal Style */}
+      <div className="bg-gray-50 py-4 md:py-8 border-b border-gray-100">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {quickActions.map((action, index) => {
               const Icon = iconMap[action.iconName] || FileText;
               return (
                 <div 
                   key={index} 
                   onClick={() => handleQuickAction(action.link)}
-                  className="group flex items-center gap-4 p-4 cursor-pointer hover:bg-green-50 rounded-xl transition-colors"
+                  className="group flex items-center gap-4 p-5 bg-white rounded-xl shadow-sm border border-gray-200 cursor-pointer hover:border-primary hover:shadow-md transition-all duration-300"
                 >
-                  <div className="w-14 h-14 bg-green-50 group-hover:bg-primary group-hover:text-white text-primary rounded-full flex items-center justify-center transition-colors duration-300 flex-shrink-0">
-                    <Icon className="h-7 w-7" />
+                  <div className="w-12 h-12 bg-green-50 group-hover:bg-primary group-hover:text-white text-primary rounded-full flex items-center justify-center transition-colors duration-300 flex-shrink-0">
+                    <Icon className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-primary transition-colors">{action.title}</h3>
-                    <div className="flex items-center text-sm text-gray-500 group-hover:text-secondary font-medium mt-1">
-                      <span>Proceed</span>
-                      <ChevronRight className="h-4 w-4 ml-1 transform group-hover:translate-x-1 transition-transform" />
+                    <h3 className="text-base font-bold text-gray-800 group-hover:text-primary transition-colors">{action.title}</h3>
+                    <div className="flex items-center text-xs text-gray-500 font-medium mt-0.5">
+                      <span>Tap to proceed</span> <ChevronRight className="h-3 w-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                   </div>
                 </div>
@@ -222,7 +285,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <HealthConcerns onNavigate={onNavigate} />
 
       {/* 3. Popular Packages */}
-      <section className="py-20 md:py-28 bg-white" aria-labelledby="packages-heading">
+      <section className="py-20 bg-soft-blue" aria-labelledby="packages-heading">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 id="packages-heading" className="text-3xl md:text-4xl font-bold text-primary mb-4">Best Selling Packages</h2>
@@ -244,16 +307,16 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="mt-12 text-center">
              <button 
               onClick={() => onNavigate(View.WELLNESS)}
-              className="inline-flex items-center gap-2 text-primary font-bold border-b-2 border-secondary hover:text-secondary transition-colors pb-1 text-lg"
+              className="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 px-8 rounded-full transition-all text-lg shadow-sm"
             >
-              View All Health Packages <ArrowRight className="h-5 w-5" />
+              View All Health Packages
             </button>
           </div>
         </div>
       </section>
 
       {/* 4. Testimonials (Enhanced) */}
-      <section className="py-20 bg-soft-blue">
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
              <div className="inline-block px-3 py-1 bg-green-100 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-4">

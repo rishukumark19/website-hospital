@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { View } from '../types';
 import Navbar from './Navbar';
@@ -13,7 +14,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-soft-blue text-text-dark font-sans relative">
+    <div className="min-h-screen flex flex-col bg-transparent text-text-dark font-sans relative">
       
       {/* New Responsive Navbar */}
       <Navbar currentView={currentView} onNavigate={onNavigate} />
