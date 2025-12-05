@@ -1,11 +1,14 @@
 
 export enum View {
   HOME = 'HOME',
+  ABOUT = 'ABOUT',
   SERVICES = 'SERVICES',
+  DEPARTMENTS = 'DEPARTMENTS',
   WELLNESS = 'WELLNESS',
   ASSISTANT = 'ASSISTANT',
   APPOINTMENT = 'APPOINTMENT',
   LOCATOR = 'LOCATOR',
+  CONTACT = 'CONTACT',
   HEALTH_CONCERNS = 'HEALTH_CONCERNS'
 }
 
@@ -38,6 +41,7 @@ export interface ChatMessage {
 export interface NavLink {
   name: string;
   path: string;
+  view: View;
 }
 
 export interface QuickAction {

@@ -10,7 +10,8 @@ import {
   MapPin, 
   Search, 
   Activity, 
-  ChevronDown 
+  ChevronDown,
+  Clock
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -33,28 +34,11 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Helper to map text links to App Views
-  const handleLinkClick = (linkName: string) => {
+  const handleLinkClick = (view: View) => {
     setIsMobileMenuOpen(false);
-    switch (linkName) {
-      case 'Home':
-        onNavigate(View.HOME);
-        break;
-      case 'Services':
-        onNavigate(View.SERVICES);
-        break;
-      case 'Health Packages':
-        onNavigate(View.WELLNESS);
-        break;
-      case 'Lab Locator':
-        onNavigate(View.LOCATOR);
-        break;
-      case 'Contact':
+    onNavigate(view);
+    if (view === View.CONTACT) {
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        break;
-      default:
-        console.log(`Navigating to ${linkName}`);
-        break;
     }
   };
 
@@ -62,44 +46,50 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
     <>
       <ReportModal isOpen={isReportModalOpen} onClose={() => setIsReportModalOpen(false)} />
 
-      {/* Top Bar */}
-      <div className="bg-primary text-white text-xs py-2 hidden md:block">
+      {/* Top Bar - Premium Dark Teal/Navy */}
+      <div className="bg-primary text-white text-[11px] md:text-xs py-2.5 hidden md:block tracking-wide">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2 hover:text-secondary transition-colors cursor-pointer">
-              <Phone className="h-3 w-3" />
-              <span className="font-medium">24/7 Care: 911-000</span>
+            <div className="flex items-center gap-2 hover:text-secondary transition-colors cursor-pointer group">
+              <Phone className="h-3.5 w-3.5 text-secondary group-hover:text-white transition-colors" />
+              <span className="font-semibold">24/7 Helpline: <span className="text-secondary group-hover:text-white">911-000</span></span>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="opacity-80">Support:</span>
-              <span className="font-medium hover:text-secondary cursor-pointer transition-colors">help@neurodiag.com</span>
+            <div className="flex items-center gap-2 hidden lg:flex">
+              <Clock className="h-3.5 w-3.5 opacity-70" />
+              <span className="opacity-80">Mon-Sun: 7:00 AM - 10:00 PM</span>
             </div>
           </div>
           
-          <div className="flex items-center gap-2">
-            <MapPin className="h-3 w-3 text-secondary" />
-            <select 
-              value={selectedLocation}
-              onChange={(e) => setSelectedLocation(e.target.value)}
-              className="bg-transparent border-none text-white text-xs font-medium focus:ring-0 cursor-pointer outline-none"
-            >
-              {locations.map(loc => (
-                <option key={loc.id} value={loc.name} className="text-gray-800">
-                  {loc.name}
-                </option>
-              ))}
-            </select>
-            <ChevronDown className="h-3 w-3 opacity-70" />
+          <div className="flex items-center gap-4">
+             <a href="#" className="opacity-80 hover:opacity-100 hover:text-secondary transition-colors">For Doctors</a>
+             <span className="opacity-30">|</span>
+             <a href="#" className="opacity-80 hover:opacity-100 hover:text-secondary transition-colors">Corporate</a>
+             <span className="opacity-30">|</span>
+            <div className="flex items-center gap-1.5 cursor-pointer hover:text-secondary transition-colors">
+              <MapPin className="h-3.5 w-3.5 text-secondary" />
+              <select 
+                value={selectedLocation}
+                onChange={(e) => setSelectedLocation(e.target.value)}
+                className="bg-transparent border-none text-white text-xs font-semibold focus:ring-0 cursor-pointer outline-none uppercase tracking-wide"
+              >
+                {locations.map(loc => (
+                  <option key={loc.id} value={loc.name} className="text-gray-800">
+                    {loc.name}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="h-3 w-3 opacity-70" />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Navbar */}
       <nav 
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-500 border-b ${
           isScrolled 
-            ? 'bg-white/90 backdrop-blur-md shadow-md py-3' 
-            : 'bg-white py-4 border-b border-gray-100'
+            ? 'bg-white/95 backdrop-blur-md shadow-lg py-3 border-gray-100' 
+            : 'bg-white py-5 border-transparent'
         }`}
       >
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -107,63 +97,55 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
             
             {/* Logo */}
             <div 
-              className="flex items-center gap-2 cursor-pointer group" 
+              className="flex items-center gap-3 cursor-pointer group" 
               onClick={() => onNavigate(View.HOME)}
             >
-              <div className="bg-primary p-2 rounded-lg group-hover:bg-secondary transition-colors duration-300">
+              <div className="bg-gradient-to-br from-primary to-blue-800 p-2.5 rounded-xl shadow-lg group-hover:shadow-blue-900/20 transition-all duration-300">
                 <Activity className="h-6 w-6 text-white" />
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold tracking-tight text-primary leading-none">NeuroDiag</span>
-                <span className="text-xs text-secondary font-medium tracking-wide uppercase">Centre</span>
+                <span className="text-2xl font-heading font-bold text-primary leading-none tracking-tight">NeuroDiag</span>
+                <span className="text-[10px] text-teal font-bold tracking-[0.2em] uppercase mt-0.5">Excellence in Care</span>
               </div>
             </div>
 
-            {/* Desktop Nav Links */}
-            <div className="hidden md:flex items-center space-x-8">
+            {/* Desktop Nav Links - Centered */}
+            <div className="hidden lg:flex items-center space-x-1">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
-                  onClick={() => handleLinkClick(link.name)}
-                  className={`text-sm font-medium transition-all duration-200 relative group ${
-                    (link.name === 'Home' && currentView === View.HOME) || 
-                    (link.name === 'Services' && currentView === View.SERVICES) ||
-                    (link.name === 'Health Packages' && currentView === View.WELLNESS)
-                      ? 'text-primary' 
-                      : 'text-gray-600 hover:text-primary'
+                  onClick={() => handleLinkClick(link.view)}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 relative ${
+                    currentView === link.view
+                      ? 'text-primary bg-blue-50' 
+                      : 'text-gray-500 hover:text-primary hover:bg-gray-50'
                   }`}
                 >
                   {link.name}
-                  <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-secondary transition-all duration-300 group-hover:w-full ${
-                     (link.name === 'Home' && currentView === View.HOME) || 
-                     (link.name === 'Services' && currentView === View.SERVICES) ||
-                     (link.name === 'Health Packages' && currentView === View.WELLNESS) ? 'w-full' : ''
-                  }`}></span>
                 </button>
               ))}
             </div>
 
-            {/* Right Side Actions (Search + CTA) */}
+            {/* Right Side Actions */}
             <div className="hidden md:flex items-center gap-4">
                <button 
                 onClick={() => setIsReportModalOpen(true)}
-                className="text-xs font-semibold text-primary hover:text-secondary border border-primary/20 hover:border-secondary rounded-full px-4 py-2 transition-all"
+                className="text-xs font-bold text-primary hover:text-white border-2 border-primary/10 hover:bg-primary hover:border-primary rounded-full px-5 py-2.5 transition-all duration-300"
                >
                  Download Report
                </button>
 
-              {/* CTA Button */}
               <button
                 onClick={() => onNavigate(View.APPOINTMENT)}
-                className="bg-primary hover:bg-blue-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg shadow-blue-900/10 flex items-center gap-2 hover:-translate-y-0.5"
+                className="bg-secondary hover:bg-cyan-500 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg shadow-cyan-500/20 flex items-center gap-2 hover:-translate-y-0.5"
               >
-                Book a Test
+                Book Appointment
               </button>
             </div>
 
             {/* Mobile Menu Toggle */}
             <button
-              className="md:hidden text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="lg:hidden text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
               onClick={() => setIsMobileMenuOpen(true)}
             >
               <Menu className="h-6 w-6" />
@@ -172,74 +154,70 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
         </div>
       </nav>
 
-      {/* Mobile Sidebar / Drawer */}
+      {/* Mobile Sidebar */}
       <div 
-        className={`fixed inset-0 z-50 transform transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-[60] transform transition-all duration-300 lg:hidden ${
           isMobileMenuOpen ? 'visible' : 'invisible'
         }`}
       >
-        {/* Backdrop */}
         <div 
-          className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 ${
+          className={`absolute inset-0 bg-primary/20 backdrop-blur-sm transition-opacity duration-300 ${
             isMobileMenuOpen ? 'opacity-100' : 'opacity-0'
           }`}
           onClick={() => setIsMobileMenuOpen(false)}
         />
 
-        {/* Sidebar Content */}
         <div 
-          className={`absolute top-0 left-0 h-full w-[80%] max-w-sm bg-white shadow-2xl transform transition-transform duration-300 flex flex-col ${
-            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          className={`absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl transform transition-transform duration-300 flex flex-col ${
+            isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
-          {/* Sidebar Header */}
-          <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-            <div className="flex items-center gap-2">
-              <div className="bg-primary p-1.5 rounded-md">
-                <Activity className="h-5 w-5 text-white" />
-              </div>
-              <span className="text-lg font-bold text-primary">NeuroDiag</span>
-            </div>
+          <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+            <span className="text-lg font-heading font-bold text-primary">Menu</span>
             <button 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors"
+              className="p-2 text-gray-400 hover:text-primary hover:bg-white rounded-full transition-all shadow-sm"
             >
               <X className="h-5 w-5" />
             </button>
           </div>
 
-          {/* Sidebar Links */}
-          <div className="flex-1 overflow-y-auto py-6 px-4 space-y-1">
+          <div className="flex-1 overflow-y-auto py-6 px-6 space-y-2">
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => handleLinkClick(link.name)}
-                className="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors flex items-center justify-between group"
+                onClick={() => handleLinkClick(link.view)}
+                className={`w-full text-left px-4 py-4 rounded-xl text-base font-semibold transition-colors flex items-center justify-between group ${
+                    currentView === link.view ? 'bg-blue-50 text-primary' : 'text-gray-600 hover:bg-gray-50'
+                }`}
               >
                 {link.name}
+                {currentView === link.view && <div className="w-1.5 h-1.5 rounded-full bg-secondary"></div>}
               </button>
             ))}
+            
+            <div className="my-4 border-t border-gray-100"></div>
+            
              <button
                 onClick={() => {
                     setIsMobileMenuOpen(false);
                     setIsReportModalOpen(true);
                 }}
-                className="w-full text-left px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-blue-50 hover:text-primary transition-colors flex items-center justify-between group"
+                className="w-full text-left px-4 py-4 rounded-xl text-base font-semibold text-gray-600 hover:bg-gray-50 hover:text-primary transition-colors flex items-center justify-between"
               >
                 Download Report
               </button>
           </div>
 
-          {/* Sidebar Footer/Actions */}
           <div className="p-6 border-t border-gray-100 bg-gray-50 space-y-4">
             <button
               onClick={() => {
                 onNavigate(View.APPOINTMENT);
                 setIsMobileMenuOpen(false);
               }}
-              className="w-full bg-primary text-white py-3.5 rounded-xl font-bold shadow-lg shadow-blue-900/10 active:scale-95 transition-transform"
+              className="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-xl shadow-blue-900/10 active:scale-95 transition-transform"
             >
-              Book a Test
+              Book Appointment
             </button>
           </div>
         </div>

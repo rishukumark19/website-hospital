@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NeuroDiag Centre</title>
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter & Poppins for headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,11 +19,14 @@
               primary: '#003366', // Deep Navy
               secondary: '#00AEEF', // Bright Cyan
               accent: '#EE2E24', // Red
+              teal: '#008080', // Medical Teal
+              'teal-light': '#E0F2F1',
               background: '#F8F9FA', // Light Gray
               surface: '#FFFFFF',
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
+              heading: ['Poppins', 'sans-serif'],
             },
             container: {
               center: true,
@@ -51,7 +54,7 @@
 }
 </script>
 </head>
-  <body class="bg-background text-primary font-sans antialiased selection:bg-secondary selection:text-white">
+  <body class="bg-background text-primary font-sans antialiased selection:bg-teal-light selection:text-teal-900">
     <div id="root"></div>
   </body>
 </html>

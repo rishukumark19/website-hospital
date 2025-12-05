@@ -1,13 +1,13 @@
 
-import { NavLink, QuickAction, HealthPackage, TestCategory, LabLocation, TestItem, HealthConcern } from '../types';
+import { NavLink, QuickAction, HealthPackage, TestCategory, LabLocation, TestItem, HealthConcern, View } from '../types';
 
 export const navLinks: NavLink[] = [
-  { name: 'Home', path: '/' },
-  { name: 'About Us', path: '/about' },
-  { name: 'Services', path: '/services' },
-  { name: 'Health Packages', path: '/wellness' },
-  { name: 'Lab Locator', path: '/locator' },
-  { name: 'Contact', path: '/contact' },
+  { name: 'Home', path: '/', view: View.HOME },
+  { name: 'About Us', path: '/about', view: View.ABOUT },
+  { name: 'Services', path: '/services', view: View.SERVICES },
+  { name: 'Departments', path: '/departments', view: View.DEPARTMENTS },
+  { name: 'Locations', path: '/locator', view: View.LOCATOR },
+  { name: 'Contact', path: '/contact', view: View.CONTACT },
 ];
 
 export const quickActions: QuickAction[] = [
