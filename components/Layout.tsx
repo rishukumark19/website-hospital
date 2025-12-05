@@ -3,6 +3,7 @@ import { View } from '../types';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
+import EmergencyHotline from './EmergencyHotline';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -27,8 +28,9 @@ const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) =>
       {/* New Footer */}
       <Footer onNavigate={onNavigate} />
 
-      {/* Scroll to Top Utility */}
+      {/* Utilities */}
       <ScrollToTop />
+      <EmergencyHotline />
     </div>
   );
 };

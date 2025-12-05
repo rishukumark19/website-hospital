@@ -1,48 +1,29 @@
-
 import React, { useState } from 'react';
-import { ServiceItem } from '../types';
+import { ServiceItem, View } from '../types';
 import TestCard from '../components/TestCard';
 import TestListItem from '../components/TestListItem';
-import { testDirectory, testCategories } from '../data/mockData';
-import { Search, Stethoscope, Microscope, Zap, Filter, LayoutGrid, List } from 'lucide-react';
+import { testDirectory } from '../data/mockData';
+import { Search, Microscope, Zap, List, ShieldCheck, Home, Download } from 'lucide-react';
 
 // Data for Core Services
-const coreServicesData: ServiceItem[] = [
-  { id: 'c1', title: 'Pathology & Laboratory Medicine', description: 'Comprehensive diagnostic testing for precise disease management.', price: 500, category: 'Pathology', iconName: 'Microscope' },
-  { id: 'c2', title: 'Genetics & Genomics', description: 'Advanced molecular diagnostics for genetic conditions.', price: 5000, category: 'Pathology', iconName: 'Dna' },
-  { id: 'c3', title: 'Biochemistry', description: 'Analysis of chemical processes within and related to living organisms.', price: 800, category: 'Pathology', iconName: 'FlaskConical' },
-  { id: 'c4', title: 'Microbiology', description: 'Study of microscopic organisms, such as bacteria, viruses, archaea, fungi and protozoa.', price: 1000, category: 'Pathology', iconName: 'Bug' },
-  { id: 'c5', title: 'Hematology', description: 'Diagnosis and treatment of blood diseases and disorders.', price: 600, category: 'Pathology', iconName: 'Droplet' },
-  { id: 'c6', title: 'Histopathology', description: 'Microscopic examination of tissue in order to study the manifestations of disease.', price: 2000, category: 'Pathology', iconName: 'Slice' },
-  { id: 'c7', title: 'Newborn Screening', description: 'Screening for harmful or potentially fatal disorders that aren\'t otherwise apparent at birth.', price: 1500, category: 'Pathology', iconName: 'Baby' },
-  { id: 'c8', title: 'Metabolomics & Proteomics', description: 'Large-scale study of small molecules and proteins.', price: 8000, category: 'Pathology', iconName: 'Activity' },
+const pathologyServices: ServiceItem[] = [
+  { id: 'c1', title: 'Pathology & Laboratory Medicine', description: 'Comprehensive diagnostic testing including blood, urine, and tissue analysis.', price: 500, category: 'Pathology', iconName: 'Microscope' },
+  { id: 'c3', title: 'Biochemistry', description: 'Analysis of chemical processes for liver, kidney, and metabolic health.', price: 800, category: 'Pathology', iconName: 'FlaskConical' },
+  { id: 'c4', title: 'Microbiology', description: 'Identification of infectious agents like bacteria and viruses.', price: 1000, category: 'Pathology', iconName: 'Bug' },
+  { id: 'c5', title: 'Hematology', description: 'Complete blood count and diagnosis of blood disorders.', price: 600, category: 'Pathology', iconName: 'Droplet' },
 ];
 
-// Data for Imaging & Radiology
-const imagingServicesData: ServiceItem[] = [
-  { id: 'i1', title: 'High-Definition MRI', description: 'Detailed imaging of organs and structures within the body.', price: 7500, category: 'Radiology', iconName: 'Brain' },
-  { id: 'i2', title: 'CT Scan', description: 'Detailed cross-sectional images of the body.', price: 5000, category: 'Radiology', iconName: 'Scan' },
-  { id: 'i3', title: 'Digital X-Ray', description: 'Quick and painless imaging of bone structures.', price: 800, category: 'Radiology', iconName: 'Bone' },
-  { id: 'i4', title: 'Digital Mammography', description: 'Specialized medical imaging that uses a low-dose x-ray system to see inside the breasts.', price: 2500, category: 'Radiology', iconName: 'Scan' },
-  { id: 'i5', title: 'Ultrasound / Sonography', description: 'Using high-frequency sound waves to capture live images from the inside of your body.', price: 1800, category: 'Radiology', iconName: 'Activity' },
-  { id: 'i6', title: 'Cardiology Diagnostics', description: 'Includes ECG, Echo, and TMT for comprehensive heart health.', price: 3000, category: 'Cardiology', iconName: 'HeartPulse' },
-  { id: 'i7', title: 'Wellness Services', description: 'Holistic wellness checks and consultations.', price: 1500, category: 'Checkup', iconName: 'Sun' },
+// Data for Imaging
+const imagingServices: ServiceItem[] = [
+  { id: 'i1', title: 'High-Definition MRI', description: 'Detailed imaging of soft tissues, brain, and spine.', price: 7500, category: 'Radiology', iconName: 'Brain' },
+  { id: 'i2', title: 'CT Scan', description: 'Fast, detailed cross-sectional images for trauma and diagnostics.', price: 5000, category: 'Radiology', iconName: 'Scan' },
+  { id: 'i3', title: 'Digital X-Ray', description: 'Quick imaging for bone fractures and chest infections.', price: 800, category: 'Radiology', iconName: 'Bone' },
+  { id: 'i5', title: 'Ultrasound / Sonography', description: 'Safe imaging for pregnancy, abdomen, and pelvis.', price: 1800, category: 'Radiology', iconName: 'Activity' },
 ];
 
 const Services: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-
-  // Filter logic for Departments
-  const filterServices = (services: ServiceItem[]) => {
-    return services.filter(service => 
-      service.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      service.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  };
-
-  const filteredCore = filterServices(coreServicesData);
-  const filteredImaging = filterServices(imagingServicesData);
 
   // Filter logic for Test Directory
   const filteredTests = testDirectory.filter(test => {
@@ -62,14 +43,32 @@ const Services: React.FC = () => {
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Our Services & Tests</h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Browse our comprehensive menu of diagnostic services. Search by name, code, or health concern.
+            Comprehensive diagnostic solutions at Bank More, Dhanbad.
           </p>
         </div>
 
-        {/* Sticky Search & Filter Bar */}
+        {/* 5 Main Categories Section (Feature 5) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-20">
+            {[
+                { title: 'Pathology', icon: Microscope, desc: 'Advanced blood & tissue analysis', color: 'bg-blue-50 text-blue-600' },
+                { title: 'Radiology', icon: Zap, desc: 'MRI, CT, X-Ray & Ultrasound', color: 'bg-orange-50 text-orange-600' },
+                { title: 'Wellness', icon: ShieldCheck, desc: 'Full body health packages', color: 'bg-green-50 text-green-600' },
+                { title: 'Home Visit', icon: Home, desc: 'Sample collection at your door', color: 'bg-purple-50 text-purple-600' },
+                { title: 'Reports', icon: Download, desc: 'Download digital reports', color: 'bg-teal-50 text-teal-600' },
+            ].map((cat, idx) => (
+                <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer">
+                    <div className={`w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center ${cat.color} group-hover:scale-110 transition-transform`}>
+                        <cat.icon className="h-7 w-7" />
+                    </div>
+                    <h3 className="font-bold text-gray-800 mb-1">{cat.title}</h3>
+                    <p className="text-xs text-gray-500">{cat.desc}</p>
+                </div>
+            ))}
+        </div>
+
+        {/* Search Bar */}
         <div className="sticky top-20 z-30 bg-background/95 backdrop-blur-sm py-4 -mx-4 px-4 mb-8 border-b border-gray-100">
             <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4">
-                {/* Search Bar */}
                 <div className="relative flex-grow">
                     <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
                     <input 
@@ -81,10 +80,8 @@ const Services: React.FC = () => {
                     />
                 </div>
             </div>
-
-             {/* Categories (Health Concerns) */}
              <div className="max-w-6xl mx-auto mt-6">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Browse by Health Concern</p>
+                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Browse by Category</p>
                 <div className="flex flex-wrap gap-2">
                     {categories.map(cat => (
                         <button
@@ -103,20 +100,20 @@ const Services: React.FC = () => {
              </div>
         </div>
 
-        {/* SECTION 1: DEPARTMENTS (Hidden if filtering by specific test category to focus on results) */}
+        {/* Detailed Service Cards */}
         {selectedCategory === 'All' && !searchTerm && (
-            <div className="space-y-16 mb-20 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                {/* Core Services */}
+            <div className="space-y-16 mb-20">
+                {/* Pathology */}
                 <div>
                     <div className="flex items-center gap-3 mb-8">
                         <div className="p-2 bg-blue-100 rounded-lg text-primary">
                         <Microscope className="h-6 w-6" />
                         </div>
-                        <h3 className="text-2xl font-bold text-primary">Core Departments</h3>
+                        <h3 className="text-2xl font-bold text-primary">Pathology & Lab Tests</h3>
                         <div className="h-px bg-gray-200 flex-grow ml-4"></div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {filteredCore.map((service) => (
+                        {pathologyServices.map((service) => (
                             <TestCard key={service.id} test={service} />
                         ))}
                     </div>
@@ -125,14 +122,14 @@ const Services: React.FC = () => {
                 {/* Imaging */}
                 <div>
                     <div className="flex items-center gap-3 mb-8">
-                        <div className="p-2 bg-blue-100 rounded-lg text-primary">
+                        <div className="p-2 bg-orange-100 rounded-lg text-orange-600">
                         <Zap className="h-6 w-6" />
                         </div>
                         <h3 className="text-2xl font-bold text-primary">Imaging & Radiology</h3>
                         <div className="h-px bg-gray-200 flex-grow ml-4"></div>
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {filteredImaging.map((service) => (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {imagingServices.map((service) => (
                             <TestCard key={service.id} test={service} />
                         ))}
                     </div>
@@ -140,18 +137,14 @@ const Services: React.FC = () => {
             </div>
         )}
 
-        {/* SECTION 2: TEST DIRECTORY */}
-        <div id="test-directory" className="scroll-mt-32">
-            <div className="flex items-center justify-between mb-8">
-                 <div className="flex items-center gap-3">
-                    <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
-                        <List className="h-6 w-6" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-primary">Test Directory</h3>
+        {/* Test Directory List */}
+        <div id="test-directory">
+            <div className="flex items-center gap-3 mb-8">
+                <div className="p-2 bg-secondary/10 rounded-lg text-secondary">
+                    <List className="h-6 w-6" />
                 </div>
-                <div className="text-sm text-gray-500 font-medium">
-                    {filteredTests.length} Tests Found
-                </div>
+                <h3 className="text-2xl font-bold text-primary">Test Directory</h3>
+                <div className="h-px bg-gray-200 flex-grow ml-4"></div>
             </div>
 
             {filteredTests.length > 0 ? (
@@ -162,13 +155,7 @@ const Services: React.FC = () => {
                 </div>
             ) : (
                 <div className="text-center py-16 bg-white rounded-2xl border border-gray-100">
-                    <p className="text-gray-500 mb-2">No specific tests found matching "{searchTerm}".</p>
-                    <button 
-                        onClick={() => {setSearchTerm(''); setSelectedCategory('All');}}
-                        className="text-secondary font-semibold hover:underline"
-                    >
-                        Reset Search
-                    </button>
+                    <p className="text-gray-500 mb-2">No tests found matching "{searchTerm}".</p>
                 </div>
             )}
         </div>

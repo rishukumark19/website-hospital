@@ -5,6 +5,7 @@ import PackageCard from '../components/PackageCard';
 import BookingModal from '../components/BookingModal';
 import ReportModal from '../components/ReportModal';
 import HealthConcerns from './HealthConcerns';
+import TestimonialCard from '../components/TestimonialCard';
 import { 
   ArrowRight, 
   MapPin, 
@@ -39,6 +40,37 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
     MapPin: MapPin,
     FileText: FileText
   };
+
+  const testimonials = [
+    {
+      name: "Priya Sharma",
+      location: "Bank More, Dhanbad",
+      rating: 5,
+      text: "The home collection service was incredibly punctual. The phlebotomist was professional and painless. Got reports on email same day!",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+      name: "Rahul Verma",
+      location: "Jharia",
+      rating: 5,
+      text: "Avishkar is the only place I trust for my parents' diabetes monitoring. Accurate reports and very helpful staff.",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+      name: "Anjali Gupta",
+      location: "Hirapur",
+      rating: 4,
+      text: "Very clean and hygienic lab. The wait time was minimal and the staff guided me well for my MRI scan.",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
+    },
+    {
+      name: "Vikram Singh",
+      location: "Govindpur",
+      rating: 5,
+      text: "Best diagnostic center in Dhanbad. Their full body package covers everything at a very reasonable price.",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200"
+    }
+  ];
 
   return (
     <div className="flex flex-col w-full">
@@ -218,6 +250,24 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             >
               View All Health Packages <ArrowRight className="h-5 w-5" />
             </button>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW: Testimonials Section (Feature 1) */}
+      <section className="py-20 bg-soft-blue">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Patient Success Stories</h2>
+            <p className="text-gray-600 text-lg">
+              Don't just take our word for it. Here is what our patients from Dhanbad have to say about their experience with Avishkar.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {testimonials.map((t, i) => (
+              <TestimonialCard key={i} {...t} />
+            ))}
           </div>
         </div>
       </section>

@@ -8,7 +8,8 @@ import {
   CheckCircle, 
   Globe, 
   Microscope,
-  Quote
+  Quote,
+  Stethoscope
 } from 'lucide-react';
 
 interface AboutUsProps {
@@ -156,7 +157,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Leadership / Doctors */}
+      {/* 4. Leadership / Doctors (Feature 3) */}
       <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
            <div className="flex flex-col md:flex-row justify-between items-end mb-12">
@@ -173,20 +174,26 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
 
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[
-                { name: 'Dr. Sarah Johnson', role: 'Chief Pathologist', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800' },
-                { name: 'Dr. Robert Chen', role: 'Head of Radiology', img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800' },
-                { name: 'Dr. Emily Davis', role: 'Clinical Biochemist', img: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800' },
-                { name: 'Dr. Michael Wilson', role: 'Microbiologist', img: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800' },
+                { name: 'Dr. Sarah Johnson', role: 'Chief Pathologist', qual: 'MBBS, MD (Pathology)', exp: '15 Years Exp.', img: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=800' },
+                { name: 'Dr. Robert Chen', role: 'Head of Radiology', qual: 'MBBS, MD (Radio-Diagnosis)', exp: '12 Years Exp.', img: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=800' },
+                { name: 'Dr. Emily Davis', role: 'Clinical Biochemist', qual: 'Ph.D. Biochemistry', exp: '8 Years Exp.', img: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800' },
+                { name: 'Dr. Michael Wilson', role: 'Microbiologist', qual: 'M.Sc Medical Microbiology', exp: '10 Years Exp.', img: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800' },
               ].map((doc, idx) => (
-                <div key={idx} className="group">
-                  <div className="rounded-2xl overflow-hidden mb-4 relative">
-                    <img src={doc.img} alt={doc.name} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
-                      <p className="text-white text-sm">MBBS, MD (Pathology) - 15 Years Exp.</p>
+                <div key={idx} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <div className="relative overflow-hidden h-64">
+                    <img src={doc.img} alt={doc.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-md text-[10px] font-bold text-primary shadow-sm flex items-center gap-1">
+                      <Award className="h-3 w-3 text-secondary" /> Certified
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold text-primary">{doc.name}</h3>
-                  <p className="text-secondary font-medium text-sm">{doc.role}</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-primary mb-1">{doc.name}</h3>
+                    <p className="text-secondary font-medium text-xs uppercase tracking-wide mb-3">{doc.role}</p>
+                    <div className="space-y-1 text-sm text-gray-600">
+                       <p className="flex items-center gap-2"><Stethoscope className="h-3 w-3" /> {doc.qual}</p>
+                       <p className="flex items-center gap-2"><Award className="h-3 w-3" /> {doc.exp}</p>
+                    </div>
+                  </div>
                 </div>
               ))}
            </div>

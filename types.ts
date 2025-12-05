@@ -9,7 +9,11 @@ export enum View {
   APPOINTMENT = 'APPOINTMENT',
   LOCATOR = 'LOCATOR',
   CONTACT = 'CONTACT',
-  HEALTH_CONCERNS = 'HEALTH_CONCERNS'
+  HEALTH_CONCERNS = 'HEALTH_CONCERNS',
+  FAQ = 'FAQ',
+  BLOG = 'BLOG',
+  PRIVACY = 'PRIVACY',
+  TERMS = 'TERMS'
 }
 
 export interface ServiceItem {

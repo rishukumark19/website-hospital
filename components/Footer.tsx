@@ -9,7 +9,9 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  ArrowRight 
+  ArrowRight,
+  Clock,
+  MessageCircle
 } from 'lucide-react';
 
 interface FooterProps {
@@ -63,7 +65,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { label: 'About Us', view: View.ABOUT },
                 { label: 'Our Services', view: View.SERVICES },
                 { label: 'Book Appointment', view: View.APPOINTMENT },
-                { label: 'Find a Lab', view: View.LOCATOR },
+                { label: 'Patient FAQ', view: View.FAQ },
+                { label: 'Health Blog', view: View.BLOG },
               ].map((link, idx) => (
                 <li key={idx}>
                   <button 
@@ -78,22 +81,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
 
-          {/* Col 3: Doctor Links */}
-          <div>
-            <h3 className="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block">For Doctors</h3>
-            <ul className="space-y-3">
-              {['Refer a Patient', 'Partner with Us', 'Clinical Research', 'Careers', 'News & Updates'].map((item, idx) => (
-                <li key={idx}>
-                  <a href="#" className="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group">
-                    <ArrowRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary" />
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Col 4: Contact Details */}
+          {/* Col 3: Contact Details (Feature 6) */}
           <div>
             <h3 className="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block">Contact Us</h3>
             <ul className="space-y-4">
@@ -103,17 +91,53 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li className="flex items-center gap-3 text-green-100 text-sm">
                 <Phone className="h-5 w-5 text-secondary flex-shrink-0" />
-                <span>+91 326 230 XXXX</span>
+                <a href="tel:+91326230XXXX" className="hover:text-white transition-colors">+91 326 230 XXXX</a>
               </li>
               <li className="flex items-center gap-3 text-green-100 text-sm">
                 <Mail className="h-5 w-5 text-secondary flex-shrink-0" />
-                <span>info@avishkardiagnostic.com</span>
+                <a href="mailto:info@avishkardiagnostic.com" className="hover:text-white transition-colors">info@avishkardiagnostic.com</a>
+              </li>
+              <li className="flex items-center gap-3 text-green-100 text-sm">
+                <Clock className="h-5 w-5 text-secondary flex-shrink-0" />
+                <span>Mon-Sun: 7:00 AM - 9:00 PM</span>
               </li>
             </ul>
             
-            <div className="mt-6 bg-white/10 rounded-xl p-4 border border-white/10 backdrop-blur-sm">
+            <div className="mt-6 flex gap-3">
+               <a href="https://wa.me/" target="_blank" className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-colors">
+                 <MessageCircle className="h-4 w-4" /> WhatsApp
+               </a>
+               <a href="tel:+91326230XXXX" className="bg-white hover:bg-gray-100 text-primary px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-colors">
+                 <Phone className="h-4 w-4" /> Call Now
+               </a>
+            </div>
+          </div>
+
+          {/* Col 4: Legal & Policy */}
+           <div>
+            <h3 className="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block">Legal</h3>
+            <ul className="space-y-3">
+              {[
+                { label: 'Privacy Policy', view: View.PRIVACY },
+                { label: 'Terms of Service', view: View.TERMS },
+              ].map((link, idx) => (
+                <li key={idx}>
+                  <button 
+                    onClick={() => link.view && onNavigate(link.view)}
+                    className="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                  >
+                    <ArrowRight className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary" />
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            
+            <div className="mt-8">
+               <div className="bg-white/10 rounded-xl p-4 border border-white/10 backdrop-blur-sm">
                 <p className="text-xs text-green-100 mb-1">Emergency Hotline (24/7)</p>
                 <p className="text-2xl font-bold text-secondary">0326-230-000</p>
+               </div>
             </div>
           </div>
 
@@ -123,9 +147,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="border-t border-white/10 pt-8 mt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-green-200">
           <p>&copy; {new Date().getFullYear()} Avishkar Diagnostic Centre, Dhanbad. All rights reserved.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+            <span className="opacity-50">Designed for Healthcare Excellence</span>
           </div>
         </div>
 
