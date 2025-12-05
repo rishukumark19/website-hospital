@@ -9,7 +9,7 @@ import {
   CheckCircle, 
   Globe, 
   Microscope,
-  Clock
+  Quote
 } from 'lucide-react';
 
 interface AboutUsProps {
@@ -79,6 +79,25 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 2.5 Feature Image Break (NEW) */}
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto max-w-4xl px-4 text-center">
+             <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-white">
+                <img 
+                    src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=2070" 
+                    alt="Professional Indian Female Doctor in a modern clinic" 
+                    className="w-full h-96 object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end justify-center pb-10">
+                    <div className="text-white px-4">
+                        <p className="text-2xl font-bold mb-2">Empowering Health with Compassion</p>
+                        <p className="opacity-90 max-w-lg mx-auto">Our team of dedicated professionals works round the clock to ensure you get the best care.</p>
+                    </div>
+                </div>
+             </div>
         </div>
       </section>
 
@@ -175,7 +194,30 @@ const AboutUs: React.FC<AboutUsProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. Key Stats */}
+      {/* 5. Patient Stories (NEW) */}
+      <section className="py-20 bg-blue-50">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-primary text-center mb-12">Trusted by 10 Million+ Patients</h2>
+            <div className="flex flex-wrap justify-center gap-8">
+                {[
+                    { name: 'Priya Sharma', text: 'Excellent service and timely reports. The home collection was very convenient.', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100' },
+                    { name: 'Amit Patel', text: 'Professional staff and clean environment. Highly recommended for full body checkups.', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100' },
+                    { name: 'Sneha Gupta', text: 'NeuroBot helped me understand my test prep easily. Great technology!', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100' }
+                ].map((testimonial, idx) => (
+                    <div key={idx} className="bg-white p-6 rounded-2xl shadow-sm border border-blue-100 max-w-sm flex items-start gap-4">
+                         <img src={testimonial.img} alt={testimonial.name} className="w-14 h-14 rounded-full object-cover border-2 border-white shadow-md" />
+                         <div>
+                             <Quote className="h-4 w-4 text-secondary mb-1 opacity-50" />
+                             <p className="text-sm text-gray-600 italic mb-2">"{testimonial.text}"</p>
+                             <p className="text-primary font-bold text-sm">- {testimonial.name}</p>
+                         </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </section>
+
+      {/* 6. Key Stats */}
       <section className="py-20 bg-primary text-white">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
