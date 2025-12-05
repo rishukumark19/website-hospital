@@ -12,13 +12,13 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-background text-primary font-sans relative">
+    <div className="min-h-screen flex flex-col bg-soft-blue text-text-dark font-sans relative">
       
       {/* New Responsive Navbar */}
       <Navbar currentView={currentView} onNavigate={onNavigate} />
 
       {/* Main Content */}
-      <main className="flex-grow">
+      <main className="flex-grow animate-fade-in">
         <div className="w-full">
           {children}
         </div>
