@@ -209,8 +209,8 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       <HealthConcerns onNavigate={onNavigate} />
 
-      {/* Popular Packages */}
-      <section className="py-20 bg-gray-50" aria-labelledby="packages-heading">
+      {/* Popular Packages - Redesigned background for contrast */}
+      <section className="py-20 bg-[#F0FDF4]/40" aria-labelledby="packages-heading">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
@@ -221,7 +221,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </div>
             <button 
               onClick={() => onNavigate(View.WELLNESS)}
-              className="hidden md:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"
+              className="hidden md:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all bg-white px-5 py-2.5 rounded-full border border-gray-200 shadow-sm"
             >
               View All Packages <ArrowRight className="h-5 w-5" />
             </button>
@@ -240,7 +240,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="mt-10 md:hidden text-center">
              <button 
               onClick={() => onNavigate(View.WELLNESS)}
-              className="bg-white border border-gray-200 text-gray-700 px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 mx-auto"
+              className="bg-white border border-gray-200 text-gray-700 px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 mx-auto shadow-sm"
             >
               View All Packages <ArrowRight className="h-5 w-5" />
             </button>
