@@ -1,41 +1,59 @@
-# NeuroDiag Centre
+# Avishkar Diagnostic Centre Website
 
-**Premium NABL Accredited Diagnostic Centre & Healthcare Platform**
+A premium, fully responsive static website for Avishkar Diagnostic Centre, designed to provide a seamless user experience for patients seeking diagnostic services.
 
-NeuroDiag Centre is a modern, responsive web application designed for a leading diagnostic chain. It facilitates seamless interaction between patients and healthcare services, offering features like home sample collection booking, online report access, and AI-assisted health queries.
+## 🚀 Features
 
-## 🏥 Key Features
-
-*   **Comprehensive Test Directory**: Searchable database of 500+ pathology and radiology tests.
-*   **Preventive Health Packages**: Detailed wellness packages for different demographics (Women, Seniors, etc.).
-*   **Lab Locator**: Interactive finder for 250+ lab locations with service filtering.
-*   **AI Health Assistant (NeuroBot)**: 24/7 virtual assistant for patient queries regarding test preparations and general health info.
-*   **Online Booking**: Easy appointment scheduling for home visits and lab tests.
-*   **Report Access**: Secure portal for patients to download test reports.
+- **Responsive Design**: Optimized for all devices, from mobile phones to large desktop screens.
+- **Dynamic Navigation**:
+  - **Desktop**: Full navbar with dropdowns for locations and user account.
+  - **Mobile**: Slide-out menu and a sticky bottom navigation bar for quick access.
+- **Interactive Elements**:
+  - **Hero Section**: Unified search bar with location selector.
+  - **Health Concerns**: Scrollable/Grid view of health concerns (Kidney, Liver, etc.).
+  - **Test Directory**: Searchable and filterable list of 500+ tests.
+- **Appointment Booking**: A multi-step, user-friendly form for booking home collections or lab visits.
+- **Service Showcases**: Detailed sections for Pathology, Radiology, Wellness Packages, and more.
+- **User Dashboard**: Simulated dashboard for viewing reports and upcoming appointments.
 
 ## 🛠️ Technology Stack
 
-*   **Frontend**: React (v18+), TypeScript
-*   **Styling**: Tailwind CSS (Medical Theme Customization)
-*   **Icons**: Lucide React
-*   **AI Integration**: Google Gemini API (for NeuroBot)
-*   **Build Tool**: Vite
+- **HTML5**: Semantic structure.
+- **Tailwind CSS**: Utility-first styling (via CDN) for rapid and modern UI development.
+- **Vanilla JavaScript**: Handles all interactivity, routing (SPA simulation), and data rendering.
+- **Lucide Icons**: Beautiful, consistent icons (via CDN).
 
-## 🚀 Getting Started
+## 📂 Project Structure
 
-1.  **Clone the repository**
-2.  **Install dependencies**: `npm install`
-3.  **Run development server**: `npm run dev`
+```
+/
+├── index.html      # Main entry point containing all views and structure
+├── script.js       # Core logic, mock data, and event handlers
+├── README.md       # Project documentation
+└── .gitignore      # Git configuration
+```
 
-## 🔒 Security & Privacy
+## 🏃‍♂️ How to Run
 
-NeuroDiag follows strict data privacy guidelines. Patient data is simulated for this demonstration. In a production environment, all health data would be encrypted and compliant with HIPAA/GDPR standards.
+Since this is a static website with no build dependencies:
 
-## 🏆 Accreditations
+1.  **Clone the repository** or download the files.
+2.  **Open `index.html`** directly in your web browser.
+3.  That's it! The site is fully functional.
 
-*   NABL (National Accreditation Board for Testing and Calibration Laboratories)
-*   CAP (College of American Pathologists)
-*   ISO 9001:2015 Certified
+## 🌐 Deployment
+
+This project is ready for immediate deployment to any static hosting service:
+
+- **GitHub Pages**: Go to Settings > Pages and select the `main` branch.
+- **Netlify / Vercel**: Simply drag and drop the folder or connect your Git repository.
+
+## 📝 Customization
+
+- **Content**: Edit the HTML structure in `index.html`.
+- **Data**: Modify the mock data arrays (e.g., `packages`, `testDirectory`, `locations`) at the top of `script.js`.
+- **Styling**: Update Tailwind classes in `index.html` or the `tailwind.config` script tag within the `<head>`.
 
 ---
-© 2024 NeuroDiag Centre. All rights reserved.
+
+_Designed for Healthcare Excellence._

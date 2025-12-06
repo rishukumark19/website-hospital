@@ -1,24 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Avishkar Diagnostic - Best Pathology & Radiology Lab in Dhanbad</title>
-    <meta name="description" content="Avishkar Diagnostic Centre Bank More: Premier NABL accredited lab in Dhanbad offering MRI, CT Scan, Blood Tests, and Home Collection. Accurate reports & 24/7 service.">
-    <meta name="keywords" content="Diagnostic Centre Dhanbad, Pathology Lab Bank More, MRI Scan Dhanbad, CT Scan Cost, Blood Test Home Collection, NABL Lab Jharkhand, Avishkar Diagnostic">
-    <meta name="author" content="Avishkar Diagnostic Centre">
-    <meta property="og:title" content="Avishkar Diagnostic - Precision Diagnostics in Dhanbad">
-    <meta property="og:description" content="Trusted by 10 Lakh+ patients. Book home visits for blood tests, MRI, CT Scan and Full Body Checkups.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://avishkardiagnostic.com">
-    <meta name="theme-color" content="#009A5A">
+    <title>
+      Avishkar Diagnostic - Best Pathology & Radiology Lab in Dhanbad
+    </title>
+    <meta
+      name="description"
+      content="Avishkar Diagnostic Centre Bank More: Premier NABL accredited lab in Dhanbad offering MRI, CT Scan, Blood Tests, and Home Collection. Accurate reports & 24/7 service."
+    />
 
-    <!-- Google Fonts: Inter & Poppins for headings -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -26,105 +26,2464 @@
         theme: {
           extend: {
             colors: {
-              primary: '#009A5A', // Emerald Green (Requested)
-              secondary: '#E63028', // Brand Red
-              accent: '#F39C12', // Warm Orange
-              teal: '#007A5A', // Darker Green for depth
-              'teal-light': '#F0FDF4', // Very light mint background
-              'soft-blue': '#F8FAFC', // Neutral clean background
-              surface: '#FFFFFF',
-              'text-dark': '#111827', // Gray 900
-              'text-light': '#6B7280' // Gray 500
+              primary: "#009A5A",
+              secondary: "#E63028",
+              accent: "#F39C12",
+              teal: "#007A5A",
+              "teal-light": "#F0FDF4",
+              "soft-blue": "#F8FAFC",
+              surface: "#FFFFFF",
+              "text-dark": "#111827",
+              "text-light": "#6B7280",
             },
             fontFamily: {
-              sans: ['Inter', 'sans-serif'],
-              heading: ['Poppins', 'sans-serif']
+              sans: ["Inter", "sans-serif"],
+              heading: ["Poppins", "sans-serif"],
             },
-            borderRadius: {
-              'xl': '12px',
-              '2xl': '16px', 
-              '3xl': '24px'
-            },
+            borderRadius: { xl: "12px", "2xl": "16px", "3xl": "24px" },
             boxShadow: {
-              'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.05)',
-              'card': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
-              'glow': '0 0 20px rgba(0, 154, 90, 0.15)',
-              'premium': '0 20px 40px -10px rgba(0, 0, 0, 0.08)'
+              soft: "0 2px 15px -3px rgba(0, 0, 0, 0.05)",
+              card: "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)",
+              premium: "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
             },
-            animation: {
-              'fade-in': 'fadeIn 0.5s ease-in',
-              'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-              'slide-in-right': 'slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
-            },
-            keyframes: {
-              fadeIn: {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' }
-              },
-              slideUp: {
-                '0%': { transform: 'translateY(20px)', opacity: '0' },
-                '100%': { transform: 'translateY(0)', opacity: '1' }
-              },
-              slideInRight: {
-                '0%': { transform: 'translateX(100%)' },
-                '100%': { transform: 'translateX(0)' }
-              }
-            }
-          }
-        }
-      }
+          },
+        },
+      };
     </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
-      /* Custom Scrollbar for Webkit */
+      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: transparent; 
+        background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background: #D1D5DB; 
+        background: #d1d5db;
         border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #9CA3AF; 
+        background: #9ca3af;
       }
-
-      /* Global Styles */
-      body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        background-color: #FFFFFF;
-      }
-      
-      .glass-effect {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-      }
-
-      /* Subtle Grid Background for Premium Feel */
       .bg-premium-grid {
         background-size: 40px 40px;
-        background-image:
-          linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.02) 1px,
+            transparent 1px
+          ),
           linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
       }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.31.0"
-  }
-}
-</script>
-</head>
-  <body class="bg-premium-grid text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary">
-    <div id="root"></div>
+  </head>
+  <body
+    class="bg-premium-grid text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary"
+  >
+    <!-- Navbar -->
+    <nav
+      class="hidden md:block sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 py-4 transition-all duration-300"
+      id="navbar"
+    >
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center">
+          <!-- Logo -->
+          <div
+            class="flex items-center gap-3 cursor-pointer group"
+            onclick="navigateTo('home')"
+          >
+            <div
+              class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-green-500/20 group-hover:bg-green-700 transition-colors"
+            >
+              <i data-lucide="activity" class="h-6 w-6"></i>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="text-xl font-heading font-bold text-gray-900 tracking-tight leading-none"
+                >Avishkar</span
+              >
+              <span
+                class="text-[11px] font-semibold tracking-wider text-primary uppercase mt-0.5"
+                >Diagnostics</span
+              >
+            </div>
+          </div>
+
+          <!-- Desktop Links -->
+          <div class="hidden md:flex items-center gap-1">
+            <button
+              onclick="navigateTo('home')"
+              data-view="home"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-primary bg-green-50"
+            >
+              Home
+            </button>
+            <button
+              onclick="navigateTo('about')"
+              data-view="about"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              About Us
+            </button>
+            <button
+              onclick="navigateTo('services')"
+              data-view="services"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Services
+            </button>
+            <button
+              onclick="navigateTo('tests')"
+              data-view="tests"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Test Menu
+            </button>
+            <button
+              onclick="navigateTo('home-collection')"
+              data-view="home-collection"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Home Visit
+            </button>
+            <button
+              onclick="navigateTo('contact')"
+              data-view="contact"
+              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Contact & Locations
+            </button>
+          </div>
+
+          <!-- Right Actions -->
+          <div class="flex items-center gap-4">
+            <!-- Location (Desktop) -->
+            <div class="hidden md:block relative">
+              <button
+                onclick="toggleLocationMenu()"
+                class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
+              >
+                <i data-lucide="map-pin" class="h-4 w-4 text-primary"></i>
+                <span id="selected-location-text">Bank More</span>
+                <i data-lucide="chevron-down" class="h-3 w-3 opacity-50"></i>
+              </button>
+              <!-- Dropdown -->
+              <div
+                id="location-menu"
+                class="hidden absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-40 animate-in fade-in zoom-in-95"
+              >
+                <button
+                  onclick="selectLocation('Bank More')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  Bank More
+                </button>
+                <button
+                  onclick="selectLocation('Hirapur')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  Hirapur
+                </button>
+                <button
+                  onclick="selectLocation('Saraidhela')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  Saraidhela
+                </button>
+                <button
+                  onclick="selectLocation('Jharia')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  Jharia
+                </button>
+                <button
+                  onclick="selectLocation('Govindpur')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  Govindpur
+                </button>
+                <button
+                  onclick="selectLocation('City Center')"
+                  class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between"
+                >
+                  City Center
+                </button>
+              </div>
+            </div>
+
+            <div class="hidden md:block h-6 w-px bg-gray-200"></div>
+
+            <!-- Login / User Menu -->
+            <button
+              id="nav-login-btn"
+              onclick="navigateTo('login')"
+              class="hidden md:flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:bg-gray-800 transition-all hover:scale-[1.02]"
+            >
+              <i data-lucide="user" class="h-4 w-4"></i> Login
+            </button>
+
+            <div id="nav-user-menu-btn" class="hidden relative">
+              <button
+                onclick="toggleUserMenu()"
+                class="flex items-center gap-2 bg-green-50 text-primary px-4 py-2 rounded-xl text-sm font-bold hover:bg-green-100 transition-colors"
+              >
+                <div
+                  class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs"
+                >
+                  RJ
+                </div>
+                <span>My Account</span>
+                <i data-lucide="chevron-down" class="h-4 w-4"></i>
+              </button>
+              <div
+                id="user-menu"
+                class="hidden absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-40 animate-in fade-in zoom-in-95 overflow-hidden"
+              >
+                <button
+                  onclick="navigateTo('dashboard'); toggleUserMenu()"
+                  class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 font-medium"
+                >
+                  <i data-lucide="layout-dashboard" class="h-4 w-4"></i>
+                  Dashboard
+                </button>
+                <button
+                  onclick="logout(); toggleUserMenu()"
+                  class="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 font-medium"
+                >
+                  <i data-lucide="log-out" class="h-4 w-4"></i> Logout
+                </button>
+              </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button
+              onclick="toggleMobileMenu()"
+              class="md:hidden p-2 text-gray-700 active:bg-gray-100 rounded-full"
+            >
+              <i data-lucide="menu" class="h-6 w-6"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile Top Bar (Sticky) -->
+    <div
+      class="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 flex items-center justify-between px-4"
+    >
+      <div class="flex items-center gap-2" onclick="navigateTo('home')">
+        <div class="bg-primary p-1.5 rounded-lg shadow-sm">
+          <i data-lucide="activity" class="h-5 w-5 text-white"></i>
+        </div>
+        <span class="font-heading font-bold text-lg text-gray-900"
+          >Avishkar</span
+        >
+      </div>
+      <button
+        onclick="toggleMobileMenu()"
+        class="flex items-center gap-1.5 bg-teal-light px-3 py-1.5 rounded-full border border-green-100 active:scale-95 transition-transform"
+      >
+        <i
+          data-lucide="map-pin"
+          class="h-3.5 w-3.5 text-primary fill-current"
+        ></i>
+        <span
+          id="mobile-location-text"
+          class="text-xs font-bold text-primary truncate max-w-[100px]"
+          >Bank More</span
+        >
+        <i
+          data-lucide="chevron-down"
+          class="h-3 w-3 text-primary opacity-50"
+        ></i>
+      </button>
+      <button
+        onclick="toggleMobileMenu()"
+        class="p-2 -mr-2 text-gray-700 active:bg-gray-100 rounded-full"
+      >
+        <i data-lucide="menu" class="h-6 w-6 stroke-[1.5]"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-[100] lg:hidden">
+      <div
+        class="absolute inset-0 bg-gray-900/40 backdrop-blur-sm transition-opacity"
+        onclick="toggleMobileMenu()"
+      ></div>
+      <div
+        class="absolute top-0 right-0 h-full w-[80%] max-w-[300px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right"
+      >
+        <div class="px-6 pt-12 pb-6 flex justify-between items-start">
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900">Menu</h2>
+            <p class="text-sm text-gray-400">Navigate comfortably</p>
+          </div>
+          <button
+            onclick="toggleMobileMenu()"
+            class="p-2 bg-gray-50 rounded-full hover:bg-gray-100"
+          >
+            <i data-lucide="x" class="h-5 w-5 text-gray-500"></i>
+          </button>
+        </div>
+        <div class="flex-1 overflow-y-auto px-6 space-y-1">
+          <button
+            onclick="navigateTo('home'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="home" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">Home</span>
+          </button>
+          <button
+            onclick="navigateTo('about'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="shield-check" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">About Us</span>
+          </button>
+          <button
+            onclick="navigateTo('services'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="activity" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">Services</span>
+          </button>
+          <button
+            onclick="navigateTo('tests'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="test-tube" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">Test Menu</span>
+          </button>
+          <button
+            onclick="navigateTo('home-collection'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="plus" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">Home Visit</span>
+          </button>
+          <button
+            onclick="navigateTo('contact'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+          >
+            <i data-lucide="phone" class="h-5 w-5 text-gray-400"></i>
+            <span class="text-sm font-medium">Contact & Locations</span>
+          </button>
+        </div>
+        <div class="p-6 mt-auto border-t border-gray-100 bg-gray-50">
+          <div
+            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 mb-4"
+          >
+            <div
+              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-bold"
+            >
+              <i data-lucide="user" class="h-5 w-5"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-gray-900">Guest User</p>
+              <p class="text-xs text-primary font-medium">
+                Login to view reports
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <button
+              class="flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
+              onclick="toggleMobileMenu()"
+            >
+              <i data-lucide="shopping-cart" class="h-4 w-4"></i> Cart
+            </button>
+            <button
+              onclick="navigateTo('login'); toggleMobileMenu()"
+              class="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 rounded-xl text-sm font-bold shadow-md"
+            >
+              <i data-lucide="log-in" class="h-4 w-4"></i> Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <div
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-[50] pb-safe"
+    >
+      <div class="grid grid-cols-5 items-end h-[60px] pb-1.5 relative">
+        <button
+          onclick="navigateTo('home')"
+          data-view="home"
+          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-primary"
+        >
+          <i data-lucide="home" class="h-6 w-6" stroke-width="2.5"></i>
+          <span class="text-[10px] font-medium">Home</span>
+        </button>
+        <button
+          onclick="navigateTo('services')"
+          data-view="services"
+          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
+        >
+          <i data-lucide="test-tube" class="h-6 w-6" stroke-width="2"></i>
+          <span class="text-[10px] font-medium">Tests</span>
+        </button>
+        <div class="relative -top-6 flex justify-center">
+          <button
+            onclick="navigateTo('appointment')"
+            class="w-14 h-14 bg-primary rounded-full shadow-lg shadow-green-600/30 flex items-center justify-center text-white border-[3px] border-white active:scale-95 transition-transform"
+          >
+            <i data-lucide="plus" class="h-7 w-7"></i>
+          </button>
+        </div>
+        <button
+          onclick="navigateTo('reports')"
+          data-view="reports"
+          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
+        >
+          <i data-lucide="file-text" class="h-6 w-6" stroke-width="2"></i>
+          <span class="text-[10px] font-medium">Reports</span>
+        </button>
+        <button
+          onclick="navigateTo('login')"
+          data-view="login"
+          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
+        >
+          <i data-lucide="user" class="h-6 w-6" stroke-width="2"></i>
+          <span class="text-[10px] font-medium">Account</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content">
+      <!-- VIEW: HOME -->
+      <div id="view-home" class="view-section">
+        <!-- Hero Section -->
+        <section class="relative pt-10 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+          <div
+            class="absolute inset-0 z-0 bg-gradient-to-b from-teal-light via-white to-soft-blue"
+          ></div>
+          <div class="container mx-auto max-w-7xl px-4 relative z-10">
+            <div class="flex flex-col items-center text-center">
+              <h1
+                class="text-4xl md:text-6xl font-heading font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight"
+              >
+                Precision Diagnostics, <br class="hidden md:block" />
+                <span class="text-primary">Personalized Care.</span>
+              </h1>
+              <p
+                class="text-gray-500 text-lg md:text-xl font-light max-w-xl mx-auto mb-10 leading-relaxed"
+              >
+                Dhanbad's most trusted NABL accredited laboratory.
+                <br class="hidden md:block" />
+                Accurate reports, home collection, and expert care.
+              </p>
+
+              <!-- Search Bar -->
+              <div class="w-full max-w-3xl mx-auto relative z-20">
+                <div
+                  class="bg-white rounded-2xl shadow-premium border border-gray-100 p-2 flex flex-col md:flex-row items-center gap-2"
+                >
+                  <div
+                    class="w-full md:w-56 relative border-b md:border-b-0 md:border-r border-gray-100 p-3"
+                  >
+                    <div class="flex items-center gap-3">
+                      <i
+                        data-lucide="map-pin"
+                        class="h-5 w-5 text-gray-400 shrink-0"
+                      ></i>
+                      <div class="text-left">
+                        <p
+                          class="text-xs text-gray-400 font-bold uppercase tracking-wider"
+                        >
+                          Location
+                        </p>
+                        <p class="text-sm font-bold text-gray-800 truncate">
+                          Bank More
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex-grow w-full relative">
+                    <i
+                      data-lucide="search"
+                      class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                    ></i>
+                    <input
+                      type="text"
+                      placeholder="Search for tests (e.g. CBC, Thyroid)..."
+                      class="w-full h-14 pl-12 pr-4 bg-transparent outline-none text-gray-800 font-medium placeholder-gray-400 text-base"
+                    />
+                  </div>
+                  <button
+                    onclick="navigateTo('tests')"
+                    class="w-full md:w-auto bg-primary hover:bg-green-700 text-white h-12 md:h-14 px-8 rounded-xl font-bold text-sm shadow-lg shadow-green-500/20 transition-all active:scale-95 flex items-center justify-center gap-2"
+                  >
+                    Search
+                  </button>
+                </div>
+                <div class="mt-6 flex flex-wrap justify-center gap-4">
+                  <button
+                    class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl text-sm font-semibold text-gray-600 shadow-sm border border-gray-100 hover:border-primary/30 hover:text-primary transition-all"
+                  >
+                    <i data-lucide="upload" class="h-4 w-4 text-secondary"></i>
+                    Upload Prescription
+                  </button>
+                  <button
+                    onclick="navigateTo('wellness')"
+                    class="flex items-center gap-2 px-5 py-2.5 bg-white rounded-xl text-sm font-semibold text-gray-600 shadow-sm border border-gray-100 hover:border-primary/30 hover:text-primary transition-all"
+                  >
+                    <i
+                      data-lucide="activity"
+                      class="h-4 w-4 text-secondary"
+                    ></i>
+                    Popular Packages
+                  </button>
+                </div>
+
+                <!-- Hero Pills -->
+                <div class="mt-8 flex justify-center gap-3">
+                  <button
+                    onclick="navigateTo('tests')"
+                    class="px-4 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 hover:border-primary hover:text-primary transition-colors shadow-sm"
+                  >
+                    Diabetes
+                  </button>
+                  <button
+                    onclick="navigateTo('tests')"
+                    class="px-4 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 hover:border-primary hover:text-primary transition-colors shadow-sm"
+                  >
+                    Fever
+                  </button>
+                  <button
+                    onclick="navigateTo('wellness')"
+                    class="px-4 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-bold text-gray-600 hover:border-primary hover:text-primary transition-colors shadow-sm"
+                  >
+                    Full Body
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Stats -->
+        <div class="border-y border-gray-100 bg-white">
+          <div
+            class="container mx-auto max-w-6xl px-4 grid grid-cols-3 divide-x divide-gray-100"
+          >
+            <div class="py-6 text-center">
+              <p class="text-2xl font-bold text-gray-900">10 Lakh+</p>
+              <p
+                class="text-xs text-gray-400 font-bold uppercase tracking-wider mt-1"
+              >
+                Patients
+              </p>
+            </div>
+            <div class="py-6 text-center">
+              <p class="text-2xl font-bold text-gray-900">6 Centers</p>
+              <p
+                class="text-xs text-gray-400 font-bold uppercase tracking-wider mt-1"
+              >
+                Labs
+              </p>
+            </div>
+            <div class="py-6 text-center">
+              <p class="text-2xl font-bold text-gray-900">15 Years</p>
+              <p
+                class="text-xs text-gray-400 font-bold uppercase tracking-wider mt-1"
+              >
+                Experience
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Health Concerns -->
+        <section class="py-12 md:py-16 bg-white relative">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-8">
+              <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                  Find Tests by Health Concern
+                </h2>
+                <p class="text-gray-500 text-sm md:text-base">
+                  Target specific organs and conditions.
+                </p>
+              </div>
+              <button
+                onclick="navigateTo('tests')"
+                class="text-primary font-bold text-sm bg-green-50 px-4 py-2 rounded-lg hover:bg-green-100 transition-colors flex items-center gap-2"
+              >
+                View All Concerns
+                <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </button>
+            </div>
+            <div
+              id="concerns-container"
+              class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-4 md:grid md:grid-cols-4 lg:grid-cols-6 md:gap-6 md:overflow-visible scrollbar-hide"
+            >
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Packages -->
+        <section class="py-20 bg-[#F0FDF4]/40">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div
+              class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
+            >
+              <div class="max-w-2xl text-center md:text-left mx-auto md:mx-0">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                  Best Selling Packages
+                </h2>
+                <p class="text-gray-500 text-lg">
+                  Checkups tailored for your lifestyle in Dhanbad.
+                </p>
+              </div>
+              <button
+                onclick="navigateTo('wellness')"
+                class="hidden md:flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all bg-white px-5 py-2.5 rounded-full border border-gray-200 shadow-sm"
+              >
+                View All Packages
+                <i data-lucide="arrow-right" class="h-5 w-5"></i>
+              </button>
+            </div>
+            <div
+              id="packages-container"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-20 bg-white">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+              <div
+                class="inline-block px-3 py-1 bg-white border border-gray-100 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm"
+              >
+                Testimonials
+              </div>
+              <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Patient Success Stories
+              </h2>
+            </div>
+            <div
+              id="testimonials-container"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Network Section -->
+        <section class="py-20 bg-gray-50">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+              <div class="lg:w-1/2">
+                <div
+                  class="inline-block px-3 py-1 bg-green-100 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-4"
+                >
+                  Local Leaders
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  We are Dhanbad's<br />Largest Network.
+                </h2>
+                <p class="text-gray-500 text-lg mb-8 leading-relaxed">
+                  With 6+ collection centers and a central processing lab in
+                  Bank More, quality diagnostics is always within your reach.
+                </p>
+                <div class="flex gap-4">
+                  <button
+                    onclick="navigateTo('contact')"
+                    class="bg-primary hover:bg-green-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-green-500/20 transition-all"
+                  >
+                    Find Nearest Lab
+                  </button>
+                  <button
+                    onclick="navigateTo('home-collection')"
+                    class="bg-white border border-gray-200 hover:border-primary text-gray-700 hover:text-primary font-bold py-3 px-8 rounded-xl transition-all"
+                  >
+                    Book Home Visit
+                  </button>
+                </div>
+              </div>
+              <div class="lg:w-1/2 w-full">
+                <div
+                  class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100"
+                >
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        1
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">Bank More</p>
+                        <p class="text-xs text-gray-400">Main Lab</p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        2
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">Hirapur</p>
+                        <p class="text-xs text-gray-400">Collection Center</p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        3
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">
+                          Saraidhela
+                        </p>
+                        <p class="text-xs text-gray-400">Steel Gate</p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        4
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">Jharia</p>
+                        <p class="text-xs text-gray-400">Main Road</p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        5
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">Govindpur</p>
+                        <p class="text-xs text-gray-400">GT Road</p>
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                    >
+                      <div
+                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                      >
+                        6
+                      </div>
+                      <div>
+                        <p class="font-bold text-gray-900 text-sm">
+                          City Center
+                        </p>
+                        <p class="text-xs text-gray-400">Dhanbad</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-6 pt-6 border-t border-gray-100 text-center">
+                    <p class="text-xs text-gray-400">
+                      Headquarters: Bank More, Dhanbad
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW: ABOUT US -->
+      <div id="view-about" class="view-section hidden">
+        <section class="bg-primary text-white py-20 relative overflow-hidden">
+          <div
+            class="container mx-auto max-w-7xl px-4 text-center relative z-10"
+          >
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6">
+              About Avishkar Diagnostic
+            </h1>
+            <p class="text-xl text-green-50 max-w-2xl mx-auto leading-relaxed">
+              Pioneering diagnostic excellence in Dhanbad with cutting-edge
+              technology and a patient-first approach.
+            </p>
+          </div>
+        </section>
+        <section class="py-20 bg-white">
+          <div
+            class="container mx-auto max-w-7xl px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+          >
+            <div>
+              <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                Precision in Every Result,<br /><span class="text-secondary"
+                  >Care in Every Touch.</span
+                >
+              </h2>
+              <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                Founded with a vision to make world-class diagnostics accessible
+                to everyone in Jharkhand, Avishkar Diagnostic Centre has grown
+                to become the most trusted name in Bank More, Dhanbad.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    Our Mission
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    To provide accurate, timely, and affordable diagnostic
+                    services to all segments of society.
+                  </p>
+                </div>
+                <div
+                  class="bg-green-50/50 p-6 rounded-xl border border-green-100"
+                >
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    Our Vision
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    To be the most trusted leader in diagnostic healthcare and
+                    research in the region.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000"
+                alt="Lab"
+                class="rounded-3xl shadow-xl w-full object-cover h-[500px]"
+              />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- VIEW: SERVICES -->
+      <div id="view-services" class="view-section hidden">
+        <div class="bg-soft-blue min-h-screen py-12">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="mb-12 text-center">
+              <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+                Our Services & Tests
+              </h2>
+              <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                Comprehensive diagnostic solutions at Bank More, Dhanbad.
+              </p>
+            </div>
+
+            <!-- 5 Main Categories Section -->
+            <div
+              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-20"
+            >
+              <!-- Pathology -->
+              <div
+                onclick="navigateTo('tests')"
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
+              >
+                <div
+                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform"
+                >
+                  <i data-lucide="microscope" class="h-7 w-7"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-1">Pathology</h3>
+                <p class="text-xs text-gray-500">
+                  Advanced blood & tissue analysis
+                </p>
+              </div>
+              <!-- Radiology -->
+              <div
+                onclick="navigateTo('tests')"
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
+              >
+                <div
+                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-orange-50 text-orange-600 group-hover:scale-110 transition-transform"
+                >
+                  <i data-lucide="zap" class="h-7 w-7"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-1">Radiology</h3>
+                <p class="text-xs text-gray-500">MRI, CT, X-Ray & Ultrasound</p>
+              </div>
+              <!-- Wellness -->
+              <div
+                onclick="navigateTo('wellness')"
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
+              >
+                <div
+                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-green-50 text-green-600 group-hover:scale-110 transition-transform"
+                >
+                  <i data-lucide="shield-check" class="h-7 w-7"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-1">Wellness</h3>
+                <p class="text-xs text-gray-500">Full body health packages</p>
+              </div>
+              <!-- Home Visit -->
+              <div
+                onclick="navigateTo('home-collection')"
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
+              >
+                <div
+                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-purple-50 text-purple-600 group-hover:scale-110 transition-transform"
+                >
+                  <i data-lucide="home" class="h-7 w-7"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-1">Home Visit</h3>
+                <p class="text-xs text-gray-500">
+                  Sample collection at your door
+                </p>
+              </div>
+              <!-- Reports -->
+              <div
+                onclick="navigateTo('reports')"
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
+              >
+                <div
+                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-teal-50 text-teal-600 group-hover:scale-110 transition-transform"
+                >
+                  <i data-lucide="download" class="h-7 w-7"></i>
+                </div>
+                <h3 class="font-bold text-gray-800 mb-1">Reports</h3>
+                <p class="text-xs text-gray-500">Download digital reports</p>
+              </div>
+            </div>
+
+            <!-- Detailed Service Cards -->
+            <div class="space-y-16 mb-20">
+              <!-- Pathology -->
+              <div>
+                <div class="flex items-center gap-3 mb-8">
+                  <div class="p-2 bg-blue-100 rounded-lg text-primary">
+                    <i data-lucide="microscope" class="h-6 w-6"></i>
+                  </div>
+                  <h3 class="text-2xl font-bold text-primary">
+                    Pathology & Lab Tests
+                  </h3>
+                  <div class="h-px bg-gray-200 flex-grow ml-4"></div>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                >
+                  <!-- Card 1 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <i data-lucide="microscope" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Pathology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Pathology & Laboratory Medicine
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Comprehensive diagnostic testing including blood, urine,
+                      and tissue analysis.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹500</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 2 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <i data-lucide="flask-conical" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Pathology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Biochemistry
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Analysis of chemical processes for liver, kidney, and
+                      metabolic health.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹800</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 3 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <i data-lucide="bug" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Pathology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Microbiology
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Identification of infectious agents like bacteria and
+                      viruses.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹1000</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 4 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                        <i data-lucide="droplet" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Pathology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Hematology
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Complete blood count and diagnosis of blood disorders.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹600</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Imaging -->
+              <div>
+                <div class="flex items-center gap-3 mb-8">
+                  <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
+                    <i data-lucide="zap" class="h-6 w-6"></i>
+                  </div>
+                  <h3 class="text-2xl font-bold text-primary">
+                    Imaging & Radiology
+                  </h3>
+                  <div class="h-px bg-gray-200 flex-grow ml-4"></div>
+                </div>
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                >
+                  <!-- Card 1 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+                        <i data-lucide="brain" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Radiology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      High-Definition MRI
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Detailed imaging of soft tissues, brain, and spine.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹7500</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 2 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+                        <i data-lucide="scan" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Radiology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      CT Scan
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Fast, detailed cross-sectional images for trauma and
+                      diagnostics.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹5000</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 3 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+                        <i data-lucide="bone" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Radiology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Digital X-Ray
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Quick imaging for bone fractures and chest infections.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹800</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Card 4 -->
+                  <div
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <div class="flex justify-between items-start mb-4">
+                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
+                        <i data-lucide="activity" class="h-6 w-6"></i>
+                      </div>
+                      <span
+                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
+                        >Radiology</span
+                      >
+                    </div>
+                    <h4 class="font-bold text-lg text-gray-900 mb-2">
+                      Ultrasound
+                    </h4>
+                    <p class="text-sm text-gray-500 mb-4">
+                      Safe imaging for pregnancy, abdomen, and pelvis.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto">
+                      <span class="font-bold text-primary">₹1800</span>
+                      <button
+                        onclick="navigateTo('appointment')"
+                        class="text-sm font-bold text-secondary hover:underline"
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- View All CTA -->
+            <div class="text-center">
+              <button
+                onclick="navigateTo('tests')"
+                class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-green-700 transition-all"
+              >
+                View Full Test Directory
+                <i data-lucide="arrow-right" class="h-5 w-5"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: TEST DIRECTORY -->
+      <div id="view-tests" class="view-section hidden">
+        <div class="bg-background min-h-screen py-12">
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+              <h1 class="text-3xl md:text-4xl font-bold text-primary mb-3">
+                Diagnostic Test Directory
+              </h1>
+              <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                Search from over 500+ pathology and radiology tests.
+              </p>
+            </div>
+            <div
+              class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 sticky top-20 z-30"
+            >
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="md:col-span-2 relative">
+                  <i
+                    data-lucide="search"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    id="test-search-input"
+                    placeholder="Search test name (e.g. CBC, Thyroid)..."
+                    class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all font-medium"
+                  />
+                </div>
+                <div>
+                  <select
+                    id="test-category-select"
+                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 appearance-none font-medium text-gray-700"
+                  >
+                    <option value="All">All Categories</option>
+                    <option value="Diabetes">Diabetes</option>
+                    <option value="Heart">Heart</option>
+                    <option value="Thyroid">Thyroid</option>
+                    <option value="Kidney">Kidney</option>
+                    <option value="Liver">Liver</option>
+                    <option value="Vitamins">Vitamins</option>
+                  </select>
+                </div>
+                <div class="flex items-center justify-center md:justify-start">
+                  <label
+                    class="flex items-center gap-2 cursor-pointer select-none bg-gray-50 px-4 py-3 rounded-xl border border-gray-200 w-full hover:bg-gray-100 transition-colors"
+                  >
+                    <input
+                      type="checkbox"
+                      id="test-fasting-check"
+                      class="w-5 h-5 text-primary rounded focus:ring-primary border-gray-300"
+                    />
+                    <span class="text-gray-700 font-medium text-sm"
+                      >Fasting Only</span
+                    >
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div
+              id="test-count"
+              class="mb-6 text-sm text-gray-500 font-semibold"
+            ></div>
+            <div
+              id="test-directory-grid"
+              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              <!-- Injected by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: WELLNESS -->
+      <div id="view-wellness" class="view-section hidden">
+        <section
+          class="bg-primary text-white py-16 md:py-20 relative overflow-hidden"
+        >
+          <div
+            class="container mx-auto max-w-7xl px-4 text-center relative z-10"
+          >
+            <div
+              class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 backdrop-blur-sm border border-white/10"
+            >
+              <i data-lucide="shield-check" class="h-4 w-4 text-secondary"></i>
+              Preventive Care
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">
+              Wellness & Health Packages
+            </h1>
+            <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+              Prevention is better than cure. Choose from our range of
+              scientifically designed health checkup packages.
+            </p>
+          </div>
+        </section>
+        <div class="container mx-auto max-w-7xl px-4 py-12">
+          <div class="flex flex-wrap justify-center gap-3 mb-12">
+            <button
+              class="wellness-filter-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-primary text-white shadow-lg"
+              data-category="all"
+            >
+              All Packages
+            </button>
+            <button
+              class="wellness-filter-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-white text-gray-600 border border-gray-200"
+              data-category="full"
+            >
+              Full Body
+            </button>
+            <button
+              class="wellness-filter-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-white text-gray-600 border border-gray-200"
+              data-category="women"
+            >
+              Women Health
+            </button>
+            <button
+              class="wellness-filter-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-white text-gray-600 border border-gray-200"
+              data-category="senior"
+            >
+              Senior Citizens
+            </button>
+            <button
+              class="wellness-filter-btn px-6 py-2.5 rounded-full text-sm font-bold transition-all bg-white text-gray-600 border border-gray-200"
+              data-category="chronic"
+            >
+              Chronic Care
+            </button>
+          </div>
+          <div
+            id="wellness-packages-grid"
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: CONTACT -->
+      <div id="view-contact" class="view-section hidden">
+        <div class="bg-background min-h-screen py-12">
+          <div class="container mx-auto max-w-7xl px-4">
+            <div class="text-center mb-16">
+              <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+                Contact & Locations
+              </h1>
+              <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                Get in touch with our team or find the nearest Avishkar
+                Diagnostic center.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+              <div
+                class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all"
+              >
+                <div
+                  class="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center text-primary mb-6"
+                >
+                  <i data-lucide="phone" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">
+                  Customer Care
+                </h3>
+                <p class="text-gray-500 mb-4 text-sm">24/7 Support Line</p>
+                <a
+                  href="tel:9700369700"
+                  class="text-2xl font-bold text-primary hover:text-secondary transition-colors"
+                  >9700 36 9700</a
+                >
+              </div>
+              <div
+                class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all"
+              >
+                <div
+                  class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 mb-6"
+                >
+                  <i data-lucide="mail" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Email Us</h3>
+                <p class="text-gray-500 mb-4 text-sm">
+                  For reports & inquiries
+                </p>
+                <a
+                  href="mailto:info@avishkardiagnostic.com"
+                  class="text-lg font-bold text-blue-600 hover:text-blue-700 transition-colors"
+                  >info@avishkardiagnostic.com</a
+                >
+              </div>
+              <div
+                class="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-all"
+              >
+                <div
+                  class="w-16 h-16 bg-orange-50 rounded-full flex items-center justify-center text-orange-600 mb-6"
+                >
+                  <i data-lucide="message-circle" class="h-7 w-7"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">WhatsApp</h3>
+                <p class="text-gray-500 mb-4 text-sm">Instant Chat Support</p>
+                <a
+                  href="#"
+                  class="text-lg font-bold text-green-600 hover:text-green-700 transition-colors"
+                  >Chat Now</a
+                >
+              </div>
+            </div>
+            <div class="border-t border-gray-100 pt-16">
+              <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">
+                  Find a Lab Near You
+                </h2>
+                <div class="max-w-xl mx-auto mt-6 relative">
+                  <input
+                    type="text"
+                    id="location-search"
+                    placeholder="Search by area..."
+                    class="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                  />
+                  <i
+                    data-lucide="search"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+              <div
+                id="locations-grid"
+                class="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
+                <!-- Injected by JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: APPOINTMENT -->
+      <div id="view-appointment" class="view-section hidden">
+        <div class="bg-background min-h-screen py-12">
+          <div class="container mx-auto max-w-3xl px-4">
+            <div class="mb-10">
+              <div
+                class="flex justify-between text-xs font-bold text-gray-400 uppercase tracking-wide mb-2"
+              >
+                <span>Service</span><span>Time</span><span>Details</span
+                ><span>Tests</span><span>Confirm</span>
+              </div>
+              <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div
+                  id="apt-progress"
+                  class="h-full bg-primary transition-all duration-500 ease-out"
+                  style="width: 20%"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-8 md:p-10"
+            >
+              <!-- Step 1 -->
+              <div
+                id="apt-step-1"
+                class="animate-in slide-in-from-right duration-300"
+              >
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                  How would you like to get tested?
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div
+                    onclick="appointmentData.serviceType='home'; nextAptStep()"
+                    class="cursor-pointer p-8 rounded-2xl border-2 border-gray-100 hover:border-primary hover:bg-green-50 transition-all flex flex-col items-center text-center gap-4"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center text-primary"
+                    >
+                      <i data-lucide="home" class="h-8 w-8"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-lg text-gray-800">
+                        Home Collection
+                      </h3>
+                      <p class="text-sm text-gray-500 mt-1">
+                        Our phlebotomist visits your home.
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    onclick="appointmentData.serviceType='center'; nextAptStep()"
+                    class="cursor-pointer p-8 rounded-2xl border-2 border-gray-100 hover:border-primary hover:bg-green-50 transition-all flex flex-col items-center text-center gap-4"
+                  >
+                    <div
+                      class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"
+                    >
+                      <i data-lucide="building-2" class="h-8 w-8"></i>
+                    </div>
+                    <div>
+                      <h3 class="font-bold text-lg text-gray-800">
+                        Visit Center
+                      </h3>
+                      <p class="text-sm text-gray-500 mt-1">
+                        Visit our lab at Bank More.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div
+                id="apt-step-2"
+                class="hidden animate-in slide-in-from-right duration-300"
+              >
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                  Select Date & Time
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Preferred Date</label
+                    >
+                    <input
+                      type="date"
+                      class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                      onchange="appointmentData.date=this.value"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Time Slot</label
+                    >
+                    <div class="grid grid-cols-2 gap-3">
+                      <button
+                        onclick="appointmentData.timeSlot='07:00 - 09:00'; document.querySelectorAll('.time-slot-btn').forEach(b=>b.classList.remove('bg-primary','text-white')); this.classList.add('bg-primary','text-white')"
+                        class="time-slot-btn py-3 px-2 rounded-lg text-sm font-medium border border-gray-200"
+                      >
+                        07:00 - 09:00
+                      </button>
+                      <button
+                        onclick="appointmentData.timeSlot='09:00 - 11:00'; document.querySelectorAll('.time-slot-btn').forEach(b=>b.classList.remove('bg-primary','text-white')); this.classList.add('bg-primary','text-white')"
+                        class="time-slot-btn py-3 px-2 rounded-lg text-sm font-medium border border-gray-200"
+                      >
+                        09:00 - 11:00
+                      </button>
+                      <button
+                        onclick="appointmentData.timeSlot='11:00 - 13:00'; document.querySelectorAll('.time-slot-btn').forEach(b=>b.classList.remove('bg-primary','text-white')); this.classList.add('bg-primary','text-white')"
+                        class="time-slot-btn py-3 px-2 rounded-lg text-sm font-medium border border-gray-200"
+                      >
+                        11:00 - 13:00
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div
+                id="apt-step-3"
+                class="hidden animate-in slide-in-from-right duration-300 space-y-6"
+              >
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                  Patient Details
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Full Name</label
+                    ><input
+                      type="text"
+                      class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                      onchange="appointmentData.name=this.value"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Phone Number</label
+                    ><input
+                      type="tel"
+                      class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                      onchange="appointmentData.phone=this.value"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-2"
+                    >Address</label
+                  ><textarea
+                    class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl h-24 resize-none"
+                    onchange="appointmentData.address=this.value"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div
+                id="apt-step-4"
+                class="hidden animate-in slide-in-from-right duration-300"
+              >
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                  Select Tests
+                </h2>
+                <div class="relative mb-6">
+                  <i
+                    data-lucide="search"
+                    class="absolute left-4 top-3.5 h-5 w-5 text-gray-400"
+                  ></i>
+                  <input
+                    type="text"
+                    id="apt-test-search"
+                    placeholder="Search tests..."
+                    class="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl"
+                  />
+                </div>
+                <div
+                  id="apt-test-list"
+                  class="h-64 overflow-y-auto border border-gray-100 rounded-xl mb-6 bg-gray-50 p-2 space-y-2"
+                ></div>
+                <div
+                  class="bg-white p-4 rounded-xl border border-gray-200 shadow-sm"
+                >
+                  <h3 class="font-bold text-gray-800 mb-2">Selected Tests</h3>
+                  <div
+                    id="apt-selected-tests"
+                    class="flex flex-wrap gap-2 mb-4"
+                  ></div>
+                  <div
+                    class="flex justify-between items-center border-t border-gray-100 pt-3"
+                  >
+                    <span class="text-gray-500 font-medium"
+                      >Estimated Total</span
+                    >
+                    <span id="apt-total" class="text-xl font-bold text-primary"
+                      >₹0</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div
+                id="apt-step-5"
+                class="hidden animate-in slide-in-from-right duration-300 text-center"
+              >
+                <div
+                  class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+                >
+                  <i
+                    data-lucide="check-circle"
+                    class="h-12 w-12 text-green-600"
+                  ></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                  Booking Confirmed!
+                </h2>
+                <p class="text-gray-500 mb-6">
+                  Your appointment ID is <strong>#AV8839</strong>.
+                </p>
+                <button
+                  onclick="window.location.reload()"
+                  class="bg-primary text-white font-bold py-3 px-8 rounded-xl"
+                >
+                  Book Another
+                </button>
+              </div>
+
+              <div class="mt-10 flex justify-between gap-4">
+                <button
+                  id="apt-back-btn"
+                  onclick="prevAptStep()"
+                  class="hidden px-6 py-3 rounded-xl font-bold text-gray-600 bg-gray-100 hover:bg-gray-200"
+                >
+                  Back
+                </button>
+                <button
+                  id="apt-next-btn"
+                  onclick="nextAptStep()"
+                  class="ml-auto px-8 py-3 rounded-xl font-bold text-white bg-primary hover:bg-green-700"
+                >
+                  Next Step
+                </button>
+                <button
+                  id="apt-submit-btn"
+                  onclick="nextAptStep()"
+                  class="hidden ml-auto px-10 py-3 rounded-xl font-bold text-white bg-primary hover:bg-green-700"
+                >
+                  Confirm Booking
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: LOGIN -->
+      <div id="view-login" class="view-section hidden">
+        <div class="min-h-screen bg-gray-50 flex flex-col md:flex-row">
+          <div
+            class="hidden md:flex md:w-1/2 bg-primary relative overflow-hidden items-center justify-center p-12 text-white"
+          >
+            <div class="relative z-10 max-w-lg">
+              <h1 class="text-4xl font-bold mb-6">Your Health, Secured.</h1>
+              <p class="text-lg text-green-100 leading-relaxed mb-8">
+                Access your reports, book appointments, and manage family health
+                records in one secure place.
+              </p>
+            </div>
+          </div>
+          <div
+            class="w-full md:w-1/2 flex items-center justify-center p-6 md:p-12"
+          >
+            <div class="max-w-md w-full">
+              <div class="text-center mb-8 md:hidden">
+                <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
+              </div>
+              <form
+                onsubmit="event.preventDefault(); navigateTo('home')"
+                class="space-y-5"
+              >
+                <div>
+                  <label class="block text-sm font-bold text-gray-700 mb-2"
+                    >Mobile Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="w-full px-4 py-3.5 bg-white border border-gray-200 rounded-xl"
+                    placeholder="10-digit number"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg"
+                >
+                  Get OTP
+                </button>
+              </form>
+              <div class="mt-6 text-center text-xs text-gray-400">
+                By logging in, you agree to our
+                <button
+                  onclick="navigateTo('terms')"
+                  class="text-primary hover:underline"
+                >
+                  Terms
+                </button>
+                &
+                <button
+                  onclick="navigateTo('privacy')"
+                  class="text-primary hover:underline"
+                >
+                  Privacy Policy
+                </button>
+                .
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- VIEW: TERMS -->
+      <div id="view-terms" class="view-section hidden">
+        <div class="container mx-auto max-w-4xl px-4 py-16">
+          <h1 class="text-3xl font-bold text-gray-900 mb-6">
+            Terms of Service
+          </h1>
+          <div class="prose prose-green max-w-none text-gray-600">
+            <p>
+              Welcome to Avishkar Diagnostic. By using our services, you agree
+              to the following terms...
+            </p>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">1. Services</h3>
+            <p>
+              We provide diagnostic testing services as requested by patients or
+              their doctors.
+            </p>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">2. Reports</h3>
+            <p>
+              Reports are generated based on the samples provided. While we
+              strive for 100% accuracy, biological variations may occur.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: PRIVACY -->
+      <div id="view-privacy" class="view-section hidden">
+        <div class="container mx-auto max-w-4xl px-4 py-16">
+          <h1 class="text-3xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
+          <div class="prose prose-green max-w-none text-gray-600">
+            <p>
+              Your privacy is important to us. This policy outlines how we
+              handle your personal and medical data.
+            </p>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">
+              1. Data Collection
+            </h3>
+            <p>
+              We collect personal information such as name, age, and contact
+              details for booking and reporting purposes.
+            </p>
+            <h3 class="text-lg font-bold text-gray-800 mt-4">
+              2. Data Security
+            </h3>
+            <p>
+              All patient data is encrypted and stored securely. We do not share
+              your data with third parties without consent.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- VIEW: HOME COLLECTION -->
+      <div id="view-home-collection" class="view-section hidden">
+        <div class="bg-soft-blue min-h-screen py-12">
+          <div class="container mx-auto max-w-3xl px-4">
+            <div
+              class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden"
+            >
+              <div class="bg-primary p-8 text-white text-center">
+                <h1 class="text-3xl font-bold mb-2">Book Home Collection</h1>
+                <p class="text-green-100">
+                  Get tested from the comfort of your home.
+                </p>
+              </div>
+              <div class="p-8 md:p-10">
+                <form
+                  onsubmit="event.preventDefault(); alert('Home collection request submitted!'); navigateTo('home')"
+                  class="space-y-6"
+                >
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label class="block text-sm font-bold text-gray-700 mb-2"
+                        >Name</label
+                      ><input
+                        type="text"
+                        class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label class="block text-sm font-bold text-gray-700 mb-2"
+                        >Phone</label
+                      ><input
+                        type="tel"
+                        class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Address</label
+                    ><textarea
+                      class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl h-24 resize-none"
+                      required
+                    ></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-2"
+                      >Preferred Date & Time</label
+                    ><input
+                      type="datetime-local"
+                      class="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl"
+                      required
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    class="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:bg-green-700 transition-colors"
+                  >
+                    Book Now
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: DASHBOARD -->
+      <div id="view-dashboard" class="view-section hidden">
+        <div class="bg-gray-50 min-h-screen py-10">
+          <div class="container mx-auto max-w-7xl px-4">
+            <div class="flex items-center justify-between mb-8">
+              <div>
+                <h1 class="text-3xl font-bold text-gray-900">My Dashboard</h1>
+                <p class="text-gray-500">Welcome back, Rahul Jain</p>
+              </div>
+              <button
+                onclick="logout()"
+                class="text-red-600 font-bold text-sm hover:bg-red-50 px-4 py-2 rounded-lg transition-colors"
+              >
+                Logout
+              </button>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+              <div
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <div
+                    class="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600"
+                  >
+                    <i data-lucide="file-text" class="h-6 w-6"></i>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-gray-900">12</p>
+                    <p class="text-xs text-gray-500 font-bold uppercase">
+                      Total Reports
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <div
+                    class="w-12 h-12 bg-green-50 rounded-full flex items-center justify-center text-green-600"
+                  >
+                    <i data-lucide="calendar" class="h-6 w-6"></i>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-gray-900">2</p>
+                    <p class="text-xs text-gray-500 font-bold uppercase">
+                      Upcoming Appointments
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+              >
+                <div class="flex items-center gap-4 mb-4">
+                  <div
+                    class="w-12 h-12 bg-purple-50 rounded-full flex items-center justify-center text-purple-600"
+                  >
+                    <i data-lucide="users" class="h-6 w-6"></i>
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold text-gray-900">3</p>
+                    <p class="text-xs text-gray-500 font-bold uppercase">
+                      Family Members
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Recent Reports</h2>
+            <div
+              class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+            >
+              <div
+                class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50/50"
+              >
+                <span class="font-bold text-sm text-gray-700"
+                  >Lipid Profile</span
+                >
+                <span class="text-xs text-gray-500">2 days ago</span>
+              </div>
+              <div class="p-4 flex justify-between items-center">
+                <div class="text-sm text-gray-600">Ref: #RPT-99382</div>
+                <button class="text-primary font-bold text-sm hover:underline">
+                  Download PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: REPORTS -->
+      <div id="view-reports" class="view-section hidden">
+        <div class="bg-gray-50 min-h-screen py-10">
+          <div class="container mx-auto max-w-4xl px-4">
+            <h1 class="text-3xl font-bold text-gray-900 mb-6">My Reports</h1>
+            <div class="space-y-4">
+              <div
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-10 h-10 bg-red-50 rounded-lg flex items-center justify-center text-red-500"
+                  >
+                    <i data-lucide="file-text" class="h-5 w-5"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-gray-900">
+                      Complete Blood Count
+                    </h3>
+                    <p class="text-xs text-gray-500">
+                      12 Oct 2023 • Dr. S. Kumar
+                    </p>
+                  </div>
+                </div>
+                <button
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors"
+                >
+                  <i data-lucide="download" class="h-4 w-4 inline mr-2"></i>
+                  Download
+                </button>
+              </div>
+              <div
+                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex justify-between items-center"
+              >
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-500"
+                  >
+                    <i data-lucide="file-text" class="h-5 w-5"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-gray-900">Thyroid Profile</h3>
+                    <p class="text-xs text-gray-500">05 Sep 2023 • Self</p>
+                  </div>
+                </div>
+                <button
+                  class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-bold transition-colors"
+                >
+                  <i data-lucide="download" class="h-4 w-4 inline mr-2"></i>
+                  Download
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: FAQ -->
+      <div id="view-faq" class="view-section hidden">
+        <div class="container mx-auto max-w-4xl px-4 py-16">
+          <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Frequently Asked Questions
+          </h1>
+          <div class="space-y-4">
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-2">
+                Do I need to fast before a blood test?
+              </h3>
+              <p class="text-gray-600">
+                It depends on the test. Tests like Fasting Blood Sugar and Lipid
+                Profile require 10-12 hours of fasting.
+              </p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-2">
+                How can I get my reports?
+              </h3>
+              <p class="text-gray-600">
+                You can download them from our website, get them via WhatsApp,
+                or collect a physical copy from the center.
+              </p>
+            </div>
+            <div class="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 class="font-bold text-lg text-gray-900 mb-2">
+                Is home collection available on Sundays?
+              </h3>
+              <p class="text-gray-600">
+                Yes, our home collection service is available 7 days a week from
+                6:30 AM to 8:00 PM.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW: BLOG -->
+      <div id="view-blog" class="view-section hidden">
+        <div class="container mx-auto max-w-7xl px-4 py-16">
+          <h1 class="text-3xl font-bold text-gray-900 mb-8 text-center">
+            Health Blog
+          </h1>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&q=80&w=500"
+                class="w-full h-48 object-cover"
+                alt="Blog 1"
+              />
+              <div class="p-6">
+                <span
+                  class="text-xs font-bold text-primary uppercase tracking-wider"
+                  >Wellness</span
+                >
+                <h3 class="text-xl font-bold text-gray-900 mt-2 mb-3">
+                  5 Tips for a Healthy Heart
+                </h3>
+                <p class="text-gray-500 text-sm mb-4">
+                  Simple lifestyle changes can significantly reduce your risk of
+                  heart disease...
+                </p>
+                <button class="text-primary font-bold text-sm hover:underline">
+                  Read More
+                </button>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?auto=format&fit=crop&q=80&w=500"
+                class="w-full h-48 object-cover"
+                alt="Blog 2"
+              />
+              <div class="p-6">
+                <span
+                  class="text-xs font-bold text-primary uppercase tracking-wider"
+                  >Nutrition</span
+                >
+                <h3 class="text-xl font-bold text-gray-900 mt-2 mb-3">
+                  Understanding Vitamin D Deficiency
+                </h3>
+                <p class="text-gray-500 text-sm mb-4">
+                  Why the 'Sunshine Vitamin' is crucial for your bone health and
+                  immunity...
+                </p>
+                <button class="text-primary font-bold text-sm hover:underline">
+                  Read More
+                </button>
+              </div>
+            </div>
+            <div
+              class="bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=500"
+                class="w-full h-48 object-cover"
+                alt="Blog 3"
+              />
+              <div class="p-6">
+                <span
+                  class="text-xs font-bold text-primary uppercase tracking-wider"
+                  >Diabetes</span
+                >
+                <h3 class="text-xl font-bold text-gray-900 mt-2 mb-3">
+                  Managing Diabetes Effectively
+                </h3>
+                <p class="text-gray-500 text-sm mb-4">
+                  Expert advice on diet, exercise, and regular monitoring for
+                  diabetics...
+                </p>
+                <button class="text-primary font-bold text-sm hover:underline">
+                  Read More
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-primary text-white pt-16 pb-8 border-t-4 border-secondary"
+    >
+      <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <!-- Main Footer Grid -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+          <!-- Col 1: Company Info -->
+          <div class="space-y-6">
+            <div class="flex items-center gap-2">
+              <div class="bg-white p-2 rounded-lg">
+                <i data-lucide="activity" class="h-6 w-6 text-primary"></i>
+              </div>
+              <div>
+                <span
+                  class="text-xl font-bold tracking-tight block leading-none"
+                  >Avishkar</span
+                >
+                <span
+                  class="text-xs text-secondary font-bold tracking-wide uppercase"
+                  >Diagnostic Centre</span
+                >
+              </div>
+            </div>
+            <p class="text-green-50 text-sm leading-relaxed">
+              Avishkar Diagnostic Centre is Dhanbad's premier diagnostic
+              facility, committed to providing accurate, timely, and quality
+              services with a human touch at Bank More.
+            </p>
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition-colors group"
+              >
+                <i
+                  data-lucide="facebook"
+                  class="h-5 w-5 text-green-100 group-hover:text-white"
+                ></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition-colors group"
+              >
+                <i
+                  data-lucide="twitter"
+                  class="h-5 w-5 text-green-100 group-hover:text-white"
+                ></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition-colors group"
+              >
+                <i
+                  data-lucide="instagram"
+                  class="h-5 w-5 text-green-100 group-hover:text-white"
+                ></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 rounded-full bg-white/10 hover:bg-secondary flex items-center justify-center transition-colors group"
+              >
+                <i
+                  data-lucide="linkedin"
+                  class="h-5 w-5 text-green-100 group-hover:text-white"
+                ></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Patient Links -->
+          <div>
+            <h3
+              class="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block"
+            >
+              For Patients
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <button
+                  onclick="navigateTo('home')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Home
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('about')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('services')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Our Services
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('appointment')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Book Appointment
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('faq')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Patient FAQ
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('blog')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Health Blog
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Col 3: Contact Details -->
+          <div>
+            <h3
+              class="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block"
+            >
+              Contact Us
+            </h3>
+            <ul class="space-y-4">
+              <li class="flex items-start gap-3 text-green-100 text-sm">
+                <i
+                  data-lucide="map-pin"
+                  class="h-5 w-5 text-secondary flex-shrink-0 mt-0.5"
+                ></i>
+                <span>Bank More, Dhanbad,<br />Jharkhand 826001</span>
+              </li>
+              <li class="flex items-center gap-3 text-green-100 text-sm">
+                <i
+                  data-lucide="phone"
+                  class="h-5 w-5 text-secondary flex-shrink-0"
+                ></i>
+                <a
+                  href="tel:+91326230XXXX"
+                  class="hover:text-white transition-colors"
+                  >+91 326 230 XXXX</a
+                >
+              </li>
+              <li class="flex items-center gap-3 text-green-100 text-sm">
+                <i
+                  data-lucide="mail"
+                  class="h-5 w-5 text-secondary flex-shrink-0"
+                ></i>
+                <a
+                  href="mailto:info@avishkardiagnostic.com"
+                  class="hover:text-white transition-colors"
+                  >info@avishkardiagnostic.com</a
+                >
+              </li>
+              <li class="flex items-center gap-3 text-green-100 text-sm">
+                <i
+                  data-lucide="clock"
+                  class="h-5 w-5 text-secondary flex-shrink-0"
+                ></i>
+                <span>Mon-Sun: 7:00 AM - 9:00 PM</span>
+              </li>
+            </ul>
+            <div class="mt-6 flex gap-3">
+              <a
+                href="https://wa.me/"
+                target="_blank"
+                class="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-colors"
+              >
+                <i data-lucide="message-circle" class="h-4 w-4"></i> WhatsApp
+              </a>
+              <a
+                href="tel:+91326230XXXX"
+                class="bg-white hover:bg-gray-100 text-primary px-4 py-2 rounded-lg text-xs font-bold flex items-center gap-2 transition-colors"
+              >
+                <i data-lucide="phone" class="h-4 w-4"></i> Call Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 4: Legal & Policy -->
+          <div>
+            <h3
+              class="text-lg font-bold mb-6 text-white border-b border-white/20 pb-2 inline-block"
+            >
+              Legal
+            </h3>
+            <ul class="space-y-3">
+              <li>
+                <button
+                  onclick="navigateTo('privacy')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Privacy Policy
+                </button>
+              </li>
+              <li>
+                <button
+                  onclick="navigateTo('terms')"
+                  class="text-green-100 hover:text-white hover:pl-2 transition-all text-sm flex items-center gap-2 group"
+                >
+                  <i
+                    data-lucide="arrow-right"
+                    class="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-secondary"
+                  ></i>
+                  Terms of Service
+                </button>
+              </li>
+            </ul>
+            <div class="mt-8">
+              <div
+                class="bg-white/10 rounded-xl p-4 border border-white/10 backdrop-blur-sm"
+              >
+                <p class="text-xs text-green-100 mb-1">
+                  Emergency Hotline (24/7)
+                </p>
+                <p class="text-2xl font-bold text-secondary">0326-230-000</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-white/10 pt-8 mt-4 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-green-200"
+        >
+          <p>
+            &copy; 2024 Avishkar Diagnostic Centre, Dhanbad. All rights
+            reserved.
+          </p>
+          <div class="flex gap-6">
+            <span class="opacity-50">Designed for Healthcare Excellence</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Main Script -->
+    <script src="script.js"></script>
   </body>
 </html>
