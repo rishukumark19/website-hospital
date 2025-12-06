@@ -7,8 +7,7 @@ export const navLinks: NavLink[] = [
   { name: 'Services', path: '/services', view: View.SERVICES },
   { name: 'Test Menu', path: '/tests', view: View.TEST_DIRECTORY },
   { name: 'Home Visit', path: '/home-collection', view: View.HOME_COLLECTION },
-  { name: 'Locations', path: '/locator', view: View.LOCATOR },
-  { name: 'Contact', path: '/contact', view: View.CONTACT },
+  { name: 'Contact & Locations', path: '/contact', view: View.CONTACT },
 ];
 
 export const quickActions: QuickAction[] = [

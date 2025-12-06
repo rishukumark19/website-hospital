@@ -14,7 +14,8 @@ import {
   Baby, 
   Search,
   Stethoscope,
-  Wind
+  Wind,
+  ArrowRight
 } from 'lucide-react';
 
 interface HealthConcernsProps {
@@ -37,81 +38,132 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const HealthConcerns: React.FC<HealthConcernsProps> = ({ onNavigate }) => {
+  // Filter or prioritize the requested items for the premium look
+  // (Kidneys, Thyroid, Vitamins, Infertility, Liver, Heart, Allergy, Cancer)
+  const priorityIds = ['kidney', 'thyroid', 'vitamin', 'infertility', 'liver', 'heart', 'allergy', 'cancer'];
+  
+  // Sort data to put priority items first, or just map through them if we want strictly those.
+  // For now, let's just display the main ones to fit the 4-column grid nicely (8 items).
+  const displayConcerns = healthConcerns.filter(c => priorityIds.includes(c.id));
+
   return (
-    <div className="bg-primary py-16 md:py-20 overflow-hidden relative">
+    <div className="relative w-full py-20 md:py-28 overflow-hidden">
       
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-10">
-        <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        <div className="absolute bottom-[-10%] left-[-5%] w-96 h-96 bg-secondary rounded-full blur-3xl"></div>
+      {/* 
+        PREMIUM GRADIENT BACKGROUND 
+        #007A5A → #009E60 → #00B274
+      */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#007A5A] via-[#009E60] to-[#00B274] z-0"></div>
+      
+      {/* Vignette / Glow Effects for Depth */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)] z-0 pointer-events-none"></div>
+      
+      {/* Subtle Particles (Optional for high-end feel) */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
+         <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-[100px] mix-blend-overlay"></div>
+         <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-300 rounded-full blur-[120px] mix-blend-overlay"></div>
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        {/* Header Section */}
+        <div className="text-center mb-16 space-y-3">
+          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow-sm font-heading">
             Find Tests by Health Concern
           </h2>
-          <p className="text-green-100 text-lg max-w-2xl mx-auto font-light">
-            Select a category below to explore relevant diagnostic packages tailored to your needs.
+          <p className="text-[#F4FFFD] text-lg md:text-xl font-light max-w-2xl mx-auto opacity-90">
+            Choose a category to find relevant tests and packages tailored to your specific health needs.
           </p>
         </div>
 
-        <div className="relative group/container">
-            {/* 
-                Mobile: 2-row horizontal scroll (grid-rows-2 + grid-flow-col)
-                Desktop: Standard grid
-            */}
-            <div className="
-                grid grid-rows-2 grid-flow-col gap-3 overflow-x-auto snap-x snap-mandatory px-4 -mx-4 pb-6
-                md:grid-rows-none md:grid-flow-row md:grid-cols-4 lg:grid-cols-6 md:gap-6 md:px-0 md:mx-0
-                [&::-webkit-scrollbar]:hidden [-ms-overflow-style:'none'] [scrollbar-width:'none']
-            ">
-            {healthConcerns.map((concern) => {
-                const Icon = iconMap[concern.iconName] || Activity;
-                
-                return (
-                <button
-                    key={concern.id}
-                    onClick={() => onNavigate?.(View.SERVICES)}
-                    className="
-                        snap-start w-[160px] md:w-auto h-full min-h-[140px]
-                        flex flex-col items-center justify-center gap-3
-                        bg-white hover:bg-white/90
-                        p-5 rounded-2xl
-                        shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.2)] hover:-translate-y-1
-                        border border-white/20
-                        transition-all duration-300 ease-out
-                        group
-                        text-center
-                    "
-                >
-                    <div className="
-                        w-12 h-12 md:w-14 md:h-14 rounded-xl 
-                        bg-green-50 group-hover:bg-primary 
-                        flex items-center justify-center 
-                        text-primary group-hover:text-white 
-                        transition-colors duration-300
-                        shadow-inner
-                    ">
-                       <Icon className="h-6 w-6 md:h-7 md:w-7" />
-                    </div>
-                    <span className="
-                        text-gray-700 group-hover:text-primary 
-                        font-bold text-sm
-                        leading-tight
-                        transition-colors
-                    ">
-                       {concern.title}
-                    </span>
-                </button>
-                );
-            })}
-            </div>
+        {/* 
+           GRID LAYOUT 
+           Mobile: 2 columns
+           Desktop: 4 columns
+        */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {displayConcerns.map((concern) => {
+            const Icon = iconMap[concern.iconName] || Activity;
             
-            {/* Fade effect on edges for mobile to indicate scroll */}
-            <div className="absolute top-0 bottom-6 left-[-1px] w-8 bg-gradient-to-r from-primary to-transparent md:hidden pointer-events-none"></div>
-            <div className="absolute top-0 bottom-6 right-[-1px] w-8 bg-gradient-to-l from-primary to-transparent md:hidden pointer-events-none"></div>
+            return (
+              <button
+                key={concern.id}
+                onClick={() => onNavigate?.(View.SERVICES)}
+                className="
+                  group relative 
+                  flex flex-col items-center justify-center 
+                  p-8 
+                  rounded-[24px]
+                  transition-all duration-300 ease-out
+                  
+                  /* Glassmorphism Styles */
+                  bg-white/10 
+                  backdrop-blur-md 
+                  border border-white/30 
+                  
+                  /* Shadow */
+                  shadow-[0_8px_20px_rgba(0,0,0,0.08)]
+                  
+                  /* Hover Effects */
+                  hover:scale-105 
+                  hover:bg-white/15 
+                  hover:border-white/50
+                  hover:shadow-[0_0_25px_rgba(255,255,255,0.3)]
+                "
+              >
+                {/* Icon Container: Soft Mint Pill */}
+                <div className="
+                  w-16 h-16 
+                  rounded-full 
+                  bg-[#E9FFF5] 
+                  flex items-center justify-center 
+                  mb-5 
+                  shadow-inner
+                  group-hover:rotate-6 transition-transform duration-300
+                ">
+                  <Icon 
+                    className="h-8 w-8 text-[#007A5A]" 
+                    strokeWidth={2}
+                  />
+                </div>
+
+                {/* Text */}
+                <span className="
+                  text-white 
+                  text-lg 
+                  font-semibold 
+                  tracking-wide
+                  group-hover:text-[#E9FFF5]
+                  transition-colors
+                ">
+                  {concern.title}
+                </span>
+
+                {/* Subtle Arrow on Hover (Optional detail) */}
+                <div className="absolute bottom-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
+                   <ArrowRight className="h-4 w-4 text-white/70" />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* View All Button */}
+        <div className="mt-16 text-center">
+             <button 
+                onClick={() => onNavigate?.(View.SERVICES)}
+                className="
+                    inline-flex items-center gap-2 
+                    px-8 py-3 
+                    rounded-full 
+                    bg-white text-[#007A5A] 
+                    font-bold text-sm uppercase tracking-wider
+                    shadow-lg hover:shadow-xl hover:bg-[#E9FFF5]
+                    transition-all transform hover:-translate-y-1
+                "
+             >
+                View All Concerns <ArrowRight className="h-4 w-4" />
+             </button>
         </div>
 
       </div>

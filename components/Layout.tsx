@@ -14,7 +14,7 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children, currentView, onNavigate }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-transparent text-text-dark font-sans relative">
+    <div className="min-h-screen flex flex-col bg-transparent text-text-dark font-sans relative pb-16 md:pb-0">
       
       {/* New Responsive Navbar */}
       <Navbar currentView={currentView} onNavigate={onNavigate} />

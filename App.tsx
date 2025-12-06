@@ -20,6 +20,7 @@ import ServiceDetailCardiac from './views/ServiceDetailCardiac';
 import TestDirectory from './views/TestDirectory';
 import HomeCollection from './views/HomeCollection';
 import ReportDownload from './views/ReportDownload';
+import Contact from './views/Contact';
 import { View } from './types';
 
 const App: React.FC = () => {
@@ -40,9 +41,10 @@ const App: React.FC = () => {
       case View.APPOINTMENT:
         return <Appointment />;
       case View.LOCATOR:
-        return <Locator />;
+        // Unified Contact & Locator view
+        return <Contact />;
       case View.CONTACT:
-        return <Home onNavigate={setCurrentView} />;
+        return <Contact />;
       case View.ABOUT:
          return <AboutUs onNavigate={setCurrentView} />;
       case View.FAQ:

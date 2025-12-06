@@ -12,7 +12,7 @@
     <meta property="og:description" content="Trusted by 10 Lakh+ patients. Book home visits for blood tests, MRI, CT Scan and Full Body Checkups.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://avishkardiagnostic.com">
-    <meta name="theme-color" content="#008045">
+    <meta name="theme-color" content="#009A5A">
 
     <!-- Google Fonts: Inter & Poppins for headings -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,27 +26,35 @@
         theme: {
           extend: {
             colors: {
-              primary: '#008045', // Exact Avishkar Green
-              secondary: '#E63028', // Exact Avishkar Red
+              primary: '#009A5A', // Emerald Green (Requested)
+              secondary: '#E63028', // Brand Red
               accent: '#F39C12', // Warm Orange
-              teal: '#006B3E', // Darker Green
-              'teal-light': '#E8F5E9', // Light green background
-              'soft-blue': '#F9FAFB', // Neutral clean background
+              teal: '#007A5A', // Darker Green for depth
+              'teal-light': '#F0FDF4', // Very light mint background
+              'soft-blue': '#F8FAFC', // Neutral clean background
               surface: '#FFFFFF',
-              'text-dark': '#1F2937',
-              'text-light': '#6B7280'
+              'text-dark': '#111827', // Gray 900
+              'text-light': '#6B7280' // Gray 500
             },
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
               heading: ['Poppins', 'sans-serif']
             },
+            borderRadius: {
+              'xl': '12px',
+              '2xl': '16px', 
+              '3xl': '24px'
+            },
             boxShadow: {
-              'soft': '0 4px 20px -2px rgba(0, 128, 69, 0.08)',
-              'glow': '0 0 15px rgba(230, 48, 40, 0.2)'
+              'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.05)',
+              'card': '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+              'glow': '0 0 20px rgba(0, 154, 90, 0.15)',
+              'premium': '0 20px 40px -10px rgba(0, 0, 0, 0.08)'
             },
             animation: {
               'fade-in': 'fadeIn 0.5s ease-in',
-              'slide-up': 'slideUp 0.5s ease-out'
+              'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+              'slide-in-right': 'slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
             },
             keyframes: {
               fadeIn: {
@@ -56,6 +64,10 @@
               slideUp: {
                 '0%': { transform: 'translateY(20px)', opacity: '0' },
                 '100%': { transform: 'translateY(0)', opacity: '1' }
+              },
+              slideInRight: {
+                '0%': { transform: 'translateX(100%)' },
+                '100%': { transform: 'translateX(0)' }
               }
             }
           }
@@ -65,38 +77,39 @@
     <style>
       /* Custom Scrollbar for Webkit */
       ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: transparent; 
       }
       ::-webkit-scrollbar-thumb {
-        background: #008045; 
-        border-radius: 4px;
+        background: #D1D5DB; 
+        border-radius: 10px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #006B3E; 
+        background: #9CA3AF; 
       }
 
       /* Global Styles */
       body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        background-color: #FFFFFF;
       }
       
       .glass-effect {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
       }
 
-      /* Prominent Dotted Background Pattern */
-      .bg-dotted-pattern {
-        background-color: #ffffff;
-        /* Radial gradient creating 2px dots with 20% opacity using brand green #008045 */
-        background-image: radial-gradient(rgba(0, 128, 69, 0.2) 2.5px, transparent 2.5px);
-        background-size: 24px 24px;
+      /* Subtle Grid Background for Premium Feel */
+      .bg-premium-grid {
+        background-size: 40px 40px;
+        background-image:
+          linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
       }
     </style>
   <script type="importmap">
@@ -111,7 +124,7 @@
 }
 </script>
 </head>
-  <body class="bg-dotted-pattern text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary">
+  <body class="bg-premium-grid text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary">
     <div id="root"></div>
   </body>
 </html>
