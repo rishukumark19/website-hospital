@@ -210,7 +210,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <HealthConcerns onNavigate={onNavigate} />
 
       {/* Popular Packages */}
-      <section className="py-20 bg-white" aria-labelledby="packages-heading">
+      <section className="py-20 bg-gray-50" aria-labelledby="packages-heading">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
@@ -227,7 +227,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
             </button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {popularPackages.slice(0, 4).map(pkg => (
               <PackageCard 
                 key={pkg.id} 
@@ -240,7 +240,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <div className="mt-10 md:hidden text-center">
              <button 
               onClick={() => onNavigate(View.WELLNESS)}
-              className="bg-green-50 text-primary px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 mx-auto"
+              className="bg-white border border-gray-200 text-gray-700 px-8 py-3 rounded-full font-bold flex items-center justify-center gap-2 mx-auto"
             >
               View All Packages <ArrowRight className="h-5 w-5" />
             </button>
@@ -249,7 +249,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-[#F9FAFB]">
+      <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
              <div className="inline-block px-3 py-1 bg-white border border-gray-100 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
@@ -275,12 +275,12 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         LOCAL PRESENCE SECTION (Replaced Map)
         Option 3: Locations Grid + Stylized Local Visual
       */}
-      <section className="py-20 bg-white border-t border-gray-100">
+      <section className="py-20 bg-gray-50 border-t border-gray-100">
         <div className="container mx-auto max-w-7xl px-4">
             
             <div className="flex flex-col md:flex-row gap-12 items-center mb-12">
                 <div className="md:w-1/2">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-50 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-100 text-primary text-xs font-bold uppercase tracking-wider mb-4">
                         <MapPin className="h-3.5 w-3.5" /> Local Leaders
                     </div>
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

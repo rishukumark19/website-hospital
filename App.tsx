@@ -21,10 +21,23 @@ import TestDirectory from './views/TestDirectory';
 import HomeCollection from './views/HomeCollection';
 import ReportDownload from './views/ReportDownload';
 import Contact from './views/Contact';
+import Login from './views/Login';
+import Dashboard from './views/Dashboard';
 import { View } from './types';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.HOME);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setCurrentView(View.DASHBOARD);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentView(View.HOME);
+  };
 
   const renderView = () => {
     switch (currentView) {
@@ -41,7 +54,6 @@ const App: React.FC = () => {
       case View.APPOINTMENT:
         return <Appointment />;
       case View.LOCATOR:
-        // Unified Contact & Locator view
         return <Contact />;
       case View.CONTACT:
         return <Contact />;
@@ -71,13 +83,17 @@ const App: React.FC = () => {
          return <HomeCollection onNavigate={setCurrentView} />;
       case View.REPORT_DOWNLOAD:
          return <ReportDownload onNavigate={setCurrentView} />;
+      case View.LOGIN:
+         return <Login onLogin={handleLogin} onNavigate={setCurrentView} />;
+      case View.DASHBOARD:
+         return isLoggedIn ? <Dashboard onNavigate={setCurrentView} onLogout={handleLogout} /> : <Login onLogin={handleLogin} onNavigate={setCurrentView} />;
       default:
         return <Home onNavigate={setCurrentView} />;
     }
   };
 
   return (
-    <Layout currentView={currentView} onNavigate={setCurrentView}>
+    <Layout currentView={currentView} onNavigate={setCurrentView} isLoggedIn={isLoggedIn} onLogout={handleLogout}>
       {renderView()}
     </Layout>
   );

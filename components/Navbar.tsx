@@ -19,19 +19,23 @@ import {
   ChevronRight,
   ShieldCheck,
   Plus,
-  Phone
+  Phone,
+  LayoutDashboard
 } from 'lucide-react';
 
 interface NavbarProps {
   currentView: View;
   onNavigate: (view: View) => void;
+  isLoggedIn: boolean;
+  onLogout: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
+const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate, isLoggedIn, onLogout }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedLocation, setSelectedLocation] = useState('Bank More');
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const locations = ['Bank More', 'Hirapur', 'Saraidhela', 'Jharia', 'Govindpur', 'City Center'];
 
@@ -126,9 +130,45 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
 
                <div className="h-6 w-px bg-gray-200"></div>
 
-               <button className="flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:bg-gray-800 transition-all hover:scale-[1.02]">
-                   <User className="h-4 w-4" /> Login
-               </button>
+               {isLoggedIn ? (
+                  <div className="relative">
+                      <button 
+                         onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                         className="flex items-center gap-2 bg-green-50 text-primary px-4 py-2 rounded-xl text-sm font-bold hover:bg-green-100 transition-colors"
+                      >
+                          <div className="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs">RJ</div>
+                          <span>My Account</span>
+                          <ChevronDown className="h-4 w-4" />
+                      </button>
+
+                      {isUserMenuOpen && (
+                          <>
+                           <div className="fixed inset-0 z-30" onClick={() => setIsUserMenuOpen(false)}></div>
+                           <div className="absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-40 animate-in fade-in zoom-in-95 overflow-hidden">
+                              <button 
+                                 onClick={() => { onNavigate(View.DASHBOARD); setIsUserMenuOpen(false); }}
+                                 className="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 flex items-center gap-2 font-medium"
+                              >
+                                  <LayoutDashboard className="h-4 w-4" /> Dashboard
+                              </button>
+                              <button 
+                                 onClick={() => { onLogout(); setIsUserMenuOpen(false); }}
+                                 className="w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 font-medium"
+                              >
+                                  <LogOut className="h-4 w-4" /> Logout
+                              </button>
+                           </div>
+                          </>
+                      )}
+                  </div>
+               ) : (
+                  <button 
+                    onClick={() => onNavigate(View.LOGIN)}
+                    className="flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:bg-gray-800 transition-all hover:scale-[1.02]"
+                  >
+                     <User className="h-4 w-4" /> Login
+                  </button>
+               )}
             </div>
           </div>
         </div>
@@ -223,22 +263,38 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
              {/* Bottom Profile Section */}
              <div className="p-6 mt-auto border-t border-gray-100 bg-gray-50">
                  <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 mb-4">
-                     <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-400">
-                         <User className="h-5 w-5" />
+                     <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-bold">
+                         {isLoggedIn ? 'RJ' : <User className="h-5 w-5" />}
                      </div>
                      <div>
-                         <p className="text-sm font-bold text-gray-900">Guest User</p>
-                         <p className="text-xs text-primary font-medium">Login to view reports</p>
+                         <p className="text-sm font-bold text-gray-900">{isLoggedIn ? 'Rahul Jain' : 'Guest User'}</p>
+                         <p className="text-xs text-primary font-medium">{isLoggedIn ? '+91 98765 43210' : 'Login to view reports'}</p>
                      </div>
                  </div>
                  
                  <div className="grid grid-cols-2 gap-3">
-                     <button className="flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm">
+                     <button 
+                        className="flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
+                        onClick={() => { setIsMobileMenuOpen(false); }}
+                     >
                          <ShoppingCart className="h-4 w-4" /> Cart
                      </button>
-                     <button className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 rounded-xl text-sm font-bold shadow-md">
-                         <LogOut className="h-4 w-4" /> Login
-                     </button>
+                     
+                     {isLoggedIn ? (
+                        <button 
+                           onClick={() => { onLogout(); setIsMobileMenuOpen(false); }}
+                           className="flex items-center justify-center gap-2 bg-red-50 text-red-600 py-3 rounded-xl text-sm font-bold shadow-sm"
+                        >
+                            <LogOut className="h-4 w-4" /> Logout
+                        </button>
+                     ) : (
+                        <button 
+                           onClick={() => { onNavigate(View.LOGIN); setIsMobileMenuOpen(false); }}
+                           className="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 rounded-xl text-sm font-bold shadow-md"
+                        >
+                            <LogOut className="h-4 w-4" /> Login
+                        </button>
+                     )}
                  </div>
              </div>
           </div>
@@ -276,9 +332,9 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onNavigate }) => {
                  <span className="text-[10px] font-medium">Reports</span>
              </button>
 
-             <button onClick={() => setIsMobileMenuOpen(true)} className="flex flex-col items-center gap-1 h-full justify-center text-gray-400">
-                 <User className="h-6 w-6" />
-                 <span className="text-[10px] font-medium">Profile</span>
+             <button onClick={() => onNavigate(isLoggedIn ? View.DASHBOARD : View.LOGIN)} className={`flex flex-col items-center gap-1 h-full justify-center ${currentView === View.DASHBOARD || currentView === View.LOGIN ? 'text-primary' : 'text-gray-400'}`}>
+                 <User className="h-6 w-6" strokeWidth={currentView === View.DASHBOARD || currentView === View.LOGIN ? 2.5 : 2} />
+                 <span className="text-[10px] font-medium">{isLoggedIn ? 'Account' : 'Login'}</span>
              </button>
 
           </div>

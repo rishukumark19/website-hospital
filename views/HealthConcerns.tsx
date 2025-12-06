@@ -38,49 +38,31 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 const HealthConcerns: React.FC<HealthConcernsProps> = ({ onNavigate }) => {
-  // Filter or prioritize the requested items for the premium look
-  // (Kidneys, Thyroid, Vitamins, Infertility, Liver, Heart, Allergy, Cancer)
+  // Priority items for the premium view
   const priorityIds = ['kidney', 'thyroid', 'vitamin', 'infertility', 'liver', 'heart', 'allergy', 'cancer'];
-  
-  // Sort data to put priority items first, or just map through them if we want strictly those.
-  // For now, let's just display the main ones to fit the 4-column grid nicely (8 items).
   const displayConcerns = healthConcerns.filter(c => priorityIds.includes(c.id));
 
   return (
-    <div className="relative w-full py-20 md:py-28 overflow-hidden">
-      
-      {/* 
-        PREMIUM GRADIENT BACKGROUND 
-        #007A5A → #009E60 → #00B274
-      */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#007A5A] via-[#009E60] to-[#00B274] z-0"></div>
-      
-      {/* Vignette / Glow Effects for Depth */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.2)_100%)] z-0 pointer-events-none"></div>
-      
-      {/* Subtle Particles (Optional for high-end feel) */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
-         <div className="absolute top-10 left-10 w-64 h-64 bg-white rounded-full blur-[100px] mix-blend-overlay"></div>
-         <div className="absolute bottom-10 right-10 w-80 h-80 bg-emerald-300 rounded-full blur-[120px] mix-blend-overlay"></div>
-      </div>
-
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 relative z-10">
+    <section className="py-16 md:py-20 bg-white border-b border-gray-50">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Header Section */}
-        <div className="text-center mb-16 space-y-3">
-          <h2 className="text-3xl md:text-5xl font-bold text-white tracking-tight drop-shadow-sm font-heading">
-            Find Tests by Health Concern
-          </h2>
-          <p className="text-[#F4FFFD] text-lg md:text-xl font-light max-w-2xl mx-auto opacity-90">
-            Choose a category to find relevant tests and packages tailored to your specific health needs.
-          </p>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+            <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Find Tests by Health Concern</h2>
+                <p className="text-gray-500 text-lg max-w-2xl font-light">
+                    Select a health category to find the most relevant diagnostic tests tailored to your needs.
+                </p>
+            </div>
+            <button 
+                onClick={() => onNavigate?.(View.SERVICES)}
+                className="hidden md:flex items-center gap-2 text-primary font-bold hover:text-green-700 transition-colors bg-green-50 px-5 py-2 rounded-full"
+             >
+                View All Concerns <ArrowRight className="h-4 w-4" />
+             </button>
         </div>
 
-        {/* 
-           GRID LAYOUT 
-           Mobile: 2 columns
-           Desktop: 4 columns
-        */}
+        {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {displayConcerns.map((concern) => {
             const Icon = iconMap[concern.iconName] || Activity;
@@ -90,84 +72,41 @@ const HealthConcerns: React.FC<HealthConcernsProps> = ({ onNavigate }) => {
                 key={concern.id}
                 onClick={() => onNavigate?.(View.SERVICES)}
                 className="
-                  group relative 
-                  flex flex-col items-center justify-center 
-                  p-8 
-                  rounded-[24px]
-                  transition-all duration-300 ease-out
-                  
-                  /* Glassmorphism Styles */
-                  bg-white/10 
-                  backdrop-blur-md 
-                  border border-white/30 
-                  
-                  /* Shadow */
-                  shadow-[0_8px_20px_rgba(0,0,0,0.08)]
-                  
-                  /* Hover Effects */
-                  hover:scale-105 
-                  hover:bg-white/15 
-                  hover:border-white/50
-                  hover:shadow-[0_0_25px_rgba(255,255,255,0.3)]
+                  group flex flex-col items-center p-6 
+                  bg-white rounded-2xl border border-gray-100 
+                  hover:border-green-200 hover:shadow-lg hover:-translate-y-1
+                  transition-all duration-300 ease-out h-full
                 "
               >
-                {/* Icon Container: Soft Mint Pill */}
                 <div className="
-                  w-16 h-16 
-                  rounded-full 
-                  bg-[#E9FFF5] 
-                  flex items-center justify-center 
-                  mb-5 
-                  shadow-inner
-                  group-hover:rotate-6 transition-transform duration-300
+                  w-16 h-16 rounded-full bg-green-50 
+                  flex items-center justify-center mb-4 
+                  group-hover:bg-primary group-hover:text-white
+                  transition-colors duration-300
                 ">
-                  <Icon 
-                    className="h-8 w-8 text-[#007A5A]" 
-                    strokeWidth={2}
-                  />
+                   <Icon className="h-7 w-7 text-primary group-hover:text-white transition-colors" strokeWidth={2} />
                 </div>
-
-                {/* Text */}
-                <span className="
-                  text-white 
-                  text-lg 
-                  font-semibold 
-                  tracking-wide
-                  group-hover:text-[#E9FFF5]
-                  transition-colors
-                ">
+                
+                <span className="text-gray-800 font-bold text-base group-hover:text-primary transition-colors">
                   {concern.title}
                 </span>
-
-                {/* Subtle Arrow on Hover (Optional detail) */}
-                <div className="absolute bottom-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
-                   <ArrowRight className="h-4 w-4 text-white/70" />
-                </div>
               </button>
             );
           })}
         </div>
 
-        {/* View All Button */}
-        <div className="mt-16 text-center">
+        {/* Mobile Button */}
+        <div className="mt-8 md:hidden text-center">
              <button 
                 onClick={() => onNavigate?.(View.SERVICES)}
-                className="
-                    inline-flex items-center gap-2 
-                    px-8 py-3 
-                    rounded-full 
-                    bg-white text-[#007A5A] 
-                    font-bold text-sm uppercase tracking-wider
-                    shadow-lg hover:shadow-xl hover:bg-[#E9FFF5]
-                    transition-all transform hover:-translate-y-1
-                "
+                className="w-full py-3 rounded-xl border border-gray-200 text-gray-700 font-bold hover:bg-gray-50 transition-colors"
              >
-                View All Concerns <ArrowRight className="h-4 w-4" />
+                View All Concerns
              </button>
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 
