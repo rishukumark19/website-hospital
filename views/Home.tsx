@@ -12,10 +12,7 @@ import {
   MapPin, 
   Home as HomeIcon, 
   FileText, 
-  Microscope, 
   Users, 
-  Clock, 
-  Award,
   ChevronRight,
   Activity,
   ShieldCheck,
@@ -86,145 +83,114 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       />
 
       {/* 
-        HERO SECTION - NEUBERG STYLE REDESIGN 
-        Clean, Minimal, Professional, Mobile-First
+        HERO SECTION - NEUBERG STYLE CLEAN & ELEGANT
+        Minimalist, Image First, Subtle Buttons
       */}
-      <section className="relative bg-gradient-to-br from-green-50/50 via-white to-green-50/30 pt-4 pb-12 md:py-16 overflow-hidden">
+      <section className="relative bg-white pb-8 overflow-hidden">
         
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             
-            {/* Top Bar: Location & Upload (Visible on Desktop, stacked on mobile) */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                {/* Location Selector */}
-                <div className="inline-flex items-center gap-2 self-start bg-white border border-gray-200 rounded-full pl-3 pr-4 py-1.5 shadow-sm cursor-pointer hover:border-primary transition-colors group">
-                    <MapPin className="h-4 w-4 text-secondary group-hover:scale-110 transition-transform" />
-                    <span className="text-sm font-bold text-gray-700">Bank More, Dhanbad</span>
-                    <ChevronDown className="h-3 w-3 text-gray-400" />
-                </div>
-
-                {/* Trust Badge (Mobile Top Right) */}
-                <div className="hidden md:flex items-center gap-2 bg-green-50 px-3 py-1 rounded-lg border border-green-100">
-                    <ShieldCheck className="h-4 w-4 text-primary" />
-                    <span className="text-xs font-bold text-primary">Serving Dhanbad for 13+ Years</span>
-                </div>
-            </div>
-
-            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
+            <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-16 pt-4">
                 
-                {/* Left Side: Doctor Image (Desktop) / Split View (Mobile) */}
-                <div className="w-full lg:w-5/12 order-2 lg:order-1 relative">
-                     {/* Mobile Split Layout (Image + Text) */}
-                     <div className="flex lg:hidden items-center gap-4 mb-2">
-                        <div className="w-[40%] relative">
-                            <div className="aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 border-2 border-white shadow-lg">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=600" 
-                                    alt="Avishkar Doctor" 
-                                    className="w-full h-full object-cover"
-                                />
-                            </div>
-                            {/* Trust Badge Mobile */}
-                            <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1.5 shadow-md border border-green-100">
-                                <ShieldCheck className="h-5 w-5 text-primary" />
-                            </div>
-                        </div>
-                        <div className="w-[60%]">
-                             <div className="inline-block px-2 py-0.5 bg-green-100 text-primary rounded-md text-[10px] font-bold uppercase tracking-wider mb-2">
-                                NABL Accredited
-                             </div>
-                             <h1 className="text-2xl font-bold text-gray-900 leading-tight mb-2">
-                                Precision <br/>
-                                <span className="text-primary">Diagnostics</span>
-                             </h1>
-                             <p className="text-xs text-gray-500 font-medium leading-relaxed mb-3">
-                                13+ Years of Trust in Dhanbad.
-                             </p>
-                             <div className="flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                <span className="text-xs font-bold text-gray-700">Open 24/7</span>
-                             </div>
+                {/* 1. Doctor Image - Order 1 on Mobile (Top), Order 1 on Desktop (Left) */}
+                <div className="w-full lg:w-5/12 order-1 relative">
+                     {/* Mobile Image Container - Full Width & Clean */}
+                     <div className="block lg:hidden w-full h-[280px] rounded-2xl overflow-hidden bg-gray-50 mb-6 relative shadow-sm">
+                        <img 
+                            src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800&h=800" 
+                            alt="Avishkar Doctor" 
+                            className="w-full h-full object-cover object-top"
+                        />
+                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                            <p className="text-white font-medium text-sm">Dr. Rajesh Kumar</p>
+                            <p className="text-white/80 text-xs">Chief Pathologist</p>
                         </div>
                      </div>
 
-                     {/* Desktop Image */}
+                     {/* Desktop Image - Clean & Professional */}
                      <div className="hidden lg:block relative z-10 mx-auto">
-                        <div className="relative">
-                            <div className="absolute inset-0 bg-primary/5 rounded-full filter blur-3xl transform scale-90 translate-y-4"></div>
-                            <img 
-                                src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" 
-                                alt="Professional Doctor" 
-                                className="relative z-10 w-full max-w-md mx-auto h-auto object-contain drop-shadow-2xl rounded-3xl" 
-                            />
-                            {/* Floating Card Desktop */}
-                            <div className="absolute bottom-12 -left-4 bg-white/90 backdrop-blur p-4 rounded-xl shadow-xl border border-gray-100 flex items-center gap-3 animate-bounce-delayed max-w-[200px]">
-                                <div className="bg-red-50 p-2 rounded-full text-secondary">
-                                    <Activity className="h-6 w-6" />
-                                </div>
-                                <div>
-                                    <p className="text-xs text-gray-500 font-bold uppercase">Accuracy</p>
-                                    <p className="text-lg font-bold text-gray-800">99.9%</p>
-                                </div>
-                            </div>
-                        </div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=800" 
+                            alt="Professional Doctor" 
+                            className="relative z-10 w-full max-w-md mx-auto h-auto object-contain rounded-2xl" 
+                        />
                      </div>
                 </div>
 
-                {/* Right Side: Content & Actions */}
-                <div className="w-full lg:w-7/12 order-1 lg:order-2">
-                    {/* Desktop Headline */}
-                    <div className="hidden lg:block mb-8">
-                        <h1 className="text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-4 tracking-tight">
+                {/* 2. Content Zone - Order 2 on Mobile, Order 2 on Desktop */}
+                <div className="w-full lg:w-7/12 order-2 flex flex-col">
+                    
+                    {/* Top Bar: Location & Trust (Desktop) */}
+                    <div className="hidden lg:flex items-center gap-4 mb-6">
+                        <div className="inline-flex items-center gap-2 bg-gray-50 rounded-full px-4 py-1.5 border border-gray-100 text-sm font-medium text-gray-700">
+                             <MapPin className="h-4 w-4 text-primary" /> Bank More, Dhanbad
+                        </div>
+                        <div className="inline-flex items-center gap-2 bg-green-50 rounded-full px-4 py-1.5 text-sm font-medium text-primary">
+                             <ShieldCheck className="h-4 w-4" /> 13+ Years of Trust
+                        </div>
+                    </div>
+
+                    {/* Headline */}
+                    <div className="mb-6 text-center lg:text-left">
+                        <h1 className="text-3xl md:text-5xl font-bold text-gray-900 leading-tight mb-2 tracking-tight">
                             Avishkar <span className="text-primary">Diagnostic</span>
                         </h1>
-                        <p className="text-xl text-gray-500 font-medium max-w-lg">
-                            Accurate Reports. Advanced Technology. Affordable Care right here in Bank More.
+                        <p className="text-base md:text-lg text-gray-500 font-medium">
+                            Accurate Reports. Advanced Technology. Affordable Care.
                         </p>
                     </div>
 
-                    {/* Search Bar - Prominent & Full Width Mobile */}
-                    <div className="bg-white p-2 rounded-2xl shadow-xl shadow-gray-200/50 border border-gray-100 mb-8 flex items-center gap-2 w-full transition-transform focus-within:scale-[1.01]">
-                        <Search className="h-5 w-5 text-gray-400 ml-3 flex-shrink-0" />
+                    {/* Mobile Location Pill - Subtle */}
+                    <div className="lg:hidden flex justify-center mb-6">
+                         <div className="inline-flex items-center gap-2 bg-gray-50 border border-gray-200 rounded-full pl-3 pr-4 py-1.5 shadow-sm">
+                            <MapPin className="h-3.5 w-3.5 text-primary" />
+                            <span className="text-xs font-semibold text-gray-700">Bank More, Dhanbad</span>
+                        </div>
+                    </div>
+
+                    {/* Search Bar - Clean & Simple */}
+                    <div className="w-full bg-white rounded-xl border border-gray-200 mb-8 flex items-center gap-3 px-4 py-2 shadow-sm focus-within:ring-1 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                        <Search className="h-5 w-5 text-gray-400 flex-shrink-0" />
                         <input 
                             type="text" 
                             value={heroSearch}
                             onChange={(e) => setHeroSearch(e.target.value)}
-                            placeholder="Search for tests (e.g. CBC, MRI, Sugar)..." 
-                            className="flex-grow bg-transparent border-none focus:ring-0 text-gray-700 text-base md:text-lg placeholder-gray-400 py-3 md:py-4"
+                            placeholder="Search for tests & packages..." 
+                            className="flex-grow bg-transparent border-none focus:ring-0 text-gray-700 text-sm md:text-base placeholder-gray-400 py-2"
                         />
-                        <button 
+                         <button 
                             onClick={() => onNavigate(View.TEST_DIRECTORY)}
-                            className="bg-primary hover:bg-green-700 text-white p-3 md:px-6 md:py-3 rounded-xl transition-colors font-bold text-sm flex items-center gap-2"
+                            className="bg-primary hover:bg-green-700 text-white px-4 py-1.5 rounded-lg text-sm font-medium transition-colors hidden md:block"
                         >
-                            <span className="hidden md:inline">Search</span>
-                            <Search className="h-5 w-5 md:hidden" />
+                            Search
                         </button>
                     </div>
 
-                    {/* CTA Buttons */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                    {/* Action Buttons - ELEGANT OUTLINE STYLE */}
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-8 w-full sm:w-auto">
                         <button 
                             onClick={() => onNavigate(View.APPOINTMENT)}
-                            className="bg-primary hover:bg-green-700 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg shadow-green-900/20 flex items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                            className="w-full sm:w-auto border-2 border-primary text-primary hover:bg-green-50 bg-white px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all"
                         >
-                            <Calendar className="h-5 w-5 group-hover:scale-110 transition-transform" /> 
+                            <Calendar className="h-4 w-4" /> 
                             <span>Book Appointment</span>
                         </button>
                         <button 
                             onClick={() => onNavigate(View.HOME_COLLECTION)}
-                            className="bg-secondary hover:bg-red-600 text-white px-6 py-4 rounded-xl font-bold text-lg shadow-lg shadow-red-900/20 flex items-center justify-center gap-2 transition-all hover:-translate-y-1 group"
+                            className="w-full sm:w-auto border-2 border-secondary text-secondary hover:bg-red-50 bg-white px-6 py-2.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 transition-all"
                         >
-                            <HomeIcon className="h-5 w-5 group-hover:scale-110 transition-transform" /> 
+                            <HomeIcon className="h-4 w-4" /> 
                             <span>Home Collection</span>
                         </button>
                     </div>
 
-                    {/* Secondary Actions */}
-                    <div className="flex flex-wrap items-center gap-4 text-sm font-medium text-gray-600">
-                         <button onClick={() => setIsReportModalOpen(true)} className="flex items-center gap-2 hover:text-primary transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm">
-                             <FileText className="h-4 w-4 text-secondary" /> Download Report
+                    {/* Secondary Text Links - Minimal */}
+                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 text-sm text-gray-500">
+                         <button onClick={() => setIsReportModalOpen(true)} className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                             <FileText className="h-4 w-4" /> <span>Download Report</span>
                          </button>
-                         <button className="flex items-center gap-2 hover:text-primary transition-colors bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm md:hidden">
-                             <Upload className="h-4 w-4 text-primary" /> Upload Rx
+                         <button className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                             <Upload className="h-4 w-4" /> <span>Upload Prescription</span>
                          </button>
                     </div>
 
@@ -234,27 +200,27 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <div className="bg-white border-b border-gray-100">
+      {/* Stats Section - Clean Strip */}
+      <div className="bg-white border-t border-b border-gray-100">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-3 divide-x divide-gray-100 py-6 md:py-8">
+            <div className="grid grid-cols-3 divide-x divide-gray-100 py-4">
                 <div className="text-center px-2">
-                    <p className="text-xl md:text-3xl font-bold text-primary">10L+</p>
-                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Patients Served</p>
+                    <p className="text-lg md:text-2xl font-bold text-gray-800">10L+</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wide">Patients</p>
                 </div>
                 <div className="text-center px-2">
-                    <p className="text-xl md:text-3xl font-bold text-primary">24/7</p>
-                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Support Available</p>
+                    <p className="text-lg md:text-2xl font-bold text-gray-800">24/7</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wide">Support</p>
                 </div>
                 <div className="text-center px-2">
-                    <p className="text-xl md:text-3xl font-bold text-primary">500+</p>
-                    <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-wider mt-1">Test Menu</p>
+                    <p className="text-lg md:text-2xl font-bold text-gray-800">500+</p>
+                    <p className="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wide">Tests</p>
                 </div>
             </div>
         </div>
       </div>
 
-      {/* 2. Quick Actions Bar - Clean Minimal Style */}
+      {/* Quick Actions Bar - Clean Minimal Style */}
       <div className="bg-gray-50 py-4 md:py-8 border-b border-gray-100">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -284,7 +250,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
       <HealthConcerns onNavigate={onNavigate} />
 
-      {/* 3. Popular Packages */}
+      {/* Popular Packages */}
       <section className="py-20 bg-soft-blue" aria-labelledby="packages-heading">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -315,7 +281,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Testimonials (Enhanced) */}
+      {/* Testimonials */}
       <section className="py-20 bg-white">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -341,7 +307,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. Why Choose Us */}
+      {/* Why Choose Us */}
       <section className="py-20 bg-green-50 relative overflow-hidden">
         <div className="absolute top-0 left-0 w-64 h-64 bg-white/50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
