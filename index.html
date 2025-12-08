@@ -98,89 +98,58 @@
   >
     <!-- Navbar -->
     <nav
-      class="hidden md:block sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 py-4 transition-all duration-300"
+      class="hidden md:block sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 py-3 transition-all duration-300 shadow-soft"
       id="navbar"
     >
       <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center">
-          <!-- Logo -->
-          <div
-            class="flex items-center gap-3 cursor-pointer group"
-            onclick="navigateTo('home')"
-          >
+        <div class="flex justify-between items-center h-12">
+          <!-- Left: Logo + Location -->
+          <div class="flex items-center gap-6">
             <div
-              class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-green-500/20 group-hover:bg-green-700 transition-colors"
-            >
-              <i data-lucide="activity" class="h-6 w-6"></i>
-            </div>
-            <div class="flex flex-col">
-              <span
-                class="text-xl font-heading font-bold text-gray-900 tracking-tight leading-none"
-                >Avishkar</span
-              >
-              <span
-                class="text-[11px] font-semibold tracking-wider text-primary uppercase mt-0.5"
-                >Diagnostics</span
-              >
-            </div>
-          </div>
-
-          <!-- Desktop Links -->
-          <div class="hidden md:flex items-center gap-1">
-            <button
+              class="flex items-center gap-2.5 cursor-pointer group"
               onclick="navigateTo('home')"
-              data-view="home"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-primary bg-green-50"
             >
-              Home
-            </button>
-            <button
-              onclick="navigateTo('about')"
-              data-view="about"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              About Us
-            </button>
+              <div
+                class="w-9 h-9 bg-primary result-icon-box rounded-lg flex items-center justify-center text-white shadow-lg shadow-green-500/20 group-hover:bg-green-700 transition-colors"
+              >
+                <i data-lucide="activity" class="h-5 w-5"></i>
+              </div>
+              <div class="flex flex-col">
+                <span
+                  class="text-lg font-heading font-bold text-gray-900 tracking-tight leading-none"
+                  >Avishkar</span
+                >
+                <span
+                  class="text-[10px] font-bold tracking-wider text-primary uppercase"
+                  >Diagnostics</span
+                >
+              </div>
+            </div>
 
-            <button
-              onclick="navigateTo('tests')"
-              data-view="tests"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Test Menu
-            </button>
-            <button
-              onclick="navigateTo('home-collection')"
-              data-view="home-collection"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Home Visit
-            </button>
-            <button
-              onclick="navigateTo('contact')"
-              data-view="contact"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Contact & Locations
-            </button>
-          </div>
-
-          <!-- Right Actions -->
-          <div class="flex items-center gap-4">
-            <!-- Location (Desktop) -->
-            <div class="hidden md:block relative">
+            <!-- Location Selector (Compact Pill) -->
+            <div class="relative">
               <button
                 onclick="toggleLocationMenu()"
-                class="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-primary transition-colors px-3 py-2 rounded-lg hover:bg-gray-50"
+                class="flex items-center gap-1.5 bg-gray-50 hover:bg-green-50 border border-gray-200 hover:border-green-200 pl-2 pr-3 py-1.5 rounded-full transition-all group/loc"
               >
-                <i data-lucide="map-pin" class="h-4 w-4 text-primary"></i>
-                <span id="selected-location-text">Bank More</span>
-                <i data-lucide="chevron-down" class="h-3 w-3 opacity-50"></i>
+                <div class="bg-white p-0.5 rounded-full shadow-sm">
+                  <i data-lucide="map-pin" class="h-3 w-3 text-primary"></i>
+                </div>
+                <span
+                  id="selected-location-text"
+                  class="text-xs font-bold text-gray-700 group-hover/loc:text-primary transition-colors"
+                  >Bank More</span
+                >
+                <i
+                  data-lucide="chevron-down"
+                  class="h-3 w-3 text-gray-400 group-hover/loc:text-primary transition-colors"
+                ></i>
               </button>
-              <!-- Dropdown -->
+
+              <!-- Location Dropdown -->
               <div
                 id="location-menu"
-                class="hidden absolute top-full right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-40 animate-in fade-in zoom-in-95"
+                class="hidden absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in zoom-in-95"
               >
                 <button
                   onclick="selectLocation('Bank More')"
@@ -220,34 +189,87 @@
                 </button>
               </div>
             </div>
+          </div>
 
-            <div class="hidden md:block h-6 w-px bg-gray-200"></div>
+          <!-- Center: Menu Items -->
+          <div class="hidden md:flex items-center gap-1">
+            <button
+              onclick="navigateTo('home')"
+              data-view="home"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-primary bg-green-50"
+            >
+              Home
+            </button>
+            <button
+              onclick="navigateTo('about')"
+              data-view="about"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              About
+            </button>
+            <button
+              onclick="navigateTo('tests')"
+              data-view="tests"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Test Menu
+            </button>
+            <button
+              onclick="navigateTo('home-collection')"
+              data-view="home-collection"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Home Visit
+            </button>
+            <button
+              onclick="navigateTo('contact')"
+              data-view="contact"
+              class="nav-link px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
+            >
+              Contact & Locations
+            </button>
+          </div>
 
-            <!-- Login / User Menu -->
+          <!-- Right: Login & Cart -->
+          <div class="flex items-center gap-3">
+            <button
+              class="relative p-2 text-gray-600 hover:text-primary transition-colors hover:bg-gray-50 rounded-full"
+            >
+              <i data-lucide="shopping-cart" class="h-5 w-5"></i>
+              <span
+                class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full border border-white"
+              ></span>
+            </button>
+
+            <!-- Separator -->
+            <div class="h-5 w-px bg-gray-200"></div>
+
+            <!-- Login / User -->
             <button
               id="nav-login-btn"
               onclick="navigateTo('login')"
-              class="hidden md:flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md hover:bg-gray-800 transition-all hover:scale-[1.02]"
+              class="hidden md:flex items-center gap-2 bg-gray-900 hover:bg-black text-white px-5 py-2 rounded-full text-sm font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5"
             >
-              <i data-lucide="user" class="h-4 w-4"></i> Login
+              <i data-lucide="user" class="h-3.5 w-3.5"></i> <span>Login</span>
             </button>
 
             <div id="nav-user-menu-btn" class="hidden relative">
               <button
                 onclick="toggleUserMenu()"
-                class="flex items-center gap-2 bg-green-50 text-primary px-4 py-2 rounded-xl text-sm font-bold hover:bg-green-100 transition-colors"
+                class="flex items-center gap-2 bg-green-50 text-primary px-3 py-1.5 rounded-full text-sm font-bold hover:bg-green-100 transition-colors border border-green-100"
               >
                 <div
-                  class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-xs"
+                  class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-[10px]"
                 >
                   RJ
                 </div>
-                <span>My Account</span>
-                <i data-lucide="chevron-down" class="h-4 w-4"></i>
+                <span class="max-w-[80px] truncate">My Account</span>
+                <i data-lucide="chevron-down" class="h-3 w-3"></i>
               </button>
+              <!-- User Dropdown (Same as before) -->
               <div
                 id="user-menu"
-                class="hidden absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-40 animate-in fade-in zoom-in-95 overflow-hidden"
+                class="hidden absolute top-full right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50 animate-in fade-in zoom-in-95 overflow-hidden"
               >
                 <button
                   onclick="navigateTo('dashboard'); toggleUserMenu()"
@@ -264,14 +286,6 @@
                 </button>
               </div>
             </div>
-
-            <!-- Mobile Menu Button -->
-            <button
-              onclick="toggleMobileMenu()"
-              class="md:hidden p-2 text-gray-700 active:bg-gray-100 rounded-full"
-            >
-              <i data-lucide="menu" class="h-6 w-6"></i>
-            </button>
           </div>
         </div>
       </div>
@@ -279,39 +293,42 @@
 
     <!-- Mobile Top Bar (Sticky) -->
     <div
-      class="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 flex items-center justify-between px-4"
+      class="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-14 flex items-center justify-between px-4 shadow-soft"
     >
+      <!-- Left: Logo -->
       <div class="flex items-center gap-2" onclick="navigateTo('home')">
-        <div class="bg-primary p-1.5 rounded-lg shadow-sm">
-          <i data-lucide="activity" class="h-5 w-5 text-white"></i>
+        <div class="bg-primary p-1 rounded-md shadow-sm">
+          <i data-lucide="activity" class="h-4 w-4 text-white"></i>
         </div>
-        <span class="font-heading font-bold text-lg text-gray-900"
+        <span
+          class="font-heading font-bold text-lg text-gray-900 tracking-tight"
           >Avishkar</span
         >
       </div>
+
+      <!-- Center: Location Pill (Centered Absolutely if possible, or flex center) -->
+      <!-- To center perfectly we might need a container, but flex spacer works too. 
+           Wait, justify-between makes it left, center, right? No, justify-between spreads them.
+           We want the Pill exactly in center. 
+           We can use absolute positioning for the pill. -->
       <button
         onclick="toggleMobileMenu()"
-        class="flex items-center gap-1.5 bg-teal-light px-3 py-1.5 rounded-full border border-green-100 active:scale-95 transition-transform"
+        class="absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100 active:scale-95 transition-transform"
       >
-        <i
-          data-lucide="map-pin"
-          class="h-3.5 w-3.5 text-primary fill-current"
-        ></i>
+        <i data-lucide="map-pin" class="h-3 w-3 text-primary fill-current"></i>
         <span
           id="mobile-location-text"
-          class="text-xs font-bold text-primary truncate max-w-[100px]"
+          class="text-xs font-bold text-gray-700 truncate max-w-[90px]"
           >Bank More</span
         >
-        <i
-          data-lucide="chevron-down"
-          class="h-3 w-3 text-primary opacity-50"
-        ></i>
       </button>
+
+      <!-- Right: Hamburger -->
       <button
         onclick="toggleMobileMenu()"
         class="p-2 -mr-2 text-gray-700 active:bg-gray-100 rounded-full"
       >
-        <i data-lucide="menu" class="h-6 w-6 stroke-[1.5]"></i>
+        <i data-lucide="menu" class="h-6 w-6 stroke-[2]"></i>
       </button>
     </div>
 
@@ -322,74 +339,80 @@
         onclick="toggleMobileMenu()"
       ></div>
       <div
-        class="absolute top-0 right-0 h-full w-[80%] max-w-[300px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right"
+        class="absolute top-0 right-0 h-full w-[80%] max-w-[300px] bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300"
       >
-        <div class="px-6 pt-12 pb-6 flex justify-between items-start">
+        <div
+          class="px-5 pt-8 pb-4 flex justify-between items-center bg-white border-b border-gray-50"
+        >
           <div>
-            <h2 class="text-2xl font-bold text-gray-900">Menu</h2>
-            <p class="text-sm text-gray-400">Navigate comfortably</p>
+            <h2 class="text-xl font-bold text-gray-900 tracking-tight">Menu</h2>
           </div>
           <button
             onclick="toggleMobileMenu()"
-            class="p-2 bg-gray-50 rounded-full hover:bg-gray-100"
+            class="p-2 bg-gray-50 rounded-full hover:bg-gray-100 text-gray-500"
           >
-            <i data-lucide="x" class="h-5 w-5 text-gray-500"></i>
+            <i data-lucide="x" class="h-5 w-5"></i>
           </button>
         </div>
-        <div class="flex-1 overflow-y-auto px-6 space-y-1">
+        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
           <button
             onclick="navigateTo('home'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
-            <i data-lucide="home" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">Home</span>
-          </button>
-          <button
-            onclick="navigateTo('about'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
-          >
-            <i data-lucide="shield-check" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">About Us</span>
+            <div
+              class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"
+            >
+              <i data-lucide="home" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm">Home</span>
           </button>
 
           <button
             onclick="navigateTo('tests'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
-            <i data-lucide="test-tube" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">Test Menu</span>
+            <div
+              class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"
+            >
+              <i data-lucide="test-tube" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm">Test Menu</span>
+          </button>
+          <button
+            onclick="navigateTo('reports'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-600"
+            >
+              <i data-lucide="file-text" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm">My Reports</span>
           </button>
           <button
             onclick="navigateTo('home-collection'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
-            <i data-lucide="plus" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">Home Visit</span>
+            <div
+              class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"
+            >
+              <i data-lucide="bike" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm">Home Visit</span>
           </button>
           <button
             onclick="navigateTo('contact'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
-          >
-            <i data-lucide="phone" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">Contact & Locations</span>
-          </button>
-        </div>
-        <div class="p-6 mt-auto border-t border-gray-100 bg-gray-50">
-          <div
-            class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center gap-3 mb-4"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
             <div
-              class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-bold"
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600"
             >
-              <i data-lucide="user" class="h-5 w-5"></i>
+              <i data-lucide="map-pin" class="h-4 w-4"></i>
             </div>
-            <div>
-              <p class="text-sm font-bold text-gray-900">Guest User</p>
-              <p class="text-xs text-primary font-medium">
-                Login to view reports
-              </p>
-            </div>
-          </div>
+            <span class="text-sm">Contact & Locations</span>
+          </button>
+        </div>
+        <div class="p-5 mt-auto border-t border-gray-100 bg-gray-50">
           <div class="grid grid-cols-2 gap-3">
             <button
               class="flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
@@ -404,47 +427,51 @@
               <i data-lucide="log-in" class="h-4 w-4"></i> Login
             </button>
           </div>
+          <p
+            class="text-center text-[10px] text-gray-400 mt-4 font-medium uppercase tracking-widest"
+          >
+            Avishkar Diagnostics
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Mobile Bottom Navigation -->
     <div
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-[50] pb-safe"
+      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] z-[50] pb-safe"
     >
-      <div class="grid grid-cols-5 items-end h-[60px] pb-1.5 relative">
+      <div class="grid grid-cols-3 h-[60px] pb-1.5 relative">
+        <!-- 1. Home -->
         <button
           onclick="navigateTo('home')"
           data-view="home"
-          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-primary"
+          class="bottom-nav-btn flex flex-col items-center justify-end pb-2 gap-1 h-full text-primary transition-colors"
         >
-          <i data-lucide="home" class="h-6 w-6" stroke-width="2.5"></i>
-          <span class="text-[10px] font-medium">Home</span>
+          <i data-lucide="home" class="h-6 w-6"></i>
+          <span class="text-[10px] font-bold">Home</span>
         </button>
 
-        <div class="relative -top-6 flex justify-center">
+        <!-- 2. Book Test (Floating) -->
+        <div class="relative flex justify-center pointer-events-none">
           <button
-            onclick="navigateTo('appointment')"
-            class="w-14 h-14 bg-primary rounded-full shadow-lg shadow-green-600/30 flex items-center justify-center text-white border-[3px] border-white active:scale-95 transition-transform"
+            onclick="navigateTo('tests')"
+            class="pointer-events-auto absolute -top-5 w-14 h-14 bg-primary rounded-full shadow-lg shadow-green-600/30 flex flex-col items-center justify-center text-white border-[4px] border-white active:scale-95 transition-transform z-10"
           >
-            <i data-lucide="plus" class="h-7 w-7"></i>
+            <i data-lucide="plus" class="h-7 w-7 stroke-[3]"></i>
           </button>
+          <span class="absolute bottom-2 text-[10px] font-bold text-primary"
+            >Book</span
+          >
         </div>
-        <button
-          onclick="navigateTo('reports')"
-          data-view="reports"
-          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
-        >
-          <i data-lucide="file-text" class="h-6 w-6" stroke-width="2"></i>
-          <span class="text-[10px] font-medium">Reports</span>
-        </button>
+
+        <!-- 3. Account -->
         <button
           onclick="navigateTo('login')"
           data-view="login"
-          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
+          class="bottom-nav-btn flex flex-col items-center justify-end pb-2 gap-1 h-full text-gray-400 transition-colors"
         >
-          <i data-lucide="user" class="h-6 w-6" stroke-width="2"></i>
-          <span class="text-[10px] font-medium">Account</span>
+          <i data-lucide="user" class="h-6 w-6"></i>
+          <span class="text-[10px] font-bold">Account</span>
         </button>
       </div>
     </div>
