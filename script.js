@@ -790,150 +790,156 @@ function renderPackages(containerId, filterCategory = "All") {
 function renderTestDirectory(
   searchTerm = "",
   category = "All",
-  fastingOnly = false
+  fastingOnly = false,
+  reportTime = "All",
+  sortBy = "popular"
 ) {
   const container = document.getElementById("test-directory-grid");
+  const emptyState = document.getElementById("test-empty-state");
+  const countLabel = document.getElementById("test-count");
+
   if (!container) return;
 
-  const filtered = testDirectory.filter((test) => {
+  // 1. Filter
+  let filtered = testDirectory.filter((test) => {
     const matchesSearch =
       test.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      test.code.toLowerCase().includes(searchTerm.toLowerCase());
+      test.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      test.category.toLowerCase().includes(searchTerm.toLowerCase());
+
     const matchesCategory = category === "All" || test.category === category;
-    const matchesFasting = fastingOnly ? test.isFastingRequired : true;
-    return matchesSearch && matchesCategory && matchesFasting;
+
+    const matchesFasting = fastingOnly ? test.isFastingRequired === true : true;
+
+    let matchesTime = true;
+    if (reportTime !== "All") {
+      const testHours = parseInt(test.tat);
+      const limitHours = parseInt(reportTime);
+      if (!isNaN(testHours) && !isNaN(limitHours)) {
+        matchesTime = testHours <= limitHours;
+      }
+    }
+
+    return matchesSearch && matchesCategory && matchesFasting && matchesTime;
   });
 
-  document.getElementById(
-    "test-count"
-  ).innerText = `Found ${filtered.length} tests`;
+  // 2. Sort
+  if (sortBy === "price_low") {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (sortBy === "price_high") {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (sortBy === "time_fast") {
+    filtered.sort((a, b) => parseInt(a.tat) - parseInt(b.tat));
+  } else {
+    // popular - keep original order
+  }
+
+  // 3. UI Updates
+  if (countLabel) countLabel.innerText = `${filtered.length} Tests Available`;
 
   if (filtered.length === 0) {
-    container.innerHTML = `
-        <div class="col-span-full text-center py-24 bg-white rounded-2xl border-2 border-dashed border-gray-200">
-            <div class="inline-flex items-center justify-center p-4 bg-gray-50 rounded-full mb-4"><i data-lucide="search" class="h-8 w-8 text-gray-300"></i></div>
-            <h3 class="text-xl font-bold text-gray-700 mb-2">No tests found</h3>
-            <p class="text-gray-500">Try adjusting your filters.</p>
-        </div>`;
-    lucide.createIcons();
+    container.innerHTML = "";
+    container.classList.add("hidden");
+    if (emptyState) emptyState.classList.remove("hidden");
     return;
   }
 
+  container.classList.remove("hidden");
+  if (emptyState) emptyState.classList.add("hidden");
+
   container.innerHTML = filtered
-    .map(
-      (test) => `
-        <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-lg hover:border-green-200 transition-all duration-300 group flex flex-col">
-            <div class="flex justify-between items-start mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                        <i data-lucide="test-tube" class="h-6 w-6"></i>
-                    </div>
+    .map((test) => {
+      const isBlood = test.sampleType === "Blood";
+      const sampleBadge = isBlood
+        ? `<span class="inline-flex items-center gap-1.5 bg-red-50 text-red-700 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border border-red-100"><i data-lucide="droplet" class="h-3 w-3"></i> Blood</span>`
+        : `<span class="inline-flex items-center gap-1.5 bg-yellow-50 text-yellow-700 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border border-yellow-100"><i data-lucide="flask-conical" class="h-3 w-3"></i> ${test.sampleType}</span>`;
+
+      const fastingBadge = test.isFastingRequired
+        ? `<span class="inline-flex items-center gap-1.5 bg-purple-50 text-purple-700 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border border-purple-100"><i data-lucide="coffee-off" class="h-3 w-3"></i> Fasting</span>`
+        : `<span class="inline-flex items-center gap-1.5 bg-green-50 text-green-700 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border border-green-100"><i data-lucide="check-circle-2" class="h-3 w-3"></i> No Fasting</span>`;
+
+      return `
+        <div class="group bg-white rounded-2xl p-5 md:p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-gray-200 transition-all duration-300 flex flex-col relative overflow-hidden h-full">
+            <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-green-50 to-transparent rounded-bl-[100px] -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform"></div>
+            
+            <div class="relative z-10 flex flex-col h-full">
+                <!-- Header -->
+                <div class="flex justify-between items-start gap-4 mb-3">
                     <div>
-                        <h3 class="font-bold text-gray-800 text-lg leading-tight group-hover:text-primary transition-colors">${
-                          test.name
-                        }</h3>
-                        <span class="text-xs font-bold text-gray-400 uppercase tracking-wide">${
-                          test.category
-                        }</span>
+                        <span class="inline-block text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded mb-2 uppercase tracking-wider">${test.category}</span>
+                        <h3 class="text-lg md:text-xl font-bold text-gray-900 group-hover:text-primary transition-colors leading-tight mb-1">${test.name}</h3>
+                        <p class="text-xs text-gray-400 font-mono">${test.code}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-xl md:text-2xl font-bold text-primary tracking-tight">₹${test.price}</span>
                     </div>
                 </div>
-                <div class="text-right"><span class="block text-xl font-bold text-primary">₹${
-                  test.price
-                }</span></div>
-            </div>
-            <p class="text-sm text-gray-600 mb-6 line-clamp-2 min-h-[40px]">${
-              test.description
-            }</p>
-            <div class="grid grid-cols-2 gap-y-3 gap-x-6 text-sm text-gray-500 mb-6 bg-gray-50 p-4 rounded-xl">
-                <div class="flex items-center gap-2"><i data-lucide="beaker" class="h-4 w-4 text-secondary"></i><span>Sample: <span class="font-semibold text-gray-700">${
-                  test.sampleType
-                }</span></span></div>
-                <div class="flex items-center gap-2"><i data-lucide="clock" class="h-4 w-4 text-secondary"></i><span>Report: <span class="font-semibold text-gray-700">${
-                  test.tat
-                }</span></span></div>
-                <div class="flex items-center gap-2 col-span-2">
-                    <i data-lucide="alert-circle" class="h-4 w-4 ${
-                      test.isFastingRequired ? "text-red-500" : "text-green-500"
-                    }"></i>
-                    <span class="${
-                      test.isFastingRequired
-                        ? "text-red-600 font-semibold"
-                        : "text-green-600 font-semibold"
-                    }">${
-        test.isFastingRequired ? "Fasting Required" : "No Fasting Required"
-      }</span>
+
+                <!-- Description -->
+                <p class="text-sm text-gray-500 mb-5 leading-relaxed line-clamp-2">${test.description}</p>
+
+                <!-- Badges -->
+                <div class="flex flex-wrap gap-2 mb-6 mt-auto">
+                    ${sampleBadge}
+                    <span class="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide border border-indigo-100">
+                        <i data-lucide="clock" class="h-3 w-3"></i> ${test.tat}
+                    </span>
+                    ${fastingBadge}
                 </div>
+
+                <!-- Button -->
+                <button onclick="navigateTo('appointment')" class="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-gray-200 hover:bg-primary hover:shadow-green-200 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group/btn border border-transparent">
+                    Book This Test <i data-lucide="arrow-right" class="h-4 w-4 text-gray-400 group-hover/btn:text-white transition-colors"></i>
+                </button>
             </div>
-            <button onclick="navigateTo('appointment')" class="mt-auto w-full bg-primary hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-green-900/10 flex items-center justify-center gap-2">
-                <i data-lucide="shopping-cart" class="h-4 w-4"></i> Book This Test
-            </button>
         </div>
-    `
-    )
+      `;
+    })
     .join("");
+
   lucide.createIcons();
 }
 
-function renderLocations(searchTerm = "", service = "All") {
-  const container = document.getElementById("locations-grid");
-  if (!container) return;
+function initTestMenu() {
+  const searchInput = document.getElementById("test-search-input");
+  const categorySelect = document.getElementById("test-category-select");
+  const fastingCheck = document.getElementById("test-fasting-check");
+  const reportTimeSelect = document.getElementById("test-report-time-select");
+  const sortSelect = document.getElementById("test-sort-select");
 
-  const filtered = locationDetails.filter((loc) => {
-    const matchesSearch =
-      loc.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      loc.address.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesService =
-      service === "All" || loc.availableServices.includes(service);
-    return matchesSearch && matchesService;
-  });
+  const update = () => {
+    renderTestDirectory(
+      searchInput?.value || "",
+      categorySelect?.value || "All",
+      fastingCheck?.checked || false,
+      reportTimeSelect?.value || "All",
+      sortSelect?.value || "popular"
+    );
+  };
 
-  if (filtered.length === 0) {
-    container.innerHTML = `<div class="col-span-full text-center py-10 text-gray-500">No locations found.</div>`;
-    return;
-  }
+  if (searchInput) searchInput.addEventListener("input", update);
+  if (categorySelect) categorySelect.addEventListener("change", update);
+  if (fastingCheck) fastingCheck.addEventListener("change", update);
+  if (reportTimeSelect) reportTimeSelect.addEventListener("change", update);
+  if (sortSelect) sortSelect.addEventListener("change", update);
 
-  container.innerHTML = filtered
-    .map(
-      (loc) => `
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all group">
-            <div class="flex items-start justify-between mb-4">
-                <div>
-                    <h3 class="font-bold text-gray-900 text-lg group-hover:text-primary transition-colors">${
-                      loc.name
-                    }</h3>
-                    <p class="text-sm text-gray-500 flex items-center gap-1 mt-1"><i data-lucide="map-pin" class="h-3 w-3"></i> ${
-                      loc.address
-                    }</p>
-                </div>
-                <div class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center text-primary"><i data-lucide="navigation" class="h-5 w-5"></i></div>
-            </div>
-            <div class="flex flex-wrap gap-2 mb-6">
-                ${loc.availableServices
-                  .slice(0, 3)
-                  .map(
-                    (s) =>
-                      `<span class="px-2 py-1 bg-gray-50 text-gray-600 text-xs font-bold rounded-md border border-gray-100">${s}</span>`
-                  )
-                  .join("")}
-                ${
-                  loc.availableServices.length > 3
-                    ? `<span class="px-2 py-1 bg-gray-50 text-gray-400 text-xs font-bold rounded-md border border-gray-100">+${
-                        loc.availableServices.length - 3
-                      }</span>`
-                    : ""
-                }
-            </div>
-            <div class="flex gap-3">
-                <a href="tel:${
-                  loc.phone
-                }" class="flex-1 bg-white border border-gray-200 hover:border-primary hover:text-primary text-gray-700 font-bold py-2.5 rounded-xl text-sm flex items-center justify-center gap-2 transition-all"><i data-lucide="phone" class="h-4 w-4"></i> Call</a>
-                <button onclick="navigateTo('appointment')" class="flex-1 bg-primary hover:bg-green-700 text-white font-bold py-2.5 rounded-xl text-sm shadow-lg shadow-green-900/10 transition-all">Book Visit</button>
-            </div>
-        </div>
-    `
-    )
-    .join("");
-  lucide.createIcons();
+  update();
+}
+
+function resetFilters() {
+  const search = document.getElementById("test-search-input");
+  const cat = document.getElementById("test-category-select");
+  const time = document.getElementById("test-report-time-select");
+  const fast = document.getElementById("test-fasting-check");
+  const sort = document.getElementById("test-sort-select");
+
+  if (search) search.value = "";
+  if (cat) cat.value = "All";
+  if (time) time.value = "All";
+  if (fast) fast.checked = false;
+  if (sort) sort.value = "popular";
+
+  renderTestDirectory();
 }
 
 function renderHealthConcerns() {
@@ -1265,34 +1271,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Test Directory
-  renderTestDirectory();
-  document
-    .getElementById("test-search-input")
-    ?.addEventListener("input", (e) =>
-      renderTestDirectory(
-        e.target.value,
-        document.getElementById("test-category-select").value,
-        document.getElementById("test-fasting-check").checked
-      )
-    );
-  document
-    .getElementById("test-category-select")
-    ?.addEventListener("change", (e) =>
-      renderTestDirectory(
-        document.getElementById("test-search-input").value,
-        e.target.value,
-        document.getElementById("test-fasting-check").checked
-      )
-    );
-  document
-    .getElementById("test-fasting-check")
-    ?.addEventListener("change", (e) =>
-      renderTestDirectory(
-        document.getElementById("test-search-input").value,
-        document.getElementById("test-category-select").value,
-        e.target.checked
-      )
-    );
+  // Test Directory
+  if (typeof initTestMenu === "function") {
+    initTestMenu();
+  } else {
+    renderTestDirectory(); // Fallback
+  }
 
   // Contact Page
   renderLocations();

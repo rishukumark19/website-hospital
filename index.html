@@ -1313,21 +1313,45 @@
 
       <!-- VIEW: TEST DIRECTORY -->
       <div id="view-tests" class="view-section hidden">
-        <div class="bg-background min-h-screen py-12">
-          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-10">
-              <h1 class="text-3xl md:text-4xl font-bold text-primary mb-3">
-                Diagnostic Test Directory
-              </h1>
-              <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                Search from over 500+ pathology and radiology tests.
-              </p>
+        <div class="bg-soft-blue min-h-screen pb-24">
+          <!-- Header -->
+          <div class="bg-white border-b border-gray-100 py-10 md:py-14">
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div class="max-w-4xl mx-auto text-center">
+                <h1
+                  class="text-3xl md:text-5xl font-heading font-bold text-gray-900 mb-5 tracking-tight"
+                >
+                  Diagnostic Test Directory
+                </h1>
+                <a
+                  href="#"
+                  onclick="navigateTo('wellness'); return false;"
+                  class="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-primary hover:text-green-700 bg-green-50 hover:bg-green-100 px-5 py-2.5 rounded-full transition-all mb-8 group border border-green-100"
+                >
+                  ✨ Looking for full body checkup packages instead?
+                  <span
+                    class="group-hover:translate-x-1 transition-transform flex items-center gap-1"
+                    >View Packages <i data-lucide="arrow-right" class="h-3 w-3"></i
+                  ></span>
+                </a>
+                <p class="text-gray-500 text-lg font-light leading-relaxed px-4">
+                  Search and book from our comprehensive list of over 500+
+                  NABL-accredited pathology and radiology tests.
+                </p>
+              </div>
             </div>
-            <div
-              class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-10 sticky top-20 z-30"
-            >
-              <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div class="md:col-span-2 relative">
+          </div>
+
+          <!-- Sticky Toolbar -->
+          <div
+            class="sticky top-[56px] md:top-[64px] z-30 bg-white/90 backdrop-blur-xl border-b border-gray-200 shadow-soft py-4 transition-all"
+          >
+            <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div
+                class="flex flex-col lg:flex-row gap-4 lg:items-center justify-between"
+              >
+                <!-- Search -->
+                <div class="relative w-full lg:w-[320px] shrink-0">
                   <i
                     data-lucide="search"
                     class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
@@ -1335,49 +1359,116 @@
                   <input
                     type="text"
                     id="test-search-input"
-                    placeholder="Search test name (e.g. CBC, Thyroid)..."
-                    class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all font-medium"
+                    placeholder="Search tests (e.g. CBC, Lipid)..."
+                    class="w-full pl-11 pr-4 py-2.5 bg-gray-50 hover:bg-white focus:bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-medium text-sm"
                   />
                 </div>
-                <div>
-                  <select
-                    id="test-category-select"
-                    class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 appearance-none font-medium text-gray-700"
-                  >
-                    <option value="All">All Categories</option>
-                    <option value="Diabetes">Diabetes</option>
-                    <option value="Heart">Heart</option>
-                    <option value="Thyroid">Thyroid</option>
-                    <option value="Kidney">Kidney</option>
-                    <option value="Liver">Liver</option>
-                    <option value="Vitamins">Vitamins</option>
-                  </select>
-                </div>
-                <div class="flex items-center justify-center md:justify-start">
-                  <label
-                    class="flex items-center gap-2 cursor-pointer select-none bg-gray-50 px-4 py-3 rounded-xl border border-gray-200 w-full hover:bg-gray-100 transition-colors"
-                  >
-                    <input
-                      type="checkbox"
-                      id="test-fasting-check"
-                      class="w-5 h-5 text-primary rounded focus:ring-primary border-gray-300"
-                    />
-                    <span class="text-gray-700 font-medium text-sm"
-                      >Fasting Only</span
+
+                <!-- Filters & Sort -->
+                <div class="flex flex-col md:flex-row gap-3 w-full overflow-x-auto pb-1 md:pb-0">
+                  <div class="flex gap-3 min-w-max">
+                    <!-- Category -->
+                    <div class="relative">
+                      <select
+                        id="test-category-select"
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
+                      >
+                        <option value="All">All Categories</option>
+                        <option value="Pathology">Pathology</option>
+                        <option value="Radiology">Radiology</option>
+                        <option value="Diabetes">Diabetes</option>
+                        <option value="Heart">Heart</option>
+                        <option value="Thyroid">Thyroid</option>
+                        <option value="Kidney">Kidney</option>
+                        <option value="Liver">Liver</option>
+                        <option value="Vitamins">Vitamins</option>
+                        <option value="Infection">Infection</option>
+                      </select>
+                      <i
+                        data-lucide="chevron-down"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
+                      ></i>
+                    </div>
+
+                    <!-- Report Time -->
+                    <div class="relative">
+                      <select
+                        id="test-report-time-select"
+                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
+                      >
+                        <option value="All">Any Report Time</option>
+                        <option value="4 Hours">Within 4 Hours</option>
+                        <option value="6 Hours">Within 6 Hours</option>
+                        <option value="24 Hours">Within 24 Hours</option>
+                      </select>
+                      <i
+                        data-lucide="clock"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
+                      ></i>
+                    </div>
+
+                    <!-- Fasting -->
+                    <label
+                      class="flex items-center gap-2 cursor-pointer select-none bg-white px-4 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors whitespace-nowrap shadow-sm"
                     >
-                  </label>
+                      <input
+                        type="checkbox"
+                        id="test-fasting-check"
+                        class="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-offset-0"
+                      />
+                      <span class="text-sm font-semibold text-gray-700"
+                        >Fasting Only</span
+                      >
+                    </label>
+                  </div>
+
+                  <!-- Spacer -->
+                  <div class="hidden md:block flex-grow"></div>
+
+                  <!-- Sort (Aligned Right on Desktop) -->
+                  <div class="relative min-w-[180px]">
+                    <select
+                      id="test-sort-select"
+                      class="w-full appearance-none pl-4 pr-10 py-2.5 bg-gray-50 border border-transparent rounded-xl text-sm font-bold text-gray-900 focus:outline-none hover:bg-gray-100 cursor-pointer text-right transition-colors"
+                    >
+                      <option value="popular">Sort: Popular</option>
+                      <option value="price_low">Price: Low to High</option>
+                      <option value="price_high">Price: High to Low</option>
+                      <option value="time_fast">Report Time: Fastest</option>
+                    </select>
+                    <i
+                      data-lucide="arrow-up-down"
+                      class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none"
+                    ></i>
+                  </div>
                 </div>
               </div>
             </div>
-            <div
-              id="test-count"
-              class="mb-6 text-sm text-gray-500 font-semibold"
-            ></div>
+          </div>
+
+          <!-- Main Grid Area -->
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+            <div class="flex items-center justify-between mb-6">
+              <div id="test-count" class="text-sm font-bold text-gray-500">
+                Loading tests...
+              </div>
+            </div>
+
             <div
               id="test-directory-grid"
-              class="grid grid-cols-1 md:grid-cols-2 gap-6"
+              class="grid grid-cols-1 md:grid-cols-2 gap-5 auto-rows-fr relative min-h-[400px]"
             >
-              <!-- Injected by JS -->
+              <!-- Content Injected by JS -->
+            </div>
+            
+            <!-- Empty State Template (Hidden by default, used by JS) -->
+             <div id="test-empty-state" class="hidden col-span-full py-20 text-center">
+                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
+                    <i data-lucide="search-x" class="h-10 w-10"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">No tests found</h3>
+                <p class="text-gray-500 mb-6">Try adjusting your search or filters to find what you're looking for.</p>
+                <button onclick="resetFilters()" class="text-primary font-bold hover:underline">Clear all filters</button>
             </div>
           </div>
         </div>
