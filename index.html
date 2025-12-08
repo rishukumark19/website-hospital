@@ -141,13 +141,7 @@
             >
               About Us
             </button>
-            <button
-              onclick="navigateTo('services')"
-              data-view="services"
-              class="nav-link px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Services
-            </button>
+
             <button
               onclick="navigateTo('tests')"
               data-view="tests"
@@ -357,13 +351,7 @@
             <i data-lucide="shield-check" class="h-5 w-5 text-gray-400"></i>
             <span class="text-sm font-medium">About Us</span>
           </button>
-          <button
-            onclick="navigateTo('services'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
-          >
-            <i data-lucide="activity" class="h-5 w-5 text-gray-400"></i>
-            <span class="text-sm font-medium">Services</span>
-          </button>
+
           <button
             onclick="navigateTo('tests'); toggleMobileMenu()"
             class="w-full text-left px-4 py-3.5 rounded-xl flex items-center gap-4 text-gray-600 hover:bg-gray-50"
@@ -433,14 +421,7 @@
           <i data-lucide="home" class="h-6 w-6" stroke-width="2.5"></i>
           <span class="text-[10px] font-medium">Home</span>
         </button>
-        <button
-          onclick="navigateTo('services')"
-          data-view="services"
-          class="bottom-nav-btn flex flex-col items-center gap-1 h-full justify-center text-gray-400"
-        >
-          <i data-lucide="test-tube" class="h-6 w-6" stroke-width="2"></i>
-          <span class="text-[10px] font-medium">Tests</span>
-        </button>
+
         <div class="relative -top-6 flex justify-center">
           <button
             onclick="navigateTo('appointment')"
@@ -476,6 +457,10 @@
         <section class="relative pt-10 pb-20 md:pt-24 md:pb-32 overflow-hidden">
           <div
             class="absolute inset-0 z-0 bg-gradient-to-b from-teal-light via-white to-soft-blue"
+          ></div>
+          <div
+            class="absolute inset-0 z-0 bg-premium-grid opacity-60"
+            style="mask-image: linear-gradient(to bottom, black, transparent)"
           ></div>
           <div class="container mx-auto max-w-7xl px-4 relative z-10">
             <div class="flex flex-col items-center text-center">
@@ -524,13 +509,27 @@
                       class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
                     ></i>
                     <input
+                      id="hero-search-input"
+                      autocomplete="off"
                       type="text"
                       placeholder="Search for tests (e.g. CBC, Thyroid)..."
                       class="w-full h-14 pl-12 pr-4 bg-transparent outline-none text-gray-800 font-medium placeholder-gray-400 text-base"
                     />
+                    <div
+                      id="hero-search-results"
+                      class="hidden absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 z-50 max-h-80 overflow-y-auto"
+                    ></div>
                   </div>
                   <button
-                    onclick="navigateTo('tests')"
+                    onclick="
+                      navigateTo('tests');
+                      const heroInput = document.getElementById('hero-search-input');
+                      const testInput = document.getElementById('test-search-input');
+                      if(heroInput && testInput) {
+                        testInput.value = heroInput.value;
+                        renderTestDirectory(heroInput.value);
+                      }
+                    "
                     class="w-full md:w-auto bg-primary hover:bg-green-700 text-white h-12 md:h-14 px-8 rounded-xl font-bold text-sm shadow-lg shadow-green-500/20 transition-all active:scale-95 flex items-center justify-center gap-2"
                   >
                     Search
@@ -825,75 +824,9 @@
             </div>
           </div>
         </section>
-      </div>
 
-      <!-- VIEW: ABOUT US -->
-      <div id="view-about" class="view-section hidden">
-        <section class="bg-primary text-white py-20 relative overflow-hidden">
-          <div
-            class="container mx-auto max-w-7xl px-4 text-center relative z-10"
-          >
-            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6">
-              About Avishkar Diagnostic
-            </h1>
-            <p class="text-xl text-green-50 max-w-2xl mx-auto leading-relaxed">
-              Pioneering diagnostic excellence in Dhanbad with cutting-edge
-              technology and a patient-first approach.
-            </p>
-          </div>
-        </section>
-        <section class="py-20 bg-white">
-          <div
-            class="container mx-auto max-w-7xl px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
-          >
-            <div>
-              <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
-                Precision in Every Result,<br /><span class="text-secondary"
-                  >Care in Every Touch.</span
-                >
-              </h2>
-              <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                Founded with a vision to make world-class diagnostics accessible
-                to everyone in Jharkhand, Avishkar Diagnostic Centre has grown
-                to become the most trusted name in Bank More, Dhanbad.
-              </p>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="bg-green-50 p-6 rounded-xl border border-green-100">
-                  <h3 class="font-bold text-primary text-lg mb-2">
-                    Our Mission
-                  </h3>
-                  <p class="text-sm text-gray-600">
-                    To provide accurate, timely, and affordable diagnostic
-                    services to all segments of society.
-                  </p>
-                </div>
-                <div
-                  class="bg-green-50/50 p-6 rounded-xl border border-green-100"
-                >
-                  <h3 class="font-bold text-primary text-lg mb-2">
-                    Our Vision
-                  </h3>
-                  <p class="text-sm text-gray-600">
-                    To be the most trusted leader in diagnostic healthcare and
-                    research in the region.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="relative">
-              <img
-                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000"
-                alt="Lab"
-                class="rounded-3xl shadow-xl w-full object-cover h-[500px]"
-              />
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- VIEW: SERVICES -->
-      <div id="view-services" class="view-section hidden">
-        <div class="bg-soft-blue min-h-screen py-12">
+        <!-- SERVICES SECTION (Integrated) -->
+        <section class="bg-soft-blue py-12">
           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Header -->
             <div class="mb-12 text-center">
@@ -1264,7 +1197,71 @@
               </button>
             </div>
           </div>
-        </div>
+        </section>
+      </div>
+
+      <!-- VIEW: ABOUT US -->
+      <div id="view-about" class="view-section hidden">
+        <section class="bg-primary text-white py-20 relative overflow-hidden">
+          <div
+            class="container mx-auto max-w-7xl px-4 text-center relative z-10"
+          >
+            <h1 class="text-4xl md:text-6xl font-heading font-bold mb-6">
+              About Avishkar Diagnostic
+            </h1>
+            <p class="text-xl text-green-50 max-w-2xl mx-auto leading-relaxed">
+              Pioneering diagnostic excellence in Dhanbad with cutting-edge
+              technology and a patient-first approach.
+            </p>
+          </div>
+        </section>
+        <section class="py-20 bg-white">
+          <div
+            class="container mx-auto max-w-7xl px-4 grid grid-cols-1 md:grid-cols-2 gap-16 items-center"
+          >
+            <div>
+              <h2 class="text-3xl md:text-4xl font-bold text-primary mb-6">
+                Precision in Every Result,<br /><span class="text-secondary"
+                  >Care in Every Touch.</span
+                >
+              </h2>
+              <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                Founded with a vision to make world-class diagnostics accessible
+                to everyone in Jharkhand, Avishkar Diagnostic Centre has grown
+                to become the most trusted name in Bank More, Dhanbad.
+              </p>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div class="bg-green-50 p-6 rounded-xl border border-green-100">
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    Our Mission
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    To provide accurate, timely, and affordable diagnostic
+                    services to all segments of society.
+                  </p>
+                </div>
+                <div
+                  class="bg-green-50/50 p-6 rounded-xl border border-green-100"
+                >
+                  <h3 class="font-bold text-primary text-lg mb-2">
+                    Our Vision
+                  </h3>
+                  <p class="text-sm text-gray-600">
+                    To be the most trusted leader in diagnostic healthcare and
+                    research in the region.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <img
+                src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=2000"
+                alt="Lab"
+                class="rounded-3xl shadow-xl w-full object-cover h-[500px]"
+              />
+            </div>
+          </div>
+        </section>
       </div>
 
       <!-- VIEW: TEST DIRECTORY -->

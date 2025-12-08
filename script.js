@@ -2,7 +2,7 @@
 const navLinks = [
   { name: "Home", view: "home" },
   { name: "About Us", view: "about" },
-  { name: "Services", view: "services" },
+
   { name: "Test Menu", view: "tests" },
   { name: "Home Visit", view: "home-collection" },
   { name: "Contact & Locations", view: "contact" },
@@ -947,6 +947,85 @@ function renderTestimonials() {
   lucide.createIcons();
 }
 
+// --- HERO SEARCH ---
+function initializeHeroSearch() {
+  const input = document.getElementById("hero-search-input");
+  const resultsContainer = document.getElementById("hero-search-results");
+
+  if (!input || !resultsContainer) return;
+
+  // Hide results on click outside
+  document.addEventListener("click", (e) => {
+    if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
+      resultsContainer.classList.add("hidden");
+    }
+  });
+
+  input.addEventListener("input", (e) => {
+    const term = e.target.value.toLowerCase().trim();
+
+    if (term.length === 0) {
+      resultsContainer.classList.add("hidden");
+      resultsContainer.innerHTML = "";
+      return;
+    }
+
+    const filteredTests = testDirectory.filter(
+      (test) =>
+        test.name.toLowerCase().includes(term) ||
+        test.code.toLowerCase().includes(term)
+    );
+
+    if (filteredTests.length === 0) {
+      resultsContainer.classList.remove("hidden");
+      resultsContainer.innerHTML = `
+        <div class="p-4 text-center text-gray-500 text-sm">
+          No tests found.
+        </div>
+      `;
+      return;
+    }
+
+    resultsContainer.classList.remove("hidden");
+    resultsContainer.innerHTML = filteredTests
+      .slice(0, 6) // Limit to 6 results
+      .map(
+        (test) => `
+        <div 
+          onclick="
+            navigateTo('tests');
+            const searchInput = document.getElementById('test-search-input');
+            if(searchInput) {
+                searchInput.value = '${test.code}';
+                renderTestDirectory('${test.code}');
+            }
+          "
+          class="p-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 cursor-pointer flex justify-between items-center group transition-colors"
+        >
+          <div class="flex items-center gap-3">
+             <div class="bg-green-100 p-1.5 rounded-lg text-primary">
+                <i data-lucide="test-tube" class="h-4 w-4"></i>
+             </div>
+             <div>
+                <p class="text-sm font-bold text-gray-800 group-hover:text-primary transition-colors">${test.name}</p>
+                <p class="text-xs text-gray-500">${test.category}</p>
+             </div>
+          </div>
+          <span class="text-xs font-bold text-primary bg-green-50 px-2 py-1 rounded-md">₹${test.price}</span>
+        </div>
+      `
+      )
+      .join("");
+    lucide.createIcons();
+  });
+
+  input.addEventListener("focus", () => {
+    if (input.value.trim().length > 0) {
+      input.dispatchEvent(new Event("input"));
+    }
+  });
+}
+
 // --- INITIALIZATION ---
 document.addEventListener("DOMContentLoaded", () => {
   lucide.createIcons();
@@ -955,6 +1034,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPackages("packages-container");
   renderTestimonials();
   renderHealthConcerns();
+  initializeHeroSearch();
 
   // Wellness Page
   renderPackages("wellness-packages-grid");
