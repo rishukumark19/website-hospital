@@ -454,6 +454,30 @@ const testimonials = [
     image:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
   },
+  {
+    name: "Vikram Singh",
+    location: "Saraidhela",
+    rating: 5,
+    text: "Excellent service! The reports were accurate and timely, which helped in my quick diagnosis. Highly recommended.",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+  },
+  {
+    name: "Sita Devi",
+    location: "Govindpur",
+    rating: 5,
+    text: "I booked a home collection for my mother. The team arrived on time and was very polite. Great experience.",
+    image:
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=200",
+  },
+  {
+    name: "Amit Kumar",
+    location: "City Center",
+    rating: 4,
+    text: "Good facility with modern equipment. The staff at the reception was very helpful in guiding me through the process.",
+    image:
+      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&q=80&w=200",
+  },
 ];
 
 // --- STATE ---
@@ -1093,7 +1117,7 @@ function renderTestimonials() {
   container.innerHTML = testimonials
     .map(
       (t) => `
-        <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all h-full flex flex-col">
+        <div class="min-w-[300px] md:min-w-[350px] bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all h-full flex flex-col snap-center">
             <div class="flex items-center gap-4 mb-6">
                 <img src="${t.image}" alt="${
         t.name
