@@ -521,6 +521,113 @@ function toggleHeroLocationMenu() {
   if (menu) menu.classList.toggle("hidden");
 }
 
+function openPackageDetails(packageId) {
+  const pkg = popularPackages.find((p) => p.id == packageId);
+  if (!pkg) return;
+
+  document.getElementById("drawer-package-title").innerText = pkg.title;
+  document.getElementById("drawer-package-subtitle").innerText =
+    pkg.category + " Package";
+
+  const discount = Math.round(
+    ((pkg.price - pkg.discountedPrice) / pkg.price) * 100
+  );
+
+  const content = document.getElementById("drawer-content");
+  content.innerHTML = `
+      <div class="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-100">
+          <div>
+              <p class="text-xs text-gray-500 uppercase font-bold">Package Price</p> 
+              <div class="flex items-end gap-2">
+                  <span class="text-2xl font-bold text-primary">₹${
+                    pkg.discountedPrice
+                  }</span>
+                  <span class="text-sm text-gray-400 line-through mb-1">₹${
+                    pkg.price
+                  }</span>
+              </div>
+          </div>
+          <span class="bg-green-100 text-green-700 font-bold px-3 py-1 rounded-lg text-sm">
+            ${discount}% OFF
+          </span>
+      </div>
+
+      <div>
+          <h3 class="font-bold text-gray-900 mb-2 flex items-center gap-2">
+            <i data-lucide="info" class="h-4 w-4 text-primary"></i> Description
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed bg-gray-50 p-3 rounded-lg border border-gray-100">${
+            pkg.description
+          }</p>
+      </div>
+
+      <div>
+          <h3 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+             <i data-lucide="list-checks" class="h-4 w-4 text-primary"></i> Included Tests (${
+               pkg.testCount
+             })
+          </h3>
+          <div class="space-y-2">
+             <div class="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-lg">
+                <div class="h-8 w-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 font-bold text-xs">1</div>
+                <div>
+                    <p class="font-bold text-gray-800 text-sm">Complete Blood Count</p>
+                    <p class="text-xs text-gray-500">Hemoglobin, RBC, WBC, Platelets...</p>
+                </div>
+             </div>
+             <div class="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-lg">
+                <div class="h-8 w-8 rounded-full bg-red-50 flex items-center justify-center text-red-500 font-bold text-xs">2</div>
+                <div>
+                    <p class="font-bold text-gray-800 text-sm">Diabetes Screen</p>
+                    <p class="text-xs text-gray-500">Fasting Blood Sugar, HbA1c...</p>
+                </div>
+             </div>
+             <div class="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-lg">
+                <div class="h-8 w-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 font-bold text-xs">3</div>
+                <div>
+                    <p class="font-bold text-gray-800 text-sm">Lipid Profile</p>
+                    <p class="text-xs text-gray-500">Cholesterol, Triglycerides, HDL, LDL...</p>
+                </div>
+             </div>
+             <div class="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-lg">
+                <div class="h-8 w-8 rounded-full bg-yellow-50 flex items-center justify-center text-yellow-500 font-bold text-xs">4</div>
+                <div>
+                    <p class="font-bold text-gray-800 text-sm">Liver Function Test</p>
+                    <p class="text-xs text-gray-500">Bilirubin, SGOT, SGPT, Alkaline Lab...</p>
+                </div>
+             </div>
+             <div class="flex items-center gap-3 p-3 bg-white border border-gray-100 rounded-lg">
+                <div class="h-8 w-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 font-bold text-xs">5</div>
+                <div>
+                    <p class="font-bold text-gray-800 text-sm">Kidney Function Test</p>
+                    <p class="text-xs text-gray-500">Urea, Creatinine, Uric Acid...</p>
+                </div>
+             </div>
+             <p class="text-center text-xs text-gray-400 italic mt-2">+ ${
+               pkg.testCount - 5
+             } more parameters included</p>
+          </div>
+      </div>
+  `;
+
+  const drawer = document.getElementById("package-details-drawer");
+  drawer.classList.remove("hidden");
+  lucide.createIcons();
+}
+
+function closePackageDetails() {
+  const drawer = document.getElementById("package-details-drawer");
+  drawer.classList.add("hidden");
+}
+
+function scrollContainer(containerId, direction) {
+  const container = document.getElementById(containerId);
+  if (container) {
+    const scrollAmount = direction === "left" ? -400 : 400;
+    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  }
+}
+
 function selectLocation(loc) {
   selectedLocation = loc;
   document.getElementById("selected-location-text").innerText = loc;
@@ -597,7 +704,7 @@ function renderPackages(containerId, filterCategory = "All") {
         ((pkg.price - pkg.discountedPrice) / pkg.price) * 100
       );
       return `
-        <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col h-full relative group">
+        <div class="min-w-[300px] md:min-w-[350px] bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col h-full relative group snap-start">
             <div class="flex justify-between items-start pt-4 px-4">
                 <div class="flex gap-2">
                     ${
@@ -606,7 +713,11 @@ function renderPackages(containerId, filterCategory = "All") {
                         : `<span class="bg-blue-50 text-blue-700 border border-blue-100 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">Popular</span>`
                     }
                 </div>
-                <div class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-red-50 group-hover:text-red-500 transition-colors cursor-pointer">♥</div>
+                <button onclick="openPackageDetails('${
+                  pkg.id
+                }')" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors cursor-pointer border border-transparent hover:border-blue-100">
+                    <i data-lucide="info" class="h-5 w-5"></i>
+                </button>
             </div>
             <div class="px-5 pt-3 pb-2 flex-grow">
                 <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2 group-hover:text-primary transition-colors">${
@@ -812,19 +923,88 @@ function renderHealthConcerns() {
         .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
         .toLowerCase();
 
+      // Map ids to colors - using hover: classes ensures they are only visible on hover
+      const colorMap = {
+        fever: {
+          card: "hover:bg-red-50 hover:border-red-200",
+          icon: "text-red-500",
+          text: "group-hover:text-red-600",
+        },
+        diabetes: {
+          card: "hover:bg-blue-50 hover:border-blue-200",
+          icon: "text-blue-500",
+          text: "group-hover:text-blue-600",
+        },
+        kidney: {
+          card: "hover:bg-indigo-50 hover:border-indigo-200",
+          icon: "text-indigo-500",
+          text: "group-hover:text-indigo-600",
+        },
+        liver: {
+          card: "hover:bg-yellow-50 hover:border-yellow-200",
+          icon: "text-yellow-600",
+          text: "group-hover:text-yellow-700",
+        },
+        thyroid: {
+          card: "hover:bg-purple-50 hover:border-purple-200",
+          icon: "text-purple-500",
+          text: "group-hover:text-purple-600",
+        },
+        heart: {
+          card: "hover:bg-pink-50 hover:border-pink-200",
+          icon: "text-pink-500",
+          text: "group-hover:text-pink-600",
+        },
+        vitamin: {
+          card: "hover:bg-orange-50 hover:border-orange-200",
+          icon: "text-orange-500",
+          text: "group-hover:text-orange-600",
+        },
+        allergy: {
+          card: "hover:bg-rose-50 hover:border-rose-200",
+          icon: "text-rose-500",
+          text: "group-hover:text-rose-600",
+        },
+        infertility: {
+          card: "hover:bg-teal-50 hover:border-teal-200",
+          icon: "text-teal-500",
+          text: "group-hover:text-teal-600",
+        },
+        cancer: {
+          card: "hover:bg-gray-100 hover:border-gray-300",
+          icon: "text-gray-600",
+          text: "group-hover:text-gray-800",
+        },
+        gut: {
+          card: "hover:bg-emerald-50 hover:border-emerald-200",
+          icon: "text-emerald-600",
+          text: "group-hover:text-emerald-700",
+        },
+        lungs: {
+          card: "hover:bg-cyan-50 hover:border-cyan-200",
+          icon: "text-cyan-500",
+          text: "group-hover:text-cyan-600",
+        },
+      };
+
+      const colors = colorMap[concern.id] || {
+        card: "hover:bg-green-50 hover:border-green-200",
+        icon: "text-primary",
+        text: "group-hover:text-primary",
+      };
+
       return `
-        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-[140px] md:min-w-0 bg-white border border-gray-100 p-6 rounded-2xl flex flex-col items-center justify-center gap-4 hover:shadow-lg hover:border-green-100 transition-all cursor-pointer group snap-center">
-            <div class="w-12 h-12 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-green-50 group-hover:text-primary transition-colors text-gray-400">
+        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-[140px] md:min-w-[180px] bg-white border border-gray-100 p-6 rounded-2xl flex flex-col items-center justify-center gap-4 hover:shadow-lg transition-all cursor-pointer group snap-center ${colors.card}">
+            <div class="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-white shadow-sm group-hover:scale-110 transition-all ${colors.icon}">
                 <i data-lucide="${icon}" class="h-6 w-6"></i>
             </div>
-            <span class="font-bold text-gray-700 text-sm group-hover:text-primary transition-colors">${concern.title}</span>
+            <span class="font-bold text-gray-700 text-sm transition-colors ${colors.text}">${concern.title}</span>
         </div>
         `;
     })
     .join("");
   lucide.createIcons();
 }
-
 // --- APPOINTMENT FORM LOGIC ---
 let appointmentStep = 1;
 const appointmentData = {
