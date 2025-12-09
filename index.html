@@ -51,6 +51,15 @@
               card: "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)",
               premium: "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
             },
+            animation: {
+              "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+            },
+            keyframes: {
+              fadeInUp: {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" },
+              },
+            },
           },
         },
       };
@@ -309,22 +318,21 @@
         >
       </div>
 
-      <!-- Center: Location Pill (Centered Absolutely if possible, or flex center) -->
-      <!-- To center perfectly we might need a container, but flex spacer works too. 
-           Wait, justify-between makes it left, center, right? No, justify-between spreads them.
-           We want the Pill exactly in center. 
-           We can use absolute positioning for the pill. -->
-      <button
-        onclick="toggleMobileMenu()"
-        class="absolute left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-gray-50 px-3 py-1.5 rounded-full border border-gray-100 active:scale-95 transition-transform"
-      >
-        <i data-lucide="map-pin" class="h-3 w-3 text-primary fill-current"></i>
-        <span
-          id="mobile-location-text"
-          class="text-xs font-bold text-gray-700 truncate max-w-[90px]"
-          >Bank More</span
-        >
-      </button>
+      <!-- Center: Quick Actions -->
+      <div class="flex items-center gap-5">
+        <button onclick="navigateTo('home-collection')" class="flex flex-col items-center gap-0.5 group">
+            <i data-lucide="bike" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
+            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Visit</span>
+        </button>
+        <button onclick="navigateTo('tests')" class="flex flex-col items-center gap-0.5 group">
+            <i data-lucide="test-tube" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
+            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Tests</span>
+        </button>
+        <button onclick="navigateTo('reports')" class="flex flex-col items-center gap-0.5 group">
+            <i data-lucide="file-text" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
+            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Report</span>
+        </button>
+      </div>
 
       <!-- Right: Hamburger -->
       <button
@@ -359,6 +367,18 @@
         </div>
         <div class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
           <button
+            onclick="navigateTo('login'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors mb-2 border border-gray-100 shadow-sm"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white"
+            >
+              <i data-lucide="log-in" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm font-bold">Login / Account</span>
+          </button>
+
+          <button
             onclick="navigateTo('home'); toggleMobileMenu()"
             class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
@@ -371,65 +391,50 @@
           </button>
 
           <button
-            onclick="navigateTo('tests'); toggleMobileMenu()"
+            onclick="navigateTo('about'); toggleMobileMenu()"
             class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
             <div
               class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"
             >
-              <i data-lucide="test-tube" class="h-4 w-4"></i>
+              <i data-lucide="info" class="h-4 w-4"></i>
             </div>
-            <span class="text-sm">Test Menu</span>
+            <span class="text-sm">About Us</span>
           </button>
-          <button
-            onclick="navigateTo('reports'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-600"
-            >
-              <i data-lucide="file-text" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">My Reports</span>
-          </button>
-          <button
-            onclick="navigateTo('home-collection'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"
-            >
-              <i data-lucide="bike" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">Home Visit</span>
-          </button>
+
           <button
             onclick="navigateTo('contact'); toggleMobileMenu()"
             class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
             <div
-              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600"
+              class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-600"
             >
               <i data-lucide="map-pin" class="h-4 w-4"></i>
             </div>
-            <span class="text-sm">Contact & Locations</span>
+            <span class="text-sm">Locations & Contact</span>
+          </button>
+          
+           <div class="my-2 border-t border-gray-100"></div>
+
+          <button
+            onclick="navigateTo('tests'); toggleMobileMenu()"
+            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
+          >
+            <div
+              class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"
+            >
+              <i data-lucide="test-tube" class="h-4 w-4"></i>
+            </div>
+            <span class="text-sm">Test Menu</span>
           </button>
         </div>
         <div class="p-5 mt-auto border-t border-gray-100 bg-gray-50">
-          <div class="grid grid-cols-2 gap-3">
             <button
-              class="flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
-              onclick="toggleMobileMenu()"
-            >
-              <i data-lucide="shopping-cart" class="h-4 w-4"></i> Cart
-            </button>
-            <button
-              onclick="navigateTo('login'); toggleMobileMenu()"
-              class="flex items-center justify-center gap-2 bg-gray-900 text-white py-3 rounded-xl text-sm font-bold shadow-md"
-            >
-              <i data-lucide="log-in" class="h-4 w-4"></i> Login
-            </button>
-          </div>
+               onclick="toggleMobileMenu()"
+               class="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
+             >
+               <i data-lucide="shopping-cart" class="h-4 w-4"></i> View Cart
+             </button>
           <p
             class="text-center text-[10px] text-gray-400 mt-4 font-medium uppercase tracking-widest"
           >
@@ -439,52 +444,14 @@
       </div>
     </div>
 
-    <!-- Mobile Bottom Navigation -->
-    <div
-      class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.04)] z-[50] pb-safe"
-    >
-      <div class="grid grid-cols-3 h-[60px] pb-1.5 relative">
-        <!-- 1. Home -->
-        <button
-          onclick="navigateTo('home')"
-          data-view="home"
-          class="bottom-nav-btn flex flex-col items-center justify-end pb-2 gap-1 h-full text-primary transition-colors"
-        >
-          <i data-lucide="home" class="h-6 w-6"></i>
-          <span class="text-[10px] font-bold">Home</span>
-        </button>
 
-        <!-- 2. Book Test (Floating) -->
-        <div class="relative flex justify-center pointer-events-none">
-          <button
-            onclick="navigateTo('tests')"
-            class="pointer-events-auto absolute -top-5 w-14 h-14 bg-primary rounded-full shadow-lg shadow-green-600/30 flex flex-col items-center justify-center text-white border-[4px] border-white active:scale-95 transition-transform z-10"
-          >
-            <i data-lucide="plus" class="h-7 w-7 stroke-[3]"></i>
-          </button>
-          <span class="absolute bottom-2 text-[10px] font-bold text-primary"
-            >Book</span
-          >
-        </div>
-
-        <!-- 3. Account -->
-        <button
-          onclick="navigateTo('login')"
-          data-view="login"
-          class="bottom-nav-btn flex flex-col items-center justify-end pb-2 gap-1 h-full text-gray-400 transition-colors"
-        >
-          <i data-lucide="user" class="h-6 w-6"></i>
-          <span class="text-[10px] font-bold">Account</span>
-        </button>
-      </div>
-    </div>
 
     <!-- MAIN CONTENT AREA -->
     <main id="main-content">
       <!-- VIEW: HOME -->
       <div id="view-home" class="view-section">
         <!-- Hero Section -->
-        <section class="relative pt-10 pb-20 md:pt-24 md:pb-32 overflow-hidden">
+        <section class="relative pt-10 pb-16 md:pt-24 md:pb-24 overflow-hidden">
           <div
             class="absolute inset-0 z-0 bg-gradient-to-b from-teal-light via-white to-soft-blue"
           ></div>
@@ -495,7 +462,7 @@
           <div class="container mx-auto max-w-7xl px-4 relative z-10">
             <div class="flex flex-col items-center text-center">
               <h1
-                class="text-4xl md:text-6xl font-heading font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight"
+                class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-gray-900 leading-[1.1] mb-6 tracking-tight"
               >
                 Precision Diagnostics, <br class="hidden md:block" />
                 <span class="text-primary">Personalized Care.</span>
@@ -504,33 +471,40 @@
                 class="text-gray-500 text-lg md:text-xl font-light max-w-xl mx-auto mb-10 leading-relaxed"
               >
                 Dhanbad's most trusted NABL accredited laboratory.
-                <br class="hidden md:block" />
-                Accurate reports, home collection, and expert care.
+                Home collection, accurate reports, and expert care.
               </p>
 
-              <!-- Search Bar & Upload -->
-              <div class="w-full max-w-4xl mx-auto relative z-20">
-                <div
-                  class="flex flex-col md:flex-row items-center justify-center gap-4"
-                >
-                  <!-- Main Search Pill -->
-                  <div
-                    class="flex-grow w-full md:w-auto bg-white rounded-2xl shadow-premium border border-gray-100 p-1.5 flex items-center transition-all hover:shadow-lg"
-                  >
-                    <!-- Location Section -->
-                    <div
-                      class="hidden md:flex items-center gap-3 px-4 py-2 border-r border-gray-100 shrink-0 cursor-pointer hover:bg-gray-50 rounded-xl transition-colors group/loc-hero"
+              <!-- Hero Actions -->
+              <div class="flex flex-col md:flex-row items-center gap-4 mb-12 w-full max-w-md md:max-w-none justify-center">
+                  <button onclick="navigateTo('home-collection')" class="w-full md:w-auto bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                      <i data-lucide="bike" class="h-5 w-5"></i>
+                      Book Home Visit
+                  </button>
+                  <button onclick="navigateTo('contact')" class="w-full md:w-auto bg-white border border-gray-200 hover:border-primary text-gray-700 hover:text-primary px-8 py-4 rounded-2xl font-bold text-lg shadow-sm transition-all flex items-center justify-center gap-2">
+                      <i data-lucide="map-pin" class="h-5 w-5"></i>
+                      Find Nearest Lab
+                  </button>
+                  <a href="#" onclick="navigateTo('reports'); return false;" class="text-primary font-bold hover:underline text-sm md:text-base mt-2 md:mt-0 md:ml-4 flex items-center gap-1">
+                      <i data-lucide="download" class="h-4 w-4"></i> Download Report
+                  </a>
+              </div>
+
+              <!-- Quick Access Strip -->
+              <div class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-premium border border-gray-100 p-2 flex flex-col md:flex-row items-center gap-2 animate-fade-in-up">
+                  <!-- Location (Left) -->
+                   <div
+                      class="w-full md:w-auto flex items-center gap-3 px-4 py-3 md:border-r border-gray-100 shrink-0 cursor-pointer hover:bg-gray-50 rounded-xl transition-colors group/loc-hero"
                       onclick="toggleHeroLocationMenu()"
                     >
                       <div
-                        class="bg-gray-50 group-hover/loc-hero:bg-green-50 p-1.5 rounded-full transition-colors"
+                        class="bg-gray-50 group-hover/loc-hero:bg-green-50 p-2 rounded-full transition-colors"
                       >
                         <i
                           data-lucide="map-pin"
                           class="h-4 w-4 text-gray-400 group-hover/loc-hero:text-primary transition-colors"
                         ></i>
                       </div>
-                      <div class="text-left">
+                      <div class="text-left flex-grow md:flex-grow-0">
                         <p
                           class="text-[10px] text-gray-400 font-bold uppercase tracking-wider leading-none mb-0.5"
                         >
@@ -543,13 +517,14 @@
                           Bank More
                         </p>
                       </div>
+                      <i data-lucide="chevron-down" class="h-4 w-4 text-gray-300 ml-auto md:ml-0"></i>
                     </div>
 
-                    <!-- Search Input -->
-                    <div class="flex-grow relative">
+                    <!-- Search (Right) -->
+                    <div class="flex-grow w-full relative">
                       <i
                         data-lucide="search"
-                        class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-300 pointer-events-none"
+                        class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none"
                       ></i>
                       <input
                         id="hero-search-input"
@@ -558,48 +533,102 @@
                         placeholder="Search for tests (e.g. CBC, Thyroid)..."
                         class="w-full h-12 pl-12 pr-4 bg-transparent outline-none text-gray-800 font-medium placeholder-gray-400 text-sm md:text-base"
                       />
-                      <!-- Search Results Dropdown -->
+                       <!-- Search Results Dropdown -->
                       <div
                         id="hero-search-results"
                         class="hidden absolute top-full left-0 right-0 mt-4 bg-white rounded-xl shadow-xl border border-gray-100 z-50 max-h-80 overflow-y-auto"
                       ></div>
                     </div>
-
-                    <!-- Compact Search Button -->
-                    <button
-                      onclick="
-                      navigateTo('tests');
-                      const heroInput = document.getElementById('hero-search-input');
-                      const testInput = document.getElementById('test-search-input');
-                      if(heroInput && testInput) {
-                        testInput.value = heroInput.value;
-                        renderTestDirectory(heroInput.value);
-                      }
-                    "
-                      class="bg-primary hover:bg-green-700 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-green-500/20 transition-all active:scale-95 ml-2"
+                     <!-- Go Button -->
+                     <button
+                        onclick="
+                        navigateTo('tests');
+                        const heroInput = document.getElementById('hero-search-input');
+                        const testInput = document.getElementById('test-search-input');
+                        if(heroInput && testInput) {
+                            testInput.value = heroInput.value;
+                            renderTestDirectory(heroInput.value);
+                        }
+                        "
+                        class="hidden md:flex bg-gray-900 hover:bg-black text-white p-3 rounded-xl transition-colors"
                     >
-                      Search
+                        <i data-lucide="arrow-right" class="h-5 w-5"></i>
                     </button>
-                  </div>
-
-                  <!-- Upload Button -->
-                  <button
-                    class="w-full md:w-auto h-[60px] md:h-auto bg-white border border-primary/30 hover:border-primary text-primary hover:bg-green-50 px-6 py-3 rounded-2xl font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 group whitespace-nowrap"
-                  >
-                    <i
-                      data-lucide="upload"
-                      class="h-4 w-4 group-hover:scale-110 transition-transform"
-                    ></i>
-                    Upload
-                  </button>
-                </div>
               </div>
+
             </div>
           </div>
         </section>
 
-        <!-- Packages -->
-        <section class="py-10 bg-[#F0FDF4]/40">
+        <!-- Seasonal Campaigns Section -->
+        <section class="py-8 md:py-16 bg-white relative">
+            <div class="container mx-auto max-w-7xl px-4">
+                 <!-- Section Header -->
+                 <div class="flex items-end justify-between mb-6 px-1">
+                    <div>
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Seasonal Campaigns</h2>
+                        <p class="text-gray-500 text-sm mt-1">Curated packages for the season.</p>
+                    </div>
+                 </div>
+
+                 <!-- Slider Container -->
+                 <div class="relative w-full rounded-2xl overflow-hidden shadow-lg group">
+                    
+                    <!-- Track -->
+                    <div id="promo-slider-track" class="flex transition-transform duration-700 ease-in-out">
+                        
+                        <!-- Slide 1: Winter Immunity (Original Style) -->
+                        <div class="min-w-full flex-shrink-0 relative h-[250px] md:h-[400px] bg-gray-900 cursor-pointer" onclick="navigateTo('wellness')">
+                             <img src="images/winter_banner.png" class="absolute inset-0 w-full h-full object-cover opacity-100 group-hover:scale-105 transition-all duration-700" alt="Winter">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                            <div class="relative z-10 p-8 md:p-16 flex flex-col justify-center h-full max-w-2xl">
+                                <span class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 w-fit">
+                                    <i data-lucide="snowflake" class="h-3 w-3 md:h-4 md:w-4"></i> Winter Protection
+                                </span>
+                                <h3 class="text-3xl md:text-5xl font-heading font-bold text-white mb-3 leading-tight drop-shadow-sm">
+                                    Don’t ignore the cold.<br />
+                                    <span class="text-secondary">Stay immune, stay safe.</span>
+                                </h3>
+                                <p class="text-gray-200 text-sm md:text-lg mb-8 max-w-sm md:max-w-lg drop-shadow-sm leading-relaxed">Protect your family from seasonal flu. Comprehensive screening including Vitamin D & B12.</p>
+                                <button class="bg-white text-gray-900 text-sm md:text-base font-bold px-6 py-3 rounded-xl w-fit flex items-center gap-2 hover:bg-gray-100 transition-colors shadow-lg">
+                                    Book Now <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Heart Health (Blue) -->
+                        <div class="min-w-full flex-shrink-0 relative h-[250px] md:h-[400px] bg-blue-900 cursor-pointer" onclick="navigateTo('wellness')">
+                            <img src="https://images.unsplash.com/photo-1628348068343-c6a848d2b6dd?auto=format&fit=crop&q=80&w=1200" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-all duration-700" alt="Heart">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-950/90 via-blue-900/60 to-transparent"></div>
+                             <div class="relative z-10 p-8 md:p-16 flex flex-col justify-center h-full max-w-2xl">
+                                <span class="inline-flex items-center gap-1.5 bg-blue-800/50 backdrop-blur-md border border-blue-700/50 text-blue-100 text-[10px] md:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-4 w-fit">
+                                    <i data-lucide="heart" class="h-3 w-3 md:h-4 md:w-4"></i> Heart Awareness
+                                </span>
+                                <h3 class="text-3xl md:text-5xl font-bold text-white mb-3 leading-tight drop-shadow-sm">Cardiac Care Profile</h3>
+                                 <p class="text-blue-50 text-sm md:text-lg mb-8 max-w-sm md:max-w-lg drop-shadow-sm leading-relaxed">Your heart works 24/7. Complete heart health profile including Lipid & ECG.</p>
+                                <button class="bg-white text-blue-900 text-sm md:text-base font-bold px-6 py-3 rounded-xl w-fit flex items-center gap-2 hover:bg-blue-50 transition-colors shadow-lg">
+                                    Check Score <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Dots Navigation -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20" id="promo-slider-dots">
+                        <!-- Injected by JS -->
+                    </div>
+                    
+                    <!-- Arrow Navigation (Desktop) -->
+                     <button onclick="movePromoSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 text-white backdrop-blur-md hover:bg-black/40 transition-all hidden md:flex items-center justify-center group/arrow">
+                         <i data-lucide="chevron-left" class="h-6 w-6"></i>
+                    </button>
+                     <button onclick="movePromoSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 text-white backdrop-blur-md hover:bg-black/40 transition-all hidden md:flex items-center justify-center group/arrow">
+                         <i data-lucide="chevron-right" class="h-6 w-6"></i>
+                    </button>
+                 </div>
+            </div>
+        </section>
           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div
               class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
@@ -746,87 +775,100 @@
                 <div
                   class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100"
                 >
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-soft-blue border border-blue-50 rounded-2xl hover:bg-white hover:shadow-lg transition-all group"
                     >
                       <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                        class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         1
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">Bank More</p>
-                        <p class="text-xs text-gray-400">Main Lab</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">Bank More</h4>
+                        <p class="text-xs text-gray-500 mb-2">Main Lab & Processing Center</p>
+                        <span class="inline-block bg-white border border-gray-200 text-[10px] font-bold text-gray-600 px-2 py-0.5 rounded-full">Central Dhanbad</span>
                       </div>
                     </div>
+
+                    <!-- Card 2 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group"
                     >
-                      <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                       <div
+                        class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         2
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">Hirapur</p>
-                        <p class="text-xs text-gray-400">Collection Center</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">Hirapur</h4>
+                        <p class="text-xs text-gray-500 mb-2">Collection Center</p>
+                        <span class="inline-block bg-gray-50 text-[10px] font-bold text-gray-500 px-2 py-0.5 rounded-full">North Zone</span>
                       </div>
                     </div>
+
+                    <!-- Card 3 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group"
                     >
-                      <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                       <div
+                        class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         3
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">
-                          Saraidhela
-                        </p>
-                        <p class="text-xs text-gray-400">Steel Gate</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">Saraidhela</h4>
+                        <p class="text-xs text-gray-500 mb-2">Steel Gate Branch</p>
+                        <span class="inline-block bg-gray-50 text-[10px] font-bold text-gray-500 px-2 py-0.5 rounded-full">Medical Hub</span>
                       </div>
                     </div>
+
+                    <!-- Card 4 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group"
                     >
-                      <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                       <div
+                        class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         4
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">Jharia</p>
-                        <p class="text-xs text-gray-400">Main Road</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">Jharia</h4>
+                        <p class="text-xs text-gray-500 mb-2">Main Road Center</p>
+                        <span class="inline-block bg-gray-50 text-[10px] font-bold text-gray-500 px-2 py-0.5 rounded-full">Old Market</span>
                       </div>
                     </div>
+
+                     <!-- Card 5 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group"
                     >
-                      <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                       <div
+                        class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         5
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">Govindpur</p>
-                        <p class="text-xs text-gray-400">GT Road</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">Govindpur</h4>
+                        <p class="text-xs text-gray-500 mb-2">GT Road Facility</p>
+                         <span class="inline-block bg-gray-50 text-[10px] font-bold text-gray-500 px-2 py-0.5 rounded-full">Highway Access</span>
                       </div>
                     </div>
+
+                     <!-- Card 6 -->
                     <div
-                      class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors"
+                      class="flex items-start gap-4 p-5 bg-white border border-gray-100 rounded-2xl hover:shadow-lg transition-all group"
                     >
-                      <div
-                        class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-primary font-bold text-xs"
+                       <div
+                        class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-500 font-bold text-sm shrink-0 group-hover:bg-primary group-hover:text-white transition-colors"
                       >
                         6
                       </div>
                       <div>
-                        <p class="font-bold text-gray-900 text-sm">
-                          City Center
-                        </p>
-                        <p class="text-xs text-gray-400">Dhanbad</p>
+                        <h4 class="font-bold text-gray-900 mb-0.5">City Center</h4>
+                        <p class="text-xs text-gray-500 mb-2">Luby Circular Rd</p>
+                        <span class="inline-block bg-gray-50 text-[10px] font-bold text-gray-500 px-2 py-0.5 rounded-full">City Heart</span>
                       </div>
                     </div>
                   </div>
@@ -1359,19 +1401,6 @@
                   <input
                     type="text"
                     id="test-search-input"
-                    placeholder="Search tests (e.g. CBC, Lipid)..."
-                    class="w-full pl-11 pr-4 py-2.5 bg-gray-50 hover:bg-white focus:bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-medium text-sm"
-                  />
-                </div>
-
-                <!-- Filters & Sort -->
-                <div class="flex flex-col md:flex-row gap-3 w-full overflow-x-auto pb-1 md:pb-0">
-                  <div class="flex gap-3 min-w-max">
-                    <!-- Category -->
-                    <div class="relative">
-                      <select
-                        id="test-category-select"
-                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
                       >
                         <option value="All">All Categories</option>
                         <option value="Pathology">Pathology</option>

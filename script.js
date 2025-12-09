@@ -728,56 +728,57 @@ function renderPackages(containerId, filterCategory = "All") {
         ((pkg.price - pkg.discountedPrice) / pkg.price) * 100
       );
       return `
-        <div class="min-w-[300px] md:min-w-[350px] bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-primary/40 transition-all duration-300 flex flex-col h-full relative group snap-start">
-            <div class="flex justify-between items-start pt-4 px-4">
-                <div class="flex gap-2">
-                    ${
-                      pkg.isBestSeller
-                        ? `<span class="bg-[#FFF4E5] text-[#B95000] text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide flex items-center gap-1 border border-[#FFD8B2]"><i data-lucide="star" class="h-3 w-3 fill-current"></i> Best Seller</span>`
-                        : `<span class="bg-blue-50 text-blue-700 border border-blue-100 text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">Popular</span>`
-                    }
+        <div class="min-w-[280px] md:min-w-[320px] bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-premium hover:border-gray-200 transition-all duration-300 flex flex-col h-full relative group snap-start">
+            <div class="p-6 flex flex-col h-full">
+                <!-- Badge & Info -->
+                <div class="flex justify-between items-start mb-4">
+                     ${
+                       pkg.isBestSeller
+                         ? `<span class="bg-gradient-to-r from-orange-100 to-orange-50 text-orange-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide flex items-center gap-1"><i data-lucide="sparkles" class="h-3 w-3"></i> Best Seller</span>`
+                         : `<span class="bg-gray-50 text-gray-600 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Popular</span>`
+                     }
+                     <button onclick="openPackageDetails('${
+                       pkg.id
+                     }')" class="text-gray-400 hover:text-primary transition-colors"><i data-lucide="info" class="h-5 w-5"></i></button>
                 </div>
-                <button onclick="openPackageDetails('${
-                  pkg.id
-                }')" class="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-500 transition-colors cursor-pointer border border-transparent hover:border-blue-100">
-                    <i data-lucide="info" class="h-5 w-5"></i>
-                </button>
-            </div>
-            <div class="px-5 pt-3 pb-2 flex-grow">
-                <h3 class="text-lg font-bold text-gray-900 leading-snug mb-2 group-hover:text-primary transition-colors">${
-                  pkg.title
-                }</h3>
-                <p class="text-xs text-gray-500 mb-4 line-clamp-2 min-h-[32px]">${
-                  pkg.description
-                }</p>
-                <div class="bg-[#F8FAFC] rounded-xl p-3 mb-4 border border-gray-100">
-                    <div class="flex justify-between items-center mb-2 border-b border-gray-200 pb-2 border-dashed">
-                        <span class="text-xs font-bold text-gray-600">Includes ${
+
+                <!-- Title & Desc -->
+                <div class="mb-6">
+                    <h3 class="text-xl font-heading font-bold text-gray-900 leading-tight mb-2 group-hover:text-primary transition-colors">${
+                      pkg.title
+                    }</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed">${
+                      pkg.description
+                    }</p>
+                </div>
+
+                <!-- Specs -->
+                <div class="grid grid-cols-2 gap-3 mb-8">
+                    <div class="bg-soft-blue rounded-xl p-3">
+                        <span class="block text-xl font-bold text-gray-900">${
                           pkg.testCount
-                        } Tests</span>
-                        <span class="text-[10px] font-bold text-primary bg-green-50 px-2 py-0.5 rounded-full">NABL Labs</span>
+                        }</span>
+                        <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Tests</span>
                     </div>
-                    <div class="space-y-1.5">
-                        <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-green-500"></i><span>Same Day Reporting</span></div>
-                        <div class="flex items-center gap-2 text-xs text-gray-500"><i data-lucide="check-circle-2" class="h-3.5 w-3.5 text-green-500"></i><span>Free Home Collection</span></div>
+                     <div class="bg-green-50 rounded-xl p-3">
+                        <span class="block text-xl font-bold text-primary">NABL</span>
+                        <span class="text-[10px] uppercase font-bold text-green-700/60 tracking-wider">Certified</span>
                     </div>
                 </div>
-            </div>
-            <div class="px-5 py-4 border-t border-gray-100 bg-white mt-auto">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <div class="flex items-center gap-2 mb-0.5">
-                            <span class="text-xs text-gray-400 line-through decoration-gray-400">₹${
-                              pkg.price
-                            }</span>
-                            <span class="text-[10px] font-bold text-green-600 bg-green-50 px-1.5 rounded">${discount}% OFF</span>
-                        </div>
-                        <span class="text-xl font-bold text-gray-900 block">₹${
-                          pkg.discountedPrice
-                        }</span>
+
+                <!-- Price & CTA -->
+                <div class="mt-auto">
+                    <div class="flex items-end gap-2 mb-4">
+                         <span class="text-2xl font-bold text-gray-900">₹${
+                           pkg.discountedPrice
+                         }</span>
+                         <span class="text-sm text-gray-400 line-through mb-1">₹${
+                           pkg.price
+                         }</span>
+                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded mb-1.5 ml-auto">${discount}% OFF</span>
                     </div>
-                    <button onclick="navigateTo('appointment')" class="bg-primary hover:bg-green-700 text-white text-xs font-bold px-5 py-2.5 rounded-lg transition-all shadow-md shadow-green-200 flex items-center gap-2 group/btn">
-                        ADD <i data-lucide="arrow-right" class="h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform"></i>
+                    <button onclick="navigateTo('appointment')" class="w-full bg-primary hover:bg-green-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group/btn">
+                        Book Package <i data-lucide="arrow-right" class="h-4 w-4 group-hover/btn:translate-x-1 transition-transform"></i>
                     </button>
                 </div>
             </div>
@@ -946,6 +947,10 @@ function renderHealthConcerns() {
   const container = document.getElementById("concerns-container");
   if (!container) return;
 
+  // Responsive Grid Logic: Flex Scroll on Mobile, Grid on Desktop
+  container.className =
+    "flex gap-3 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible md:pb-0 md:justify-items-center";
+
   container.innerHTML = healthConcerns
     .map((concern) => {
       // Simple conversion: CamelCase to kebab-case for Lucide
@@ -956,79 +961,92 @@ function renderHealthConcerns() {
       // Map ids to colors - using hover: classes ensures they are only visible on hover
       const colorMap = {
         fever: {
-          card: "hover:bg-red-50 hover:border-red-200",
+          bg: "bg-red-50",
+          text: "text-red-700",
           icon: "text-red-500",
-          text: "group-hover:text-red-600",
+          border: "hover:border-red-200",
         },
         diabetes: {
-          card: "hover:bg-blue-50 hover:border-blue-200",
+          bg: "bg-blue-50",
+          text: "text-blue-700",
           icon: "text-blue-500",
-          text: "group-hover:text-blue-600",
+          border: "hover:border-blue-200",
         },
         kidney: {
-          card: "hover:bg-indigo-50 hover:border-indigo-200",
+          bg: "bg-indigo-50",
+          text: "text-indigo-700",
           icon: "text-indigo-500",
-          text: "group-hover:text-indigo-600",
+          border: "hover:border-indigo-200",
         },
         liver: {
-          card: "hover:bg-yellow-50 hover:border-yellow-200",
+          bg: "bg-yellow-50",
+          text: "text-yellow-700",
           icon: "text-yellow-600",
-          text: "group-hover:text-yellow-700",
+          border: "hover:border-yellow-200",
         },
         thyroid: {
-          card: "hover:bg-purple-50 hover:border-purple-200",
+          bg: "bg-purple-50",
+          text: "text-purple-700",
           icon: "text-purple-500",
-          text: "group-hover:text-purple-600",
+          border: "hover:border-purple-200",
         },
         heart: {
-          card: "hover:bg-pink-50 hover:border-pink-200",
+          bg: "bg-pink-50",
+          text: "text-pink-700",
           icon: "text-pink-500",
-          text: "group-hover:text-pink-600",
+          border: "hover:border-pink-200",
         },
         vitamin: {
-          card: "hover:bg-orange-50 hover:border-orange-200",
+          bg: "bg-orange-50",
+          text: "text-orange-700",
           icon: "text-orange-500",
-          text: "group-hover:text-orange-600",
+          border: "hover:border-orange-200",
         },
         allergy: {
-          card: "hover:bg-rose-50 hover:border-rose-200",
+          bg: "bg-rose-50",
+          text: "text-rose-700",
           icon: "text-rose-500",
-          text: "group-hover:text-rose-600",
+          border: "hover:border-rose-200",
         },
         infertility: {
-          card: "hover:bg-teal-50 hover:border-teal-200",
+          bg: "bg-teal-50",
+          text: "text-teal-700",
           icon: "text-teal-500",
-          text: "group-hover:text-teal-600",
+          border: "hover:border-teal-200",
         },
         cancer: {
-          card: "hover:bg-gray-100 hover:border-gray-300",
+          bg: "bg-gray-100",
+          text: "text-gray-700",
           icon: "text-gray-600",
-          text: "group-hover:text-gray-800",
+          border: "hover:border-gray-300",
         },
         gut: {
-          card: "hover:bg-emerald-50 hover:border-emerald-200",
+          bg: "bg-emerald-50",
+          text: "text-emerald-700",
           icon: "text-emerald-600",
-          text: "group-hover:text-emerald-700",
+          border: "hover:border-emerald-200",
         },
         lungs: {
-          card: "hover:bg-cyan-50 hover:border-cyan-200",
+          bg: "bg-cyan-50",
+          text: "text-cyan-700",
           icon: "text-cyan-500",
-          text: "group-hover:text-cyan-600",
+          border: "hover:border-cyan-200",
         },
       };
 
       const colors = colorMap[concern.id] || {
-        card: "hover:bg-green-50 hover:border-green-200",
+        bg: "bg-green-50",
+        text: "text-primary",
         icon: "text-primary",
-        text: "group-hover:text-primary",
+        border: "hover:border-green-200",
       };
 
       return `
-        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-[140px] md:min-w-[180px] bg-white border border-gray-100 p-6 rounded-2xl flex flex-col items-center justify-center gap-4 hover:shadow-lg transition-all cursor-pointer group snap-center ${colors.card}">
-            <div class="w-14 h-14 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-white shadow-sm group-hover:scale-110 transition-all ${colors.icon}">
-                <i data-lucide="${icon}" class="h-6 w-6"></i>
+        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-[140px] md:min-w-0 md:w-full bg-white border border-gray-100 px-4 py-4 rounded-2xl flex items-center justify-start md:justify-center gap-3 hover:shadow-lg transition-all cursor-pointer group snap-center ${colors.border} hover:bg-white">
+            <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${colors.bg} group-hover:scale-110">
+                <i data-lucide="${icon}" class="h-5 w-5 ${colors.icon}"></i>
             </div>
-            <span class="font-bold text-gray-700 text-sm transition-colors ${colors.text}">${concern.title}</span>
+            <span class="font-bold text-gray-700 text-sm group-hover:text-gray-900 whitespace-nowrap">${concern.title}</span>
         </div>
         `;
     })
@@ -1120,16 +1138,19 @@ function renderTestimonials() {
   const container = document.getElementById("testimonials-container");
   if (!container) return;
 
-  container.innerHTML = testimonials
+  const visibleTestimonials = testimonials.slice(0, 4);
+
+  container.innerHTML = visibleTestimonials
     .map(
       (t) => `
-        <div class="min-w-[300px] md:min-w-[350px] bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all h-full flex flex-col snap-center">
+        <div class="min-w-[300px] md:min-w-[350px] bg-gray-50 p-8 rounded-3xl border border-gray-100 hover:shadow-lg transition-all h-full flex flex-col snap-center relative group">
             <div class="flex items-center gap-4 mb-6">
                 <img src="${t.image}" alt="${
         t.name
-      }" class="w-14 h-14 rounded-full object-cover border-2 border-white shadow-sm">
+      }" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
                 <div>
-                    <h4 class="font-bold text-gray-900">${t.name}</h4>
+                    <!-- Name shown once here -->
+                    <h4 class="font-bold text-gray-900 text-base">${t.name}</h4>
                     <p class="text-xs text-gray-500 font-medium">${
                       t.location
                     }</p>
@@ -1154,6 +1175,18 @@ function renderTestimonials() {
     `
     )
     .join("");
+
+  // Append View More Card
+  container.innerHTML += `
+        <div onclick="navigateTo('about')" class="min-w-[200px] md:min-w-[250px] bg-white p-8 rounded-3xl border border-dashed border-gray-300 hover:border-primary hover:bg-green-50 transition-all h-full flex flex-col items-center justify-center cursor-pointer group snap-center">
+             <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <i data-lucide="arrow-right" class="h-8 w-8 text-primary"></i>
+             </div>
+             <p class="font-bold text-gray-900 mb-1 group-hover:text-primary">View More Stories</p>
+             <p class="text-xs text-gray-500">Read what our patients say</p>
+        </div>
+    `;
+
   lucide.createIcons();
 }
 
@@ -1323,4 +1356,140 @@ document.addEventListener("DOMContentLoaded", () => {
   // Default View
   navigateTo("home");
   updateAuthUI();
+
+  // Initialize Promo Slider
+  initPromoSlider();
 });
+
+/* --- LOCATIONS Logic --- */
+function renderLocations(filter = "") {
+  const container = document.getElementById("locations-grid"); // Assuming ID based on context
+  if (!container) return;
+
+  const term = filter.toLowerCase();
+  const filtered = locations.filter(
+    (l) =>
+      l.area.toLowerCase().includes(term) || l.type.toLowerCase().includes(term)
+  );
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="col-span-full text-center text-gray-500">No locations found.</div>`;
+    return;
+  }
+
+  container.innerHTML = filtered
+    .map(
+      (l) => `
+        <div class="bg-white p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-all group">
+            <div class="flex justify-between items-start mb-4">
+                <div class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 font-bold group-hover:bg-primary group-hover:text-white transition-colors">
+                    ${l.id}
+                </div>
+                <span class="text-[10px] font-bold uppercase tracking-wider bg-gray-50 py-1 px-2 rounded text-gray-500">${l.type}</span>
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg mb-1">${l.area}</h4>
+            <p class="text-sm text-gray-500 mb-4">Monday - Saturday, 7AM - 8PM</p>
+            <button class="w-full py-2 rounded-lg border border-gray-200 text-sm font-bold text-gray-600 hover:border-primary hover:text-primary transition-colors">View Details</button>
+        </div>
+    `
+    )
+    .join("");
+}
+
+/* --- PROMO SLIDER --- */
+let currentPromoSlide = 0;
+let promoAutoSlideInterval;
+
+function initPromoSlider() {
+  const track = document.getElementById("promo-slider-track");
+  if (!track) return;
+
+  const slides = track.children;
+  const dotsContainer = document.getElementById("promo-slider-dots");
+
+  // Create dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = "";
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement("button");
+      dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${
+        i === 0 ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+      }`;
+      dot.onclick = () => goToPromoSlide(i);
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Touch Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      clearInterval(promoAutoSlideInterval);
+    },
+    { passive: true }
+  );
+
+  track.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) movePromoSlide(1);
+      if (touchEndX > touchStartX + 50) movePromoSlide(-1);
+      startPromoAutoSlide();
+    },
+    { passive: true }
+  );
+
+  startPromoAutoSlide();
+}
+
+function movePromoSlide(direction) {
+  const track = document.getElementById("promo-slider-track");
+  if (!track) return;
+  const totalSlides = track.children.length;
+  let next = currentPromoSlide + direction;
+
+  if (next < 0) next = totalSlides - 1;
+  if (next >= totalSlides) next = 0;
+
+  goToPromoSlide(next);
+}
+
+function goToPromoSlide(index) {
+  const track = document.getElementById("promo-slider-track");
+  const dots = document.getElementById("promo-slider-dots")?.children;
+
+  if (!track) return;
+
+  currentPromoSlide = index;
+  track.style.transform = `translateX(-${index * 100}%)`;
+
+  // Update dots
+  if (dots) {
+    for (let i = 0; i < dots.length; i++) {
+      if (dots[i]) {
+        dots[i].className = `w-2 h-2 rounded-full transition-all duration-300 ${
+          i === index ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+        }`;
+      }
+    }
+  }
+
+  resetPromoAutoSlide();
+}
+
+function startPromoAutoSlide() {
+  clearInterval(promoAutoSlideInterval);
+  promoAutoSlideInterval = setInterval(() => {
+    movePromoSlide(1);
+  }, 5000);
+}
+
+function resetPromoAutoSlide() {
+  clearInterval(promoAutoSlideInterval);
+  startPromoAutoSlide();
+}
