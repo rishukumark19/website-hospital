@@ -261,7 +261,7 @@
         </div>
 
         <!-- Bottom Row: Menu Items -->
-        <div class="flex justify-center items-center h-12">
+        <div class="flex justify-center items-center h-12 relative">
           <div class="flex items-center gap-1">
             <button
               onclick="navigateTo('home')"
@@ -277,20 +277,141 @@
             >
               About
             </button>
-            <button
-              onclick="navigateTo('tests')"
-              data-view="tests"
-              class="nav-link px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Test Menu
-            </button>
-            <button
-              onclick="navigateTo('home-collection')"
-              data-view="home-collection"
-              class="nav-link px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Home Visit
-            </button>
+            
+            <!-- Services Mega Menu Trigger -->
+            <div class="relative group/mega">
+                 <button
+                  class="nav-link px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50 flex items-center gap-1 group-hover/mega:text-primary group-hover/mega:bg-green-50"
+                >
+                  Our Services & Tests
+                  <i data-lucide="chevron-down" class="h-3.5 w-3.5 transition-transform group-hover/mega:-rotate-180"></i>
+                </button>
+                
+                <!-- Mega Menu Dropdown -->
+                <div class="hidden group-hover/mega:block absolute top-[90%] left-1/2 -translate-x-1/2 w-[1000px] bg-white rounded-2xl shadow-xl border border-gray-100 p-8 z-[100] animate-in fade-in zoom-in-95 slide-in-from-top-2 overflow-y-auto max-h-[80vh]">
+                     
+                     <!-- Pathology Section -->
+                     <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-4">
+                             <div class="p-2 bg-blue-50 text-blue-600 rounded-lg">
+                                 <i data-lucide="microscope" class="h-5 w-5"></i>
+                             </div>
+                             <h4 class="font-bold text-gray-900 text-lg">Pathology & Lab Tests</h4>
+                             <div class="h-px bg-gray-100 flex-grow ml-4"></div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4">
+                             <!-- Card 1 -->
+                             <div onclick="navigateTestCategory('Pathology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                     <div class="p-2 bg-blue-100 text-blue-600 rounded-lg group-hover/card:bg-blue-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="microscope" class="h-4 w-4"></i>
+                                     </div>
+                                     <h5 class="font-bold text-gray-800 text-sm">Lab Medicine</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Blood, urine, and tissue analysis.</p>
+                             </div>
+                             <!-- Card 2 -->
+                             <div onclick="navigateTestCategory('Pathology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                     <div class="p-2 bg-blue-100 text-blue-600 rounded-lg group-hover/card:bg-blue-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="flask-conical" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">Biochemistry</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Metabolic health & chemical processes.</p>
+                             </div>
+                             <!-- Card 3 -->
+                              <div onclick="navigateTestCategory('Pathology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                     <div class="p-2 bg-blue-100 text-blue-600 rounded-lg group-hover/card:bg-blue-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="bug" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">Microbiology</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Infectious agents & bacteria.</p>
+                             </div>
+                             <!-- Card 4 -->
+                             <div onclick="navigateTestCategory('Pathology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                      <div class="p-2 bg-blue-100 text-blue-600 rounded-lg group-hover/card:bg-blue-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="droplet" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">Hematology</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">CBC & blood disorders.</p>
+                             </div>
+                        </div>
+                     </div>
+
+                     <!-- Radiology Section -->
+                     <div class="mb-4">
+                        <div class="flex items-center gap-2 mb-4">
+                             <div class="p-2 bg-orange-50 text-orange-600 rounded-lg">
+                                 <i data-lucide="scan" class="h-5 w-5"></i>
+                             </div>
+                             <h4 class="font-bold text-gray-900 text-lg">Imaging & Radiology</h4>
+                             <div class="h-px bg-gray-100 flex-grow ml-4"></div>
+                        </div>
+                        <div class="grid grid-cols-4 gap-4">
+                             <!-- Card 1 -->
+                             <div onclick="navigateTestCategory('Radiology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                     <div class="p-2 bg-orange-100 text-orange-600 rounded-lg group-hover/card:bg-orange-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="brain" class="h-4 w-4"></i>
+                                     </div>
+                                     <h5 class="font-bold text-gray-800 text-sm">MRI Scans</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">High-def imaging for soft tissues.</p>
+                             </div>
+                             <!-- Card 2 -->
+                             <div onclick="navigateTestCategory('Radiology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                      <div class="p-2 bg-orange-100 text-orange-600 rounded-lg group-hover/card:bg-orange-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="scan" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">CT Scans</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Cross-sectional body imaging.</p>
+                             </div>
+                             <!-- Card 3 -->
+                              <div onclick="navigateTestCategory('Radiology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                     <div class="p-2 bg-orange-100 text-orange-600 rounded-lg group-hover/card:bg-orange-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="bone" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">Digital X-Ray</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Quick bone structure imaging.</p>
+                             </div>
+                             <!-- Card 4 -->
+                             <div onclick="navigateTestCategory('Radiology')" class="group/card cursor-pointer p-4 rounded-xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50/50 transition-all">
+                                 <div class="flex items-center gap-3 mb-2">
+                                      <div class="p-2 bg-orange-100 text-orange-600 rounded-lg group-hover/card:bg-orange-600 group-hover/card:text-white transition-colors">
+                                         <i data-lucide="activity" class="h-4 w-4"></i>
+                                     </div>
+                                      <h5 class="font-bold text-gray-800 text-sm">Ultrasound</h5>
+                                 </div>
+                                 <p class="text-xs text-gray-500 line-clamp-2">Safe imaging for abdomen & fetus.</p>
+                             </div>
+                        </div>
+                     </div>
+                     
+                     <!-- Home Visit Banner in Nav -->
+                     <div onclick="navigateTo('home-collection')" class="mt-2 bg-green-50 rounded-xl p-4 flex items-center justify-between cursor-pointer group hover:bg-green-100 transition-colors border border-green-100">
+                         <div class="flex items-center gap-4">
+                             <div class="h-10 w-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
+                                 <i data-lucide="home" class="h-5 w-5"></i>
+                             </div>
+                             <div>
+                                 <h4 class="font-bold text-primary">Book a Home Collection</h4>
+                                 <p class="text-xs text-gray-600">Get tested comfortably at home. Safe & Hygienic.</p>
+                             </div>
+                         </div>
+                         <i data-lucide="chevron-right" class="h-5 w-5 text-green-600 group-hover:translate-x-1 transition-transform"></i>
+                     </div>
+                </div>
+            </div>
+
             <button
               onclick="navigateTo('contact')"
               data-view="contact"
@@ -394,70 +515,99 @@
             <i data-lucide="x" class="h-5 w-5"></i>
           </button>
         </div>
-        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-1">
+        <div class="flex-1 overflow-y-auto px-4 py-4 space-y-2 no-scrollbar">
+          
+          <!-- Login (Prominent) -->
           <button
             onclick="navigateTo('login'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors mb-2 border border-gray-100 shadow-sm"
+            class="w-full text-left px-4 py-3.5 rounded-2xl flex items-center gap-4 bg-gray-900 text-white shadow-lg shadow-gray-200 active:scale-98 transition-all mb-4"
           >
             <div
-              class="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white"
+              class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white"
             >
-              <i data-lucide="log-in" class="h-4 w-4"></i>
+              <i data-lucide="log-in" class="h-5 w-5"></i>
             </div>
-            <span class="text-sm font-bold">Login / Account</span>
+            <div>
+                 <span class="block text-sm font-bold">Login / Sign Up</span>
+                 <span class="block text-[10px] text-gray-400 font-medium">Access reports & history</span>
+            </div>
+            <i data-lucide="chevron-right" class="h-5 w-5 ml-auto text-gray-500"></i>
           </button>
 
-          <button
-            onclick="navigateTo('home'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600"
-            >
-              <i data-lucide="home" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">Home</span>
-          </button>
+          <!-- Navigation Links -->
+          <div class="space-y-1">
+               <button onclick="navigateTo('home'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-gray-700 hover:bg-gray-50 font-semibold transition-colors">
+                 <i data-lucide="home" class="h-5 w-5 text-gray-400"></i>
+                 Home
+               </button>
+               <button onclick="navigateTo('about'); toggleMobileMenu()" class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-gray-700 hover:bg-gray-50 font-semibold transition-colors">
+                 <i data-lucide="info" class="h-5 w-5 text-gray-400"></i>
+                 About Us
+               </button>
+          </div>
 
-          <button
-            onclick="navigateTo('about'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-purple-50 flex items-center justify-center text-purple-600"
-            >
-              <i data-lucide="info" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">About Us</span>
-          </button>
+          <!-- Services Accordion Style Header -->
+          <div class="pt-4 pb-2 px-4">
+              <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">Our Services</span>
+          </div>
 
-          <button
-            onclick="navigateTo('contact'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-orange-600"
-            >
-              <i data-lucide="map-pin" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">Locations & Contact</span>
-          </button>
+          <!-- Pathology Expandable -->
+          <details class="group/acc">
+              <summary class="list-none w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-gray-700 hover:bg-gray-50 font-semibold transition-colors cursor-pointer select-none">
+                  <div class="p-1.5 bg-blue-50 text-blue-600 rounded-lg"><i data-lucide="microscope" class="h-4 w-4"></i></div>
+                  Pathology
+                  <i data-lucide="chevron-down" class="h-4 w-4 ml-auto text-gray-400 transition-transform group-open/acc:-rotate-180"></i>
+              </summary>
+              <div class="pl-14 pr-4 pb-2 space-y-2">
+                   <button onclick="navigateTestCategory('Pathology'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">All Pathology Tests</button>
+                   <button onclick="navigateTestCategory('Biochemistry'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">Biochemistry</button>
+                   <button onclick="navigateTestCategory('Microbiology'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">Microbiology</button>
+                   <button onclick="navigateTestCategory('Hematology'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">Hematology</button>
+              </div>
+          </details>
+
+          <!-- Radiology Expandable -->
+          <details class="group/acc">
+              <summary class="list-none w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-gray-700 hover:bg-gray-50 font-semibold transition-colors cursor-pointer select-none">
+                  <div class="p-1.5 bg-orange-50 text-orange-600 rounded-lg"><i data-lucide="scan" class="h-4 w-4"></i></div>
+                  Radiology
+                  <i data-lucide="chevron-down" class="h-4 w-4 ml-auto text-gray-400 transition-transform group-open/acc:-rotate-180"></i>
+              </summary>
+               <div class="pl-14 pr-4 pb-2 space-y-2">
+                   <button onclick="navigateTestCategory('Radiology'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">All Radiology Services</button>
+                   <button onclick="navigateTestCategory('MRI'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">MRI & CT Scan</button>
+                   <button onclick="navigateTestCategory('X-Ray'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">X-Ray & Ultrasound</button>
+              </div>
+          </details>
+
+           <!-- Wellness Expandable -->
+          <details class="group/acc">
+              <summary class="list-none w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 text-gray-700 hover:bg-gray-50 font-semibold transition-colors cursor-pointer select-none">
+                  <div class="p-1.5 bg-green-50 text-green-600 rounded-lg"><i data-lucide="shield-check" class="h-4 w-4"></i></div>
+                  Wellness Checks
+                  <i data-lucide="chevron-down" class="h-4 w-4 ml-auto text-gray-400 transition-transform group-open/acc:-rotate-180"></i>
+              </summary>
+               <div class="pl-14 pr-4 pb-2 space-y-2">
+                   <button onclick="navigateTo('wellness'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">View All Packages</button>
+                   <button onclick="navigateTo('wellness'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">Full Body Checkup</button>
+                   <button onclick="navigateTo('wellness'); toggleMobileMenu()" class="block w-full text-left text-sm text-gray-500 py-1.5 hover:text-primary">Senior Citizen Care</button>
+              </div>
+          </details>
           
-           <div class="my-2 border-t border-gray-100"></div>
-
-          <button
-            onclick="navigateTo('tests'); toggleMobileMenu()"
-            class="w-full text-left px-4 py-3 rounded-xl flex items-center gap-4 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
-          >
-            <div
-              class="w-8 h-8 rounded-full bg-green-50 flex items-center justify-center text-green-600"
-            >
-              <i data-lucide="test-tube" class="h-4 w-4"></i>
-            </div>
-            <span class="text-sm">Test Menu</span>
-          </button>
+           <!-- Home Visit (Highlighted) -->
+           <div class="mt-4 px-4">
+                <button onclick="navigateTo('home-collection'); toggleMobileMenu()" class="w-full bg-primary/5 border border-primary/10 p-4 rounded-xl flex items-center gap-4">
+                     <div class="h-10 w-10 bg-white rounded-full flex items-center justify-center text-primary shadow-sm">
+                         <i data-lucide="bike" class="h-5 w-5"></i>
+                     </div>
+                     <div class="text-left">
+                         <span class="block text-sm font-bold text-gray-900">Book Home Visit</span>
+                         <span class="block text-[10px] text-gray-500">Sample collection at doorstep</span>
+                     </div>
+                </button>
+           </div>
         </div>
-        <div class="p-5 mt-auto border-t border-gray-100 bg-gray-50">
+        <div class="px-5 py-4 border-t border-gray-100 bg-gray-50/50">
             <button
                onclick="toggleMobileMenu()"
                class="w-full flex items-center justify-center gap-2 bg-white border border-gray-200 py-3 rounded-xl text-sm font-bold text-gray-700 shadow-sm"
@@ -802,7 +952,9 @@
                 <div
                   class="bg-white p-8 rounded-3xl shadow-xl border border-gray-100"
                 >
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div 
+                      class="flex flex-col md:grid md:grid-cols-2 gap-6 h-[400px] md:h-auto overflow-y-auto md:overflow-visible pr-2 md:pr-0 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent snap-y snap-mandatory md:snap-none"
+                  >
                     <!-- Card 1 -->
                     <div
                       class="flex items-start gap-4 p-5 bg-soft-blue border border-blue-50 rounded-2xl hover:bg-white hover:shadow-lg transition-all group"
@@ -910,379 +1062,101 @@
           </div>
         </section>
 
-        <!-- SERVICES SECTION (Integrated) -->
-        <section class="bg-soft-blue py-12">
+                <!-- SERVICES HIGHLIGHTS SECTION -->
+        <section class="bg-gray-50/50 py-16 md:py-24">
           <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Header -->
-            <div class="mb-12 text-center">
-              <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
-                Our Services & Tests
-              </h2>
-              <p class="text-gray-600 max-w-2xl mx-auto text-lg">
-                Comprehensive diagnostic solutions at Bank More, Dhanbad.
-              </p>
-            </div>
-
-            <!-- 5 Main Categories Section -->
-            <div
-              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-20"
-            >
-              <!-- Pathology -->
-              <div
-                onclick="navigateTo('tests')"
-                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
-              >
-                <div
-                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform"
-                >
-                  <i data-lucide="microscope" class="h-7 w-7"></i>
-                </div>
-                <h3 class="font-bold text-gray-800 mb-1">Pathology</h3>
-                <p class="text-xs text-gray-500">
-                  Advanced blood & tissue analysis
-                </p>
-              </div>
-              <!-- Radiology -->
-              <div
-                onclick="navigateTo('tests')"
-                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
-              >
-                <div
-                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-orange-50 text-orange-600 group-hover:scale-110 transition-transform"
-                >
-                  <i data-lucide="zap" class="h-7 w-7"></i>
-                </div>
-                <h3 class="font-bold text-gray-800 mb-1">Radiology</h3>
-                <p class="text-xs text-gray-500">MRI, CT, X-Ray & Ultrasound</p>
-              </div>
-              <!-- Wellness -->
-              <div
-                onclick="navigateTo('wellness')"
-                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
-              >
-                <div
-                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-green-50 text-green-600 group-hover:scale-110 transition-transform"
-                >
-                  <i data-lucide="shield-check" class="h-7 w-7"></i>
-                </div>
-                <h3 class="font-bold text-gray-800 mb-1">Wellness</h3>
-                <p class="text-xs text-gray-500">Full body health packages</p>
-              </div>
-              <!-- Home Visit -->
-              <div
-                onclick="navigateTo('home-collection')"
-                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
-              >
-                <div
-                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-purple-50 text-purple-600 group-hover:scale-110 transition-transform"
-                >
-                  <i data-lucide="home" class="h-7 w-7"></i>
-                </div>
-                <h3 class="font-bold text-gray-800 mb-1">Home Visit</h3>
-                <p class="text-xs text-gray-500">
-                  Sample collection at your door
-                </p>
-              </div>
-              <!-- Reports -->
-              <div
-                onclick="navigateTo('reports')"
-                class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all text-center group cursor-pointer"
-              >
-                <div
-                  class="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center bg-teal-50 text-teal-600 group-hover:scale-110 transition-transform"
-                >
-                  <i data-lucide="download" class="h-7 w-7"></i>
-                </div>
-                <h3 class="font-bold text-gray-800 mb-1">Reports</h3>
-                <p class="text-xs text-gray-500">Download digital reports</p>
-              </div>
-            </div>
-
-            <!-- Detailed Service Cards -->
-            <div class="space-y-16 mb-20">
-              <!-- Pathology -->
+            <div class="mb-12 text-center md:text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div>
-                <div class="flex items-center gap-3 mb-8">
-                  <div class="p-2 bg-blue-100 rounded-lg text-primary">
-                    <i data-lucide="microscope" class="h-6 w-6"></i>
-                  </div>
-                  <h3 class="text-2xl font-bold text-primary">
-                    Pathology & Lab Tests
-                  </h3>
-                  <div class="h-px bg-gray-200 flex-grow ml-4"></div>
-                </div>
-                <div
-                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                >
-                  <!-- Card 1 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                        <i data-lucide="microscope" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Pathology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Pathology & Laboratory Medicine
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Comprehensive diagnostic testing including blood, urine,
-                      and tissue analysis.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹500</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 2 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                        <i data-lucide="flask-conical" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Pathology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Biochemistry
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Analysis of chemical processes for liver, kidney, and
-                      metabolic health.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹800</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 3 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                        <i data-lucide="bug" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Pathology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Microbiology
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Identification of infectious agents like bacteria and
-                      viruses.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹1000</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 4 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
-                        <i data-lucide="droplet" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Pathology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Hematology
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Complete blood count and diagnosis of blood disorders.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹600</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                  <h2 class="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4 tracking-tight">
+                    Comprehensive<br><span class="text-primary">Diagnostic Services</span>
+                  </h2>
+                  <p class="text-gray-600 text-lg max-w-xl leading-relaxed">
+                    We offer a wide range of advanced pathology and radiology tests to cater to all your healthcare needs.
+                  </p>
               </div>
-
-              <!-- Imaging -->
-              <div>
-                <div class="flex items-center gap-3 mb-8">
-                  <div class="p-2 bg-orange-100 rounded-lg text-orange-600">
-                    <i data-lucide="zap" class="h-6 w-6"></i>
-                  </div>
-                  <h3 class="text-2xl font-bold text-primary">
-                    Imaging & Radiology
-                  </h3>
-                  <div class="h-px bg-gray-200 flex-grow ml-4"></div>
-                </div>
-                <div
-                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-                >
-                  <!-- Card 1 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
-                        <i data-lucide="brain" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Radiology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      High-Definition MRI
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Detailed imaging of soft tissues, brain, and spine.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹7500</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 2 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
-                        <i data-lucide="scan" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Radiology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      CT Scan
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Fast, detailed cross-sectional images for trauma and
-                      diagnostics.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹5000</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 3 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
-                        <i data-lucide="bone" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Radiology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Digital X-Ray
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Quick imaging for bone fractures and chest infections.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹800</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                  <!-- Card 4 -->
-                  <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition-all"
-                  >
-                    <div class="flex justify-between items-start mb-4">
-                      <div class="p-3 bg-orange-50 text-orange-600 rounded-xl">
-                        <i data-lucide="activity" class="h-6 w-6"></i>
-                      </div>
-                      <span
-                        class="bg-gray-100 text-gray-600 text-xs font-bold px-2 py-1 rounded"
-                        >Radiology</span
-                      >
-                    </div>
-                    <h4 class="font-bold text-lg text-gray-900 mb-2">
-                      Ultrasound
-                    </h4>
-                    <p class="text-sm text-gray-500 mb-4">
-                      Safe imaging for pregnancy, abdomen, and pelvis.
-                    </p>
-                    <div class="flex items-center justify-between mt-auto">
-                      <span class="font-bold text-primary">₹1800</span>
-                      <button
-                        onclick="navigateTo('appointment')"
-                        class="text-sm font-bold text-secondary hover:underline"
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <button onclick="navigateTo('tests')" class="hidden md:inline-flex items-center gap-2 text-primary font-bold hover:text-green-700 transition-colors group">
+                  View Full Test Menu <i data-lucide="arrow-right" class="h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
+              </button>
             </div>
 
-            <!-- View All CTA -->
-            <div class="text-center">
-              <button
-                onclick="navigateTo('tests')"
-                class="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-green-700 transition-all"
-              >
-                View Full Test Directory
-                <i data-lucide="arrow-right" class="h-5 w-5"></i>
+            <!-- Bento Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+               <!-- Card 1: Pathology (Large) -->
+               <div class="md:col-span-2 bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden" onclick="navigateTo('tests')">
+                   <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none"></div>
+                   <div class="relative z-10">
+                       <div class="flex items-start justify-between mb-8">
+                           <div class="p-3 bg-blue-50 text-blue-600 rounded-2xl group-hover:scale-110 transition-transform">
+                               <i data-lucide="microscope" class="h-8 w-8"></i>
+                           </div>
+                           <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Most Popular</span>
+                       </div>
+                       <h3 class="text-2xl font-bold text-gray-900 mb-2">Advanced Pathology</h3>
+                       <p class="text-gray-500 mb-6 max-w-md">Our NABL accredited labs use state-of-the-art analyzers for accurate blood, urine, and tissue testing.</p>
+                       
+                       <div class="flex flex-wrap gap-2">
+                           <span class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600 bg-white">Hematology</span>
+                           <span class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600 bg-white">Biochemistry</span>
+                           <span class="px-3 py-1.5 border border-gray-200 rounded-lg text-sm font-semibold text-gray-600 bg-white">Hormones</span>
+                       </div>
+                   </div>
+               </div>
+
+               <!-- Card 2: Radiology -->
+               <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden" onclick="navigateTestCategory('Radiology')">
+                    <div class="absolute bottom-0 right-0 w-40 h-40 bg-orange-50/50 rounded-full blur-2xl -mr-10 -mb-10 pointer-events-none"></div>
+                    <div class="relative z-10">
+                         <div class="p-3 bg-orange-50 text-orange-600 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform">
+                               <i data-lucide="scan" class="h-8 w-8"></i>
+                           </div>
+                           <h3 class="text-xl font-bold text-gray-900 mb-2">Digital Radiology</h3>
+                           <p class="text-gray-500 text-sm mb-6">High-resolution imaging including MRI, CT Scans, and X-Rays for precise diagnosis.</p>
+                           <span class="text-primary font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">Explore <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+               </div>
+               
+               <!-- Card 3: Wellness (Tall) -->
+               <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl transition-all group cursor-pointer relative overflow-hidden" onclick="navigateTo('wellness')">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-50/50 rounded-full blur-2xl -mr-8 -mt-8 pointer-events-none"></div>
+                    <div class="relative z-10">
+                         <div class="p-3 bg-green-50 text-green-600 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform">
+                               <i data-lucide="heart-pulse" class="h-8 w-8"></i>
+                           </div>
+                           <h3 class="text-xl font-bold text-gray-900 mb-2">Preventive Health</h3>
+                           <p class="text-gray-500 text-sm mb-6">Comprehensive full-body checkup packages designed for every age group.</p>
+                           <span class="text-primary font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">View Packages <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+                    </div>
+               </div>
+
+                <!-- Card 4: Home Collection (Span 2) -->
+               <div class="md:col-span-2 bg-gradient-to-r from-primary to-green-700 rounded-3xl p-8 shadow-lg shadow-green-500/20 relative overflow-hidden group cursor-pointer" onclick="navigateTo('home-collection')">
+                   <!-- Grid Pattern Overlay -->
+                   <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+                   <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                       <div class="text-white">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Free Home Visit</span>
+                            </div>
+                           <h3 class="text-2xl font-bold mb-2">Book a Home Collection</h3>
+                           <p class="text-green-50 max-w-md">Too busy to visit the lab? Our expert phlebotomists will collect samples from the comfort of your home. Safe, hygienic, and on time.</p>
+                       </div>
+                       <div class="bg-white text-primary px-6 py-3 rounded-xl font-bold shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center gap-2 shrink-0">
+                           <i data-lucide="calendar-check" class="h-5 w-5"></i>
+                           Book Now
+                       </div>
+                   </div>
+               </div>
+            </div>
+
+             <div class="text-center md:hidden">
+              <button onclick="navigateTo('tests')" class="inline-flex items-center gap-2 text-primary font-bold hover:text-green-700 transition-colors group">
+                  View Full Test Menu <i data-lucide="arrow-right" class="h-5 w-5 group-hover:translate-x-1 transition-transform"></i>
               </button>
             </div>
           </div>
         </section>
+        
         <!-- Stats -->
         <div class="border-y border-gray-100 bg-white">
           <div
@@ -1423,12 +1297,28 @@
                 <div class="relative w-full lg:w-[320px] shrink-0">
                   <i
                     data-lucide="search"
-                    class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400"
+                    class="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
                   ></i>
                   <input
                     type="text"
                     id="test-search-input"
-                      >
+                    placeholder="Search tests..."
+                    class="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-primary focus:bg-white transition-all shadow-sm"
+                  />
+                </div>
+
+                <!-- Filters Container -->
+                <div class="flex flex-col md:flex-row gap-3 w-full overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                  
+                  <!-- Category Dropdown -->
+                  <div class="relative min-w-[160px] md:flex-1">
+                    <div class="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
+                      <i data-lucide="layout-grid" class="h-4 w-4"></i>
+                    </div>
+                    <select
+                      id="test-category-select"
+                      class="w-full appearance-none pl-9 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
+                    >
                         <option value="All">All Categories</option>
                         <option value="Pathology">Pathology</option>
                         <option value="Radiology">Radiology</option>
@@ -1439,70 +1329,97 @@
                         <option value="Liver">Liver</option>
                         <option value="Vitamins">Vitamins</option>
                         <option value="Infection">Infection</option>
-                      </select>
-                      <i
-                        data-lucide="chevron-down"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
-                      ></i>
-                    </div>
-
-                    <!-- Report Time -->
-                    <div class="relative">
-                      <select
-                        id="test-report-time-select"
-                        class="appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
-                      >
-                        <option value="All">Any Report Time</option>
-                        <option value="4 Hours">Within 4 Hours</option>
-                        <option value="6 Hours">Within 6 Hours</option>
-                        <option value="24 Hours">Within 24 Hours</option>
-                      </select>
-                      <i
-                        data-lucide="clock"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
-                      ></i>
-                    </div>
-
-                    <!-- Fasting -->
-                    <label
-                      class="flex items-center gap-2 cursor-pointer select-none bg-white px-4 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors whitespace-nowrap shadow-sm"
-                    >
-                      <input
-                        type="checkbox"
-                        id="test-fasting-check"
-                        class="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-offset-0"
-                      />
-                      <span class="text-sm font-semibold text-gray-700"
-                        >Fasting Only</span
-                      >
-                    </label>
-                  </div>
-
-                  <!-- Spacer -->
-                  <div class="hidden md:block flex-grow"></div>
-
-                  <!-- Sort (Aligned Right on Desktop) -->
-                  <div class="relative min-w-[180px]">
-                    <select
-                      id="test-sort-select"
-                      class="w-full appearance-none pl-4 pr-10 py-2.5 bg-gray-50 border border-transparent rounded-xl text-sm font-bold text-gray-900 focus:outline-none hover:bg-gray-100 cursor-pointer text-right transition-colors"
-                    >
-                      <option value="popular">Sort: Popular</option>
-                      <option value="price_low">Price: Low to High</option>
-                      <option value="price_high">Price: High to Low</option>
-                      <option value="time_fast">Report Time: Fastest</option>
                     </select>
                     <i
-                      data-lucide="arrow-up-down"
-                      class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none"
+                      data-lucide="chevron-down"
+                      class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
                     ></i>
                   </div>
+
+                  <div class="flex gap-3 overflow-x-auto md:overflow-visible pb-1 md:pb-0">
+                      <!-- Report Time -->
+                      <div class="relative min-w-[150px]">
+                        <select
+                          id="test-report-time-select"
+                          class="w-full appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
+                        >
+                          <option value="All">Any Time</option>
+                          <option value="4 Hours">&lt; 4 Hours</option>
+                          <option value="6 Hours">&lt; 6 Hours</option>
+                          <option value="24 Hours">&lt; 24 Hours</option>
+                        </select>
+                        <i
+                          data-lucide="clock"
+                          class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
+                        ></i>
+                      </div>
+
+                      <!-- Sort -->
+                      <div class="relative min-w-[160px]">
+                        <select
+                          id="test-sort-select"
+                          class="w-full appearance-none pl-4 pr-10 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-semibold text-gray-700 focus:outline-none focus:border-primary hover:bg-gray-50 cursor-pointer shadow-sm transition-all"
+                        >
+                          <option value="popular">Popularity</option>
+                          <option value="price_low">Price: Low to High</option>
+                          <option value="price_high">Price: High to Low</option>
+                          <option value="time_fast">Time: Fastest</option>
+                        </select>
+                        <i
+                          data-lucide="arrow-up-down"
+                          class="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400 pointer-events-none"
+                        ></i>
+                      </div>
+
+                       <!-- Fasting -->
+                      <label
+                        class="flex items-center gap-2 cursor-pointer select-none bg-white px-4 py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition-colors whitespace-nowrap shadow-sm"
+                      >
+                        <input
+                          type="checkbox"
+                          id="test-fasting-check"
+                          class="w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary focus:ring-offset-0"
+                        />
+                        <span class="text-sm font-semibold text-gray-700"
+                          >Fasting</span
+                        >
+                      </label>
+                  </div>
+                </div>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Main Grid Area -->
+          <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+            <div
+              id="test-directory-grid"
+              class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+            >
+              <!-- Test Cards Rendered Here -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="test-empty-state" class="hidden text-center py-20">
+              <div class="mb-4 text-gray-200">
+                <i data-lucide="search-x" class="h-24 w-24 mx-auto"></i>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">
+                No Tests Found
+              </h3>
+              <p class="text-gray-500 max-w-md mx-auto mb-6">
+                We couldn't find any tests matching your criteria. Try adjusting
+                your filters or search term.
+              </p>
+              <button
+                onclick="resetTestFilters()"
+                class="px-6 py-2.5 bg-primary text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -295,6 +295,29 @@ const testDirectory = [
     sampleType: "Blood",
     description: "Screening for Typhoid fever.",
   },
+  {
+    id: "p_winter",
+    code: "PKG-WIN",
+    name: "Winter Immunity Package",
+    category: "Package",
+    price: 999,
+    tat: "24 Hours",
+    isFastingRequired: false,
+    sampleType: "Blood",
+    description: "Special seasonal package to check immunity markers.",
+  },
+  {
+    id: "p_cardiac",
+    code: "PKG-CARD",
+    name: "Advanced Heart Care Package",
+    category: "Package",
+    price: 2500,
+    tat: "24 Hours",
+    isFastingRequired: true,
+    sampleType: "Blood",
+    description:
+      "Detailed cardiac evaluation including Lipid Profile & risk markers.",
+  },
 ];
 
 const popularPackages = [
@@ -976,14 +999,42 @@ function renderHealthConcerns() {
   container.className =
     "flex gap-3 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible md:pb-0 md:justify-items-center";
 
+  // Responsive Grid Logic:
+  // Mobile: 2 rows (Flex column wrapping or explicitly grouped) -> sliding horizontally
+  // Desktop: Grid
+
+  // We will check window width or just use CSS classes differently.
+  // Actually, to get a "2 row slider", grouping items in divs of 2 is the most robust way for a flex-row container.
+
+  const isDesktop = window.innerWidth >= 768; // Simple check, though render-time check isn't responsive on resize without listener.
+  // Better approach: Always render grouped structure, but unwrap/change layout on desktop via CSS?
+  // CSS Grid can do 'grid-rows-2' with 'grid-auto-flow: column' but scroll snap is tricky.
+  // Let's stick to the grouping approach as it guarantees the 2-row layout the user wants on mobile.
+
+  container.className =
+    "flex gap-4 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth md:grid md:grid-cols-3 lg:grid-cols-4 md:overflow-visible md:pb-0 md:justify-items-center";
+
+  // Chunking for mobile structure (Vertical pairs in a horizontal list)
+  // For desktop, we want a normal grid. This structure might break desktop grid if we aren't careful.
+  // However, the user specifically asked for "make it 2 row" (implied mobile or general).
+  // "keep the sliding animation same" implies the slider behavior.
+
+  // Let's create a hybrid:
+  // If we just use grid-rows-2 grid-flow-col, we get 2 rows.
+  if (window.innerWidth < 768) {
+    container.className =
+      "grid grid-rows-2 grid-flow-col gap-4 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth auto-cols-[85%] sm:auto-cols-[45%]";
+  } else {
+    container.className = "grid grid-cols-3 lg:grid-cols-4 gap-4";
+  }
+
+  // Pure CSS Grid approach for the items
   container.innerHTML = healthConcerns
     .map((concern) => {
-      // Simple conversion: CamelCase to kebab-case for Lucide
       const icon = concern.iconName
         .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
         .toLowerCase();
 
-      // Map ids to colors - using hover: classes ensures they are only visible on hover
       const colorMap = {
         fever: {
           bg: "bg-red-50",
@@ -1067,11 +1118,11 @@ function renderHealthConcerns() {
       };
 
       return `
-        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-[140px] md:min-w-0 md:w-full bg-white border border-gray-100 px-4 py-4 rounded-2xl flex items-center justify-start md:justify-center gap-3 hover:shadow-lg transition-all cursor-pointer group snap-center ${colors.border} hover:bg-white">
+        <div onclick="navigateTo('tests', '${concern.title}')" class="min-w-0 w-full bg-white border border-gray-100 px-4 py-4 rounded-2xl flex items-center gap-3 hover:shadow-lg transition-all cursor-pointer group snap-center ${colors.border} hover:bg-white">
             <div class="w-10 h-10 rounded-full flex-shrink-0 flex items-center justify-center transition-all ${colors.bg} group-hover:scale-110">
                 <i data-lucide="${icon}" class="h-5 w-5 ${colors.icon}"></i>
             </div>
-            <span class="font-bold text-gray-700 text-sm group-hover:text-gray-900 whitespace-nowrap">${concern.title}</span>
+            <span class="font-bold text-gray-700 text-sm group-hover:text-gray-900 leading-tight">${concern.title}</span>
         </div>
         `;
     })
@@ -1492,7 +1543,11 @@ function initPromoSlider() {
     (e) => {
       const touchEndX = e.changedTouches[0].screenX;
       if (touchEndX < touchStartX - 50) {
+        // Swipe Left -> Next
         movePromoSlide(1);
+      } else if (touchEndX > touchStartX + 50) {
+        // Swipe Right -> Prev
+        movePromoSlide(-1);
       } else {
         startPromoAutoSlide();
       }
@@ -1608,7 +1663,7 @@ function startPromoAutoSlide() {
     if (!document.hidden) {
       movePromoSlide(1);
     }
-  }, 5000);
+  }, 3000); // Speed increased to 3s
 }
 
 function resetPromoAutoSlide() {
@@ -1641,3 +1696,170 @@ if (bottomNav) {
     { passive: true }
   );
 }
+
+function navigateTestCategory(category, searchTerm = "") {
+  // 1. Switch View
+  navigateTo("tests");
+
+  // 2. Set Filters (after a micro-delay to ensure DOM update if view switching involves HTML injection)
+  setTimeout(() => {
+    const categorySelect = document.getElementById("test-category-select");
+    const searchInput = document.getElementById("test-search-input");
+
+    // Handle Category
+    if (categorySelect) {
+      // Check if category exists in the dropdown
+      const options = Array.from(categorySelect.options).map((o) => o.value);
+      if (options.includes(category)) {
+        categorySelect.value = category;
+      } else {
+        // If specific category not found, default to 'All' to avoid mismatch
+        categorySelect.value = "All";
+
+        // If we have a category that isn't in the dropdown, append it to search if search is empty
+        if (!searchTerm && category !== "All") {
+          searchTerm = category;
+        }
+      }
+    }
+
+    // Handle Search
+    if (searchInput) {
+      searchInput.value = searchTerm;
+    }
+
+    // 3. Trigger Render
+    if (typeof renderTestDirectory === "function") {
+      renderTestDirectory(
+        searchInput?.value || "",
+        categorySelect?.value || "All"
+      );
+    }
+
+    // 4. Scroll to top
+    const view = document.getElementById("view-tests");
+    if (view) {
+      view.scrollIntoView({ behavior: "smooth" });
+    }
+  }, 50);
+}
+
+function resetTestFilters() {
+  const searchInput = document.getElementById("test-search-input");
+  const categorySelect = document.getElementById("test-category-select");
+  const reportTimeSelect = document.getElementById("test-report-time-select");
+  const fastingCheck = document.getElementById("test-fasting-check");
+  const sortSelect = document.getElementById("test-sort-select");
+
+  if (searchInput) searchInput.value = "";
+  if (categorySelect) categorySelect.value = "All";
+  if (reportTimeSelect) reportTimeSelect.value = "All";
+  if (fastingCheck) fastingCheck.checked = false;
+  if (sortSelect) sortSelect.value = "popular";
+
+  renderTestDirectory();
+}
+
+/* --- WELLNESS PACKAGES LOGIC --- */
+function renderWellnessPackages(category = "all") {
+  const container = document.getElementById("wellness-packages-grid");
+  if (!container) return;
+
+  const filtered =
+    !category || category.toLowerCase() === "all"
+      ? popularPackages
+      : popularPackages.filter((p) =>
+          p.category.toLowerCase().includes(category.toLowerCase())
+        );
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-full text-center py-12">
+        <div class="text-gray-300 mb-4">
+          <i data-lucide="package-x" class="h-16 w-16 mx-auto"></i>
+        </div>
+        <h3 class="text-xl font-bold text-gray-500">No packages found</h3>
+        <p class="text-gray-400 text-sm">Try selecting a different category.</p>
+      </div>
+    `;
+    lucide.createIcons();
+    return;
+  }
+
+  container.innerHTML = filtered
+    .map((pkg) => {
+      const discount = Math.round(
+        ((pkg.price - pkg.discountedPrice) / pkg.price) * 100
+      );
+
+      return `
+      <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-green-100 transition-all group flex flex-col relative overflow-hidden">
+           ${
+             pkg.isBestSeller
+               ? `<div class="absolute top-4 right-4 bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide">Best Seller</div>`
+               : ""
+           }
+           <div class="mb-4">
+               <span class="inline-block text-[10px] font-extrabold text-green-600 bg-green-50 px-2 py-0.5 rounded mb-2 uppercase tracking-wider">${
+                 pkg.category
+               }</span>
+               <h3 class="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors leading-tight mb-2">${
+                 pkg.title
+               }</h3>
+               <p class="text-sm text-gray-500 line-clamp-2 min-h-[40px]">${
+                 pkg.description
+               }</p>
+           </div>
+           
+           <div class="mt-auto pt-4 border-t border-gray-50 flex items-end justify-between">
+               <div>
+                   <p class="text-xs text-gray-400 mb-0.5 line-through">₹${
+                     pkg.price
+                   }</p>
+                   <div class="flex items-center gap-2">
+                       <span class="text-2xl font-bold text-primary">₹${
+                         pkg.discountedPrice
+                       }</span>
+                       <span class="bg-green-100 text-green-700 text-xs font-bold px-1.5 py-0.5 rounded">${discount}% OFF</span>
+                   </div>
+               </div>
+               <button onclick="openPackageDetails(${
+                 pkg.id
+               })" class="h-10 w-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 group-hover:bg-primary group-hover:text-white transition-colors">
+                   <i data-lucide="arrow-right" class="h-5 w-5"></i>
+               </button>
+           </div>
+      </div>
+    `;
+    })
+    .join("");
+
+  lucide.createIcons();
+
+  // Update active button state
+  document.querySelectorAll(".wellness-filter-btn").forEach((btn) => {
+    if (btn.dataset.category === category) {
+      btn.classList.add("bg-primary", "text-white", "shadow-lg");
+      btn.classList.remove("bg-white", "text-gray-600", "border-gray-200");
+    } else {
+      btn.classList.remove("bg-primary", "text-white", "shadow-lg");
+      btn.classList.add("bg-white", "text-gray-600", "border-gray-200");
+    }
+  });
+}
+
+// Initialize Wellness Page
+document.addEventListener("DOMContentLoaded", () => {
+  // ... existing init code ...
+
+  // Init Wellness Filters
+  document.querySelectorAll(".wellness-filter-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      renderWellnessPackages(e.target.dataset.category);
+    });
+  });
+
+  // Initial Render (if on wellness page logic existed, but we can safely call it)
+  // Check if we are defaulting to wellness view or just call it to populate grid
+  renderWellnessPackages();
+});
