@@ -2721,31 +2721,31 @@
 
     <!-- Main Script -->
     <!-- Mobile Bottom Navigation -->
-    <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-1 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-50 rounded-2xl h-[70px] flex items-center justify-around px-6 pb-1 mb-4 ring-1 ring-black/5 transition-transform duration-300 ease-in-out">
+    <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] z-50 rounded-t-3xl h-[80px] bg-opacity-[0.98] flex items-center justify-around px-6 pb-2 transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group group-[.nav-compact]:h-[60px] group-[.nav-compact]:pb-0">
       <!-- Home -->
-      <button onclick="navigateTo('home')" data-view="home" class="bottom-nav-btn flex flex-col items-center justify-center gap-1 w-14 h-full text-primary transition-all duration-300 group">
-        <div class="relative p-1 transition-transform group-active:scale-95">
+      <button onclick="navigateTo('home')" data-view="home" class="bottom-nav-btn flex flex-col items-center justify-end gap-1 w-14 h-full text-primary transition-all duration-300 group/btn pb-1 group-[.nav-compact]:justify-center group-[.nav-compact]:pb-0">
+        <div class="relative p-1 transition-transform group-active/btn:scale-95 group-[.nav-compact]:scale-90">
              <i data-lucide="home" class="h-6 w-6 stroke-[2.5]" id="nav-icon-home"></i>
              <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full opacity-0 group-[.text-primary]:opacity-100 transition-opacity"></span>
         </div>
-        <span class="text-[10px] font-bold tracking-tight">Home</span>
+        <span class="text-[10px] font-bold tracking-tight transition-all duration-300 opacity-100 h-auto group-[.nav-compact]:opacity-0 group-[.nav-compact]:h-0 group-[.nav-compact]:overflow-hidden">Home</span>
       </button>
 
       <!-- Book (Center FAB) -->
-      <button onclick="navigateTo('tests')" data-view="tests" class="bottom-nav-btn group relative -top-8 flex flex-col items-center justify-center">
-        <div class="h-16 w-16 bg-gradient-to-br from-primary to-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-[6px] border-white ring-1 ring-black/5 transition-transform transform group-active:scale-95 hover:shadow-xl hover:-translate-y-1">
-             <i data-lucide="plus" class="h-8 w-8 text-white stroke-[3]"></i>
+      <button onclick="navigateTo('tests')" data-view="tests" class="bottom-nav-btn group/btn relative -top-6 flex flex-col items-center justify-center transition-all duration-500 group-[.nav-compact]:-top-0 group-[.nav-compact]:scale-90">
+        <div class="h-16 w-16 bg-gradient-to-br from-primary to-green-600 rounded-full flex items-center justify-center shadow-[0_8px_20px_rgba(0,154,90,0.4)] border-[6px] border-white ring-1 ring-black/5 transition-transform transform group-active/btn:scale-95 hover:shadow-xl hover:-translate-y-1 group-[.nav-compact]:h-12 group-[.nav-compact]:w-12 group-[.nav-compact]:border-[4px] group-[.nav-compact]:shadow-md">
+             <i data-lucide="plus" class="h-8 w-8 text-white stroke-[3] group-[.nav-compact]:h-6 group-[.nav-compact]:w-6"></i>
         </div>
-        <span class="text-[10px] font-bold text-gray-400 absolute -bottom-3 w-max group-[.text-primary]:text-primary transition-colors bg-white/80 px-2 rounded-full backdrop-blur-sm">Book</span>
+        <span class="text-[10px] font-bold text-gray-400 absolute -bottom-5 w-max group-[.text-primary]:text-primary transition-colors bg-white/80 px-2 rounded-full backdrop-blur-sm shadow-sm border border-gray-100 group-[.nav-compact]:opacity-0 group-[.nav-compact]:scale-0">Book Test</span>
       </button>
 
       <!-- Account -->
-       <button onclick="navigateTo('login')" data-view="login" class="bottom-nav-btn flex flex-col items-center justify-center gap-1 w-14 h-full text-gray-400 transition-all duration-300 group">
-         <div class="relative p-1 transition-transform group-active:scale-95">
+       <button onclick="navigateTo('login')" data-view="login" class="bottom-nav-btn flex flex-col items-center justify-end gap-1 w-14 h-full text-gray-400 transition-all duration-300 group/btn pb-1 group-[.nav-compact]:justify-center group-[.nav-compact]:pb-0">
+         <div class="relative p-1 transition-transform group-active/btn:scale-95 group-[.nav-compact]:scale-90">
             <i data-lucide="user" class="h-6 w-6 stroke-[2]" id="nav-icon-account"></i>
              <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full opacity-0 group-[.text-primary]:opacity-100 transition-opacity"></span>
         </div>
-        <span class="text-[10px] font-bold tracking-tight">Account</span>
+        <span class="text-[10px] font-bold tracking-tight transition-all duration-300 opacity-100 h-auto group-[.nav-compact]:opacity-0 group-[.nav-compact]:h-0 group-[.nav-compact]:overflow-hidden">Account</span>
       </button>
     </nav>
 

@@ -1431,39 +1431,52 @@ function initPromoSlider() {
   const track = document.getElementById("promo-slider-track");
   if (!track) return;
 
-  // Check if already initialized to prevent duplicate clones
-  if (track.getAttribute("data-initialized") === "true") return;
+  // 1. Clean up existing clones (Idempotency)
+  // We assume clones have 'aria-hidden' set to true
+  const existingClones = track.querySelectorAll('[aria-hidden="true"]');
+  existingClones.forEach((clone) => clone.remove());
 
+  track.removeAttribute("data-initialized");
+
+  // 2. Get Real Slides
   const slides = Array.from(track.children);
   if (slides.length === 0) return;
 
   const dotsContainer = document.getElementById("promo-slider-dots");
 
-  // Create dots for real slides only
+  // 3. Create dots
   if (dotsContainer) {
     dotsContainer.innerHTML = "";
-    for (let i = 0; i < slides.length; i++) {
+    slides.forEach((_, i) => {
       const dot = document.createElement("button");
-      dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${
-        i === 0 ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+      dot.className = `h-2 rounded-full transition-all duration-300 ${
+        i === 0 ? "bg-white w-6" : "bg-white/50 w-2 hover:bg-white/80"
       }`;
       dot.onclick = () => {
-        if (!isPromoAnimating && currentPromoSlide !== i) goToPromoSlide(i);
+        if (!isPromoAnimating && currentPromoSlide !== i) {
+          resetPromoAutoSlide();
+          goToPromoSlide(i);
+        }
       };
       dotsContainer.appendChild(dot);
-    }
+    });
   }
 
-  // Clone first slide for seamless loop
-  const clone = slides[0].cloneNode(true);
-  clone.setAttribute("aria-hidden", "true");
-  track.appendChild(clone);
+  // 4. Clone first slide for seamless loop
+  const firstClone = slides[0].cloneNode(true);
+  firstClone.setAttribute("aria-hidden", "true");
+  track.appendChild(firstClone);
 
   track.setAttribute("data-initialized", "true");
 
-  // Touch Support
+  // 5. Reset State
+  track.style.transition = "none";
+  track.style.transform = "translateX(0)";
+  currentPromoSlide = 0;
+
+  // 6. Touch Support (Re-add listeners or ensure no duplicates)
+  // For simplicity, we just add new ones. Over time in a SPA this might stack, but here it's fine.
   let touchStartX = 0;
-  let touchEndX = 0;
 
   track.addEventListener(
     "touchstart",
@@ -1477,12 +1490,12 @@ function initPromoSlider() {
   track.addEventListener(
     "touchend",
     (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      // Only allow swipe left (next)
-      if (touchEndX < touchStartX - 50) movePromoSlide(1);
-      // Optional: keep swipe right (prev) but make it seamless loop backwards?
-      // User asked for "Left to Right only", assuming visual flow ->
-      startPromoAutoSlide();
+      const touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) {
+        movePromoSlide(1);
+      } else {
+        startPromoAutoSlide();
+      }
     },
     { passive: true }
   );
@@ -1496,23 +1509,35 @@ function movePromoSlide(direction) {
   const track = document.getElementById("promo-slider-track");
   if (!track) return;
 
-  const totalSlides = track.children.length; // Includes clone
-  const realSlideCount = totalSlides - 1;
+  const totalChildren = track.children.length;
+  // Check if clone exists
+  const loopCloneExists =
+    track.lastElementChild.getAttribute("aria-hidden") === "true";
 
+  if (!loopCloneExists) {
+    // Fallback: just normal cycle
+    let n = currentPromoSlide + direction;
+    if (n < 0) n = 0;
+    if (n >= totalChildren) n = 0;
+    goToPromoSlide(n);
+    return;
+  }
+
+  const realSlideCount = totalChildren - 1;
   let next = currentPromoSlide + direction;
 
   // Seamless Next Logic
   if (direction === 1) {
-    if (currentPromoSlide === realSlideCount - 1) {
+    if (currentPromoSlide >= realSlideCount - 1) {
       // We are at the last real slide, moving to Clone
       goToPromoSlide(realSlideCount, true);
       return;
     }
   }
 
-  // Basic Bounds (Fallback)
-  if (next < 0) next = 0; // Prevent going backward past 0
-  if (next >= totalSlides) next = 0;
+  // Basic Bounds
+  if (next < 0) next = 0;
+  if (next >= totalChildren) next = 0;
 
   goToPromoSlide(next);
 }
@@ -1526,60 +1551,53 @@ function goToPromoSlide(index, isLoopReset = false) {
   isPromoAnimating = true;
   currentPromoSlide = index;
 
-  // Explicitly set transition for the move
+  // Animate
   track.style.transition = "transform 0.7s ease-in-out";
   track.style.transform = `translateX(-${index * 100}%)`;
 
-  // Determine the "Real" index for dots
-  const realSlideCount = track.children.length - 1;
-  const realIndex = index === realSlideCount ? 0 : index;
+  // Update dots
+  const totalChildren = track.children.length;
+  const loopCloneExists =
+    track.lastElementChild.getAttribute("aria-hidden") === "true";
+  const realSlideCount = loopCloneExists ? totalChildren - 1 : totalChildren;
+  const realIndex = index >= realSlideCount ? 0 : index;
 
-  // Update dots immediately so it feels responsive
   if (dots) {
     for (let i = 0; i < dots.length; i++) {
-      if (dots[i]) {
-        dots[i].className = `w-2 h-2 rounded-full transition-all duration-300 ${
-          i === realIndex ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+      const dot = dots[i];
+      if (dot) {
+        dot.className = `h-2 rounded-full transition-all duration-300 ${
+          i === realIndex ? "bg-white w-6" : "bg-white/50 w-2 hover:bg-white/80"
         }`;
       }
     }
   }
 
-  // Handle Loop Reset after animation
-  if (isLoopReset) {
-    const onTransitionEnd = () => {
-      track.style.transition = "none";
+  const cleanup = () => {
+    isPromoAnimating = false;
+    track.style.transition = "none";
+    if (isLoopReset) {
       currentPromoSlide = 0;
       track.style.transform = "translateX(0)";
+    }
+    // Force reflow
+    void track.offsetWidth;
+  };
 
-      // Force reflow to apply the "none" transition instantly
-      void track.offsetWidth;
+  const onTransitionEnd = () => {
+    cleanup();
+    track.removeEventListener("transitionend", onTransitionEnd);
+  };
 
-      isPromoAnimating = false;
+  track.addEventListener("transitionend", onTransitionEnd);
+
+  // Safety Timeout
+  setTimeout(() => {
+    if (isPromoAnimating) {
       track.removeEventListener("transitionend", onTransitionEnd);
-    };
-
-    track.addEventListener("transitionend", onTransitionEnd);
-
-    // Fallback in case transitionend fails (e.g. background tab)
-    setTimeout(() => {
-      if (isPromoAnimating && currentPromoSlide === index) {
-        onTransitionEnd();
-      }
-    }, 750);
-  } else {
-    // Just clear the lock after animation
-    const onMoveEnd = () => {
-      isPromoAnimating = false;
-      track.removeEventListener("transitionend", onMoveEnd);
-    };
-
-    track.addEventListener("transitionend", onMoveEnd);
-
-    setTimeout(() => {
-      isPromoAnimating = false;
-    }, 750);
-  }
+      cleanup();
+    }
+  }, 750);
 
   resetPromoAutoSlide();
 }
@@ -1587,7 +1605,9 @@ function goToPromoSlide(index, isLoopReset = false) {
 function startPromoAutoSlide() {
   clearInterval(promoAutoSlideInterval);
   promoAutoSlideInterval = setInterval(() => {
-    movePromoSlide(1);
+    if (!document.hidden) {
+      movePromoSlide(1);
+    }
   }, 5000);
 }
 
@@ -1611,10 +1631,10 @@ if (bottomNav) {
 
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
         // Scrolling Down
-        bottomNav.classList.add("translate-y-[150%]");
+        bottomNav.classList.add("nav-compact");
       } else {
         // Scrolling Up
-        bottomNav.classList.remove("translate-y-[150%]");
+        bottomNav.classList.remove("nav-compact");
       }
       lastScrollY = currentScrollY;
     },
