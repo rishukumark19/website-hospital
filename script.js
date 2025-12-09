@@ -545,6 +545,11 @@ function toggleHeroLocationMenu() {
   if (menu) menu.classList.toggle("hidden");
 }
 
+function toggleMobileLocationMenu() {
+  const menu = document.getElementById("mobile-location-menu");
+  if (menu) menu.classList.toggle("hidden");
+}
+
 function openPackageDetails(packageId) {
   const pkg = popularPackages.find((p) => p.id == packageId);
   if (!pkg) return;
@@ -655,12 +660,18 @@ function scrollContainer(containerId, direction) {
 function selectLocation(loc) {
   selectedLocation = loc;
   document.getElementById("selected-location-text").innerText = loc;
-  document.getElementById("mobile-location-text").innerText = loc;
+  const mobileText = document.getElementById("mobile-location-text");
+  if (mobileText) mobileText.innerText = loc;
 
   const heroText = document.getElementById("hero-selected-location");
   if (heroText) heroText.innerText = loc;
 
-  toggleLocationMenu();
+  // Close menus
+  const desktopMenu = document.getElementById("location-menu");
+  if (desktopMenu) desktopMenu.classList.add("hidden");
+
+  const mobileMenu = document.getElementById("mobile-location-menu");
+  if (mobileMenu) mobileMenu.classList.add("hidden");
 }
 
 function selectHeroLocation(loc) {
@@ -727,60 +738,74 @@ function renderPackages(containerId, filterCategory = "All") {
       const discount = Math.round(
         ((pkg.price - pkg.discountedPrice) / pkg.price) * 100
       );
+
       return `
-        <div class="min-w-[280px] md:min-w-[320px] bg-white rounded-3xl border border-gray-100 overflow-hidden hover:shadow-premium hover:border-gray-200 transition-all duration-300 flex flex-col h-full relative group snap-start">
-            <div class="p-6 flex flex-col h-full">
-                <!-- Badge & Info -->
-                <div class="flex justify-between items-start mb-4">
-                     ${
-                       pkg.isBestSeller
-                         ? `<span class="bg-gradient-to-r from-orange-100 to-orange-50 text-orange-700 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide flex items-center gap-1"><i data-lucide="sparkles" class="h-3 w-3"></i> Best Seller</span>`
-                         : `<span class="bg-gray-50 text-gray-600 text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">Popular</span>`
-                     }
-                     <button onclick="openPackageDetails('${
-                       pkg.id
-                     }')" class="text-gray-400 hover:text-primary transition-colors"><i data-lucide="info" class="h-5 w-5"></i></button>
-                </div>
+        <div class="min-w-[320px] bg-white border border-gray-100 rounded-[24px] p-6 hover:shadow-xl transition-all duration-300 snap-start flex flex-col group h-full">
+            <!-- Header: Badge & Info -->
+            <div class="flex justify-between items-start mb-4">
+                ${
+                  pkg.isBestSeller
+                    ? `<span class="bg-[#FFF4E5] text-[#B95000] text-[11px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wide flex items-center gap-1.5"><i data-lucide="star" class="h-3 w-3 fill-current"></i> BEST SELLER</span>`
+                    : `<span class="bg-gray-50 text-gray-500 text-[11px] font-bold px-3 py-1.5 rounded-lg uppercase tracking-wide">POPULAR</span>`
+                }
+                
+                <button onclick="openPackageDetails('${
+                  pkg.id
+                }')" class="w-8 h-8 rounded-full bg-gray-50 hover:bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors">
+                    <i data-lucide="info" class="h-4 w-4"></i>
+                </button>
+            </div>
 
-                <!-- Title & Desc -->
-                <div class="mb-6">
-                    <h3 class="text-xl font-heading font-bold text-gray-900 leading-tight mb-2 group-hover:text-primary transition-colors">${
-                      pkg.title
-                    }</h3>
-                    <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed">${
-                      pkg.description
-                    }</p>
-                </div>
+            <!-- Title & Desc -->
+            <div class="mb-5">
+                <h3 class="text-[22px] font-bold text-[#0F172A] leading-tight mb-2 font-heading line-clamp-2 h-[3.5rem]">${
+                  pkg.title
+                }</h3>
+                <p class="text-[13px] text-gray-500 leading-relaxed line-clamp-2 h-[2.5rem]">${
+                  pkg.description
+                }</p>
+            </div>
 
-                <!-- Specs -->
-                <div class="grid grid-cols-2 gap-3 mb-8">
-                    <div class="bg-soft-blue rounded-xl p-3">
-                        <span class="block text-xl font-bold text-gray-900">${
-                          pkg.testCount
+            <!-- Info Box -->
+            <div class="bg-[#F8FAFC] rounded-2xl p-4 mb-6 mt-auto border border-gray-50">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-[#334155] font-bold text-sm">Includes ${
+                      pkg.testCount
+                    } Tests</span>
+                    <span class="bg-[#ECFDF5] text-[#047857] text-[10px] font-bold px-2 py-1 rounded">NABL Labs</span>
+                </div>
+                
+                <div class="border-t border-dashed border-gray-200 my-3"></div>
+                
+                <div class="space-y-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="h-4 w-4 text-[#00C070]"></i>
+                        <span class="text-xs text-gray-500 font-medium">Same Day Reporting</span>
+                    </div>
+                     <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="h-4 w-4 text-[#00C070]"></i>
+                        <span class="text-xs text-gray-500 font-medium">Free Home Collection</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer: Price & Add -->
+            <div class="flex items-end justify-between pt-2">
+                <div>
+                     <div class="flex items-center gap-2 mb-1">
+                        <span class="text-sm text-gray-400 font-bold line-through">₹${
+                          pkg.price
                         }</span>
-                        <span class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Tests</span>
-                    </div>
-                     <div class="bg-green-50 rounded-xl p-3">
-                        <span class="block text-xl font-bold text-primary">NABL</span>
-                        <span class="text-[10px] uppercase font-bold text-green-700/60 tracking-wider">Certified</span>
-                    </div>
+                        <span class="bg-[#F0FDF4] text-[#16A34A] text-[10px] font-bold px-1.5 py-0.5 rounded">${discount}% OFF</span>
+                     </div>
+                     <p class="text-[26px] font-bold text-[#0F172A] leading-none">₹${
+                       pkg.discountedPrice
+                     }</p>
                 </div>
-
-                <!-- Price & CTA -->
-                <div class="mt-auto">
-                    <div class="flex items-end gap-2 mb-4">
-                         <span class="text-2xl font-bold text-gray-900">₹${
-                           pkg.discountedPrice
-                         }</span>
-                         <span class="text-sm text-gray-400 line-through mb-1">₹${
-                           pkg.price
-                         }</span>
-                         <span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-0.5 rounded mb-1.5 ml-auto">${discount}% OFF</span>
-                    </div>
-                    <button onclick="navigateTo('appointment')" class="w-full bg-primary hover:bg-green-700 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-green-500/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2 group/btn">
-                        Book Package <i data-lucide="arrow-right" class="h-4 w-4 group-hover/btn:translate-x-1 transition-transform"></i>
-                    </button>
-                </div>
+                
+                <button onclick="navigateTo('appointment')" class="bg-[#009A5A] hover:bg-[#007A5A] text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center gap-2 shadow-lg shadow-green-500/20 transition-all active:scale-95">
+                    ADD <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                </button>
             </div>
         </div>`;
     })
@@ -836,7 +861,7 @@ function renderTestDirectory(
   }
 
   // 3. UI Updates
-  if (countLabel) countLabel.innerText = `${filtered.length} Tests Available`;
+  // if (countLabel) countLabel.innerText = `${filtered.length} Tests Available`;
 
   if (filtered.length === 0) {
     container.innerHTML = "";
@@ -1397,17 +1422,24 @@ function renderLocations(filter = "") {
 }
 
 /* --- PROMO SLIDER --- */
+
 let currentPromoSlide = 0;
 let promoAutoSlideInterval;
+let isPromoAnimating = false;
 
 function initPromoSlider() {
   const track = document.getElementById("promo-slider-track");
   if (!track) return;
 
-  const slides = track.children;
+  // Check if already initialized to prevent duplicate clones
+  if (track.getAttribute("data-initialized") === "true") return;
+
+  const slides = Array.from(track.children);
+  if (slides.length === 0) return;
+
   const dotsContainer = document.getElementById("promo-slider-dots");
 
-  // Create dots
+  // Create dots for real slides only
   if (dotsContainer) {
     dotsContainer.innerHTML = "";
     for (let i = 0; i < slides.length; i++) {
@@ -1415,10 +1447,19 @@ function initPromoSlider() {
       dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${
         i === 0 ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
       }`;
-      dot.onclick = () => goToPromoSlide(i);
+      dot.onclick = () => {
+        if (!isPromoAnimating && currentPromoSlide !== i) goToPromoSlide(i);
+      };
       dotsContainer.appendChild(dot);
     }
   }
+
+  // Clone first slide for seamless loop
+  const clone = slides[0].cloneNode(true);
+  clone.setAttribute("aria-hidden", "true");
+  track.appendChild(clone);
+
+  track.setAttribute("data-initialized", "true");
 
   // Touch Support
   let touchStartX = 0;
@@ -1437,8 +1478,10 @@ function initPromoSlider() {
     "touchend",
     (e) => {
       touchEndX = e.changedTouches[0].screenX;
+      // Only allow swipe left (next)
       if (touchEndX < touchStartX - 50) movePromoSlide(1);
-      if (touchEndX > touchStartX + 50) movePromoSlide(-1);
+      // Optional: keep swipe right (prev) but make it seamless loop backwards?
+      // User asked for "Left to Right only", assuming visual flow ->
       startPromoAutoSlide();
     },
     { passive: true }
@@ -1448,35 +1491,94 @@ function initPromoSlider() {
 }
 
 function movePromoSlide(direction) {
+  if (isPromoAnimating) return;
+
   const track = document.getElementById("promo-slider-track");
   if (!track) return;
-  const totalSlides = track.children.length;
+
+  const totalSlides = track.children.length; // Includes clone
+  const realSlideCount = totalSlides - 1;
+
   let next = currentPromoSlide + direction;
 
-  if (next < 0) next = totalSlides - 1;
+  // Seamless Next Logic
+  if (direction === 1) {
+    if (currentPromoSlide === realSlideCount - 1) {
+      // We are at the last real slide, moving to Clone
+      goToPromoSlide(realSlideCount, true);
+      return;
+    }
+  }
+
+  // Basic Bounds (Fallback)
+  if (next < 0) next = 0; // Prevent going backward past 0
   if (next >= totalSlides) next = 0;
 
   goToPromoSlide(next);
 }
 
-function goToPromoSlide(index) {
+function goToPromoSlide(index, isLoopReset = false) {
   const track = document.getElementById("promo-slider-track");
   const dots = document.getElementById("promo-slider-dots")?.children;
 
   if (!track) return;
 
+  isPromoAnimating = true;
   currentPromoSlide = index;
+
+  // Explicitly set transition for the move
+  track.style.transition = "transform 0.7s ease-in-out";
   track.style.transform = `translateX(-${index * 100}%)`;
 
-  // Update dots
+  // Determine the "Real" index for dots
+  const realSlideCount = track.children.length - 1;
+  const realIndex = index === realSlideCount ? 0 : index;
+
+  // Update dots immediately so it feels responsive
   if (dots) {
     for (let i = 0; i < dots.length; i++) {
       if (dots[i]) {
         dots[i].className = `w-2 h-2 rounded-full transition-all duration-300 ${
-          i === index ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+          i === realIndex ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
         }`;
       }
     }
+  }
+
+  // Handle Loop Reset after animation
+  if (isLoopReset) {
+    const onTransitionEnd = () => {
+      track.style.transition = "none";
+      currentPromoSlide = 0;
+      track.style.transform = "translateX(0)";
+
+      // Force reflow to apply the "none" transition instantly
+      void track.offsetWidth;
+
+      isPromoAnimating = false;
+      track.removeEventListener("transitionend", onTransitionEnd);
+    };
+
+    track.addEventListener("transitionend", onTransitionEnd);
+
+    // Fallback in case transitionend fails (e.g. background tab)
+    setTimeout(() => {
+      if (isPromoAnimating && currentPromoSlide === index) {
+        onTransitionEnd();
+      }
+    }, 750);
+  } else {
+    // Just clear the lock after animation
+    const onMoveEnd = () => {
+      isPromoAnimating = false;
+      track.removeEventListener("transitionend", onMoveEnd);
+    };
+
+    track.addEventListener("transitionend", onMoveEnd);
+
+    setTimeout(() => {
+      isPromoAnimating = false;
+    }, 750);
   }
 
   resetPromoAutoSlide();
@@ -1492,4 +1594,30 @@ function startPromoAutoSlide() {
 function resetPromoAutoSlide() {
   clearInterval(promoAutoSlideInterval);
   startPromoAutoSlide();
+}
+
+// --- SCROLL TO HIDE BOTTOM NAV ---
+let lastScrollY = window.scrollY;
+const bottomNav = document.getElementById("mobile-bottom-nav");
+
+if (bottomNav) {
+  window.addEventListener(
+    "scroll",
+    () => {
+      const currentScrollY = window.scrollY;
+
+      // Only toggle if scrolled more than a small threshold to avoid jitter
+      if (Math.abs(currentScrollY - lastScrollY) < 10) return;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling Down
+        bottomNav.classList.add("translate-y-[150%]");
+      } else {
+        // Scrolling Up
+        bottomNav.classList.remove("translate-y-[150%]");
+      }
+      lastScrollY = currentScrollY;
+    },
+    { passive: true }
+  );
 }

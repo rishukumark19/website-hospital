@@ -103,7 +103,7 @@
     </style>
   </head>
   <body
-    class="bg-premium-grid text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary"
+    class="bg-premium-grid text-text-dark font-sans antialiased selection:bg-teal-light selection:text-primary pb-24"
   >
     <!-- Navbar -->
     <nav
@@ -305,33 +305,62 @@
 
     <!-- Mobile Top Bar (Sticky) -->
     <div
-      class="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-14 flex items-center justify-between px-4 shadow-soft"
+      class="md:hidden sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 h-16 flex items-center justify-between px-4 shadow-soft"
     >
       <!-- Left: Logo -->
       <div class="flex items-center gap-2" onclick="navigateTo('home')">
-        <div class="bg-primary p-1 rounded-md shadow-sm">
-          <i data-lucide="activity" class="h-4 w-4 text-white"></i>
+        <div class="bg-primary p-1.5 rounded-lg shadow-sm">
+          <i data-lucide="activity" class="h-5 w-5 text-white"></i>
         </div>
         <span
-          class="font-heading font-bold text-lg text-gray-900 tracking-tight"
+          class="font-heading font-bold text-xl text-gray-900 tracking-tight"
           >Avishkar</span
         >
       </div>
 
-      <!-- Center: Quick Actions -->
-      <div class="flex items-center gap-5">
-        <button onclick="navigateTo('home-collection')" class="flex flex-col items-center gap-0.5 group">
-            <i data-lucide="bike" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
-            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Visit</span>
-        </button>
-        <button onclick="navigateTo('tests')" class="flex flex-col items-center gap-0.5 group">
-            <i data-lucide="test-tube" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
-            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Tests</span>
-        </button>
-        <button onclick="navigateTo('reports')" class="flex flex-col items-center gap-0.5 group">
-            <i data-lucide="file-text" class="h-4 w-4 text-gray-600 group-hover:text-primary transition-colors"></i>
-            <span class="text-[9px] font-bold text-gray-500 group-hover:text-primary uppercase tracking-tight">Report</span>
-        </button>
+      <!-- Center: Location Pill -->
+      <div class="relative">
+      <button
+        onclick="toggleMobileLocationMenu()"
+        class="flex items-center gap-2 bg-gray-50 hover:bg-green-50 border border-gray-100 hover:border-green-200 px-3 py-1.5 rounded-full transition-colors group/loc-mobile"
+      >
+         <div class="bg-white p-0.5 rounded-full shadow-sm">
+            <i data-lucide="map-pin" class="h-3 w-3 text-primary"></i>
+         </div>
+         <span id="mobile-location-text" class="text-xs font-bold text-gray-700 group-hover/loc-mobile:text-primary transition-colors">Bank More</span>
+         <i data-lucide="chevron-down" class="h-3 w-3 text-gray-400 group-hover/loc-mobile:text-primary transition-colors"></i>
+      </button>
+      
+      <!-- Mobile Location Menu -->
+      <div
+            id="mobile-location-menu"
+            class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.2)] border border-gray-100 py-2 z-50 animate-in fade-in zoom-in-95 origin-top-center"
+          >
+            <button onclick="selectLocation('Bank More')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">Bank More</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+            <button onclick="selectLocation('Hirapur')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">Hirapur</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+             <button onclick="selectLocation('Saraidhela')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">Saraidhela</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+             <button onclick="selectLocation('Jharia')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">Jharia</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+             <button onclick="selectLocation('Govindpur')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">Govindpur</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+             <button onclick="selectLocation('City Center')" class="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:bg-gray-50 flex items-center justify-between group">
+               <span class="font-medium group-hover:text-primary transition-colors">City Center</span>
+               <i data-lucide="check" class="h-3 w-3 text-primary opacity-0 group-hover:opacity-100"></i>
+            </button>
+          </div>
       </div>
 
       <!-- Right: Hamburger -->
@@ -475,18 +504,19 @@
               </p>
 
               <!-- Hero Actions -->
-              <div class="flex flex-col md:flex-row items-center gap-4 mb-12 w-full max-w-md md:max-w-none justify-center">
-                  <button onclick="navigateTo('home-collection')" class="w-full md:w-auto bg-primary hover:bg-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+              <div class="flex flex-col md:flex-row items-center gap-3 md:gap-4 mb-12 w-full max-w-md md:max-w-none justify-center">
+                  <button onclick="navigateTo('home-collection')" class="w-full md:w-auto bg-primary hover:bg-green-700 text-white px-8 py-3 md:py-4 rounded-2xl font-bold text-lg shadow-xl shadow-green-500/20 transition-all active:scale-95 duration-150 flex items-center justify-center gap-2">
                       <i data-lucide="bike" class="h-5 w-5"></i>
                       Book Home Visit
                   </button>
-                  <button onclick="navigateTo('contact')" class="w-full md:w-auto bg-white border border-gray-200 hover:border-primary text-gray-700 hover:text-primary px-8 py-4 rounded-2xl font-bold text-lg shadow-sm transition-all flex items-center justify-center gap-2">
+                  <button onclick="navigateTo('contact')" class="w-full md:w-auto bg-white border border-gray-200 hover:border-primary text-gray-700 hover:text-primary px-8 py-3 md:py-4 rounded-2xl font-bold text-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-150 flex items-center justify-center gap-2">
                       <i data-lucide="map-pin" class="h-5 w-5"></i>
                       Find Nearest Lab
                   </button>
-                  <a href="#" onclick="navigateTo('reports'); return false;" class="text-primary font-bold hover:underline text-sm md:text-base mt-2 md:mt-0 md:ml-4 flex items-center gap-1">
-                      <i data-lucide="download" class="h-4 w-4"></i> Download Report
-                  </a>
+                  <button onclick="navigateTo('reports')" class="w-full md:w-auto bg-white border border-gray-200 hover:border-primary text-gray-700 hover:text-primary px-8 py-3 md:py-4 rounded-2xl font-bold text-lg shadow-md hover:shadow-lg transition-all active:scale-95 duration-150 flex items-center justify-center gap-2">
+                      <i data-lucide="download" class="h-5 w-5"></i>
+                      Download Report
+                  </button>
               </div>
 
               <!-- Quick Access Strip -->
@@ -620,9 +650,6 @@
                     </div>
                     
                     <!-- Arrow Navigation (Desktop) -->
-                     <button onclick="movePromoSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 text-white backdrop-blur-md hover:bg-black/40 transition-all hidden md:flex items-center justify-center group/arrow">
-                         <i data-lucide="chevron-left" class="h-6 w-6"></i>
-                    </button>
                      <button onclick="movePromoSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/20 text-white backdrop-blur-md hover:bg-black/40 transition-all hidden md:flex items-center justify-center group/arrow">
                          <i data-lucide="chevron-right" class="h-6 w-6"></i>
                     </button>
@@ -2714,6 +2741,36 @@
         </div>
       </div>
     </footer>
+
+    <!-- Main Script -->
+    <!-- Mobile Bottom Navigation -->
+    <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-1 left-4 right-4 bg-white/90 backdrop-blur-md border border-gray-100/50 shadow-[0_8px_32px_rgba(0,0,0,0.12)] z-50 rounded-2xl h-[70px] flex items-center justify-around px-6 pb-1 mb-4 ring-1 ring-black/5 transition-transform duration-300 ease-in-out">
+      <!-- Home -->
+      <button onclick="navigateTo('home')" data-view="home" class="bottom-nav-btn flex flex-col items-center justify-center gap-1 w-14 h-full text-primary transition-all duration-300 group">
+        <div class="relative p-1 transition-transform group-active:scale-95">
+             <i data-lucide="home" class="h-6 w-6 stroke-[2.5]" id="nav-icon-home"></i>
+             <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full opacity-0 group-[.text-primary]:opacity-100 transition-opacity"></span>
+        </div>
+        <span class="text-[10px] font-bold tracking-tight">Home</span>
+      </button>
+
+      <!-- Book (Center FAB) -->
+      <button onclick="navigateTo('tests')" data-view="tests" class="bottom-nav-btn group relative -top-8 flex flex-col items-center justify-center">
+        <div class="h-16 w-16 bg-gradient-to-br from-primary to-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-500/40 border-[6px] border-white ring-1 ring-black/5 transition-transform transform group-active:scale-95 hover:shadow-xl hover:-translate-y-1">
+             <i data-lucide="plus" class="h-8 w-8 text-white stroke-[3]"></i>
+        </div>
+        <span class="text-[10px] font-bold text-gray-400 absolute -bottom-3 w-max group-[.text-primary]:text-primary transition-colors bg-white/80 px-2 rounded-full backdrop-blur-sm">Book</span>
+      </button>
+
+      <!-- Account -->
+       <button onclick="navigateTo('login')" data-view="login" class="bottom-nav-btn flex flex-col items-center justify-center gap-1 w-14 h-full text-gray-400 transition-all duration-300 group">
+         <div class="relative p-1 transition-transform group-active:scale-95">
+            <i data-lucide="user" class="h-6 w-6 stroke-[2]" id="nav-icon-account"></i>
+             <span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full opacity-0 group-[.text-primary]:opacity-100 transition-opacity"></span>
+        </div>
+        <span class="text-[10px] font-bold tracking-tight">Account</span>
+      </button>
+    </nav>
 
     <!-- Main Script -->
     <script src="script.js"></script>
